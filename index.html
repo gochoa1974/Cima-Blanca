@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Guía Digital de Bienvenida - Cima Blanca</title>
     
-    <!-- 4. Acelerador de letras (Pre-conexión) -->
+    <!-- ========================================== -->
+    <!-- CHIP DE GOOGLE ANALYTICS 4                 -->
+    <!-- ========================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2JVJLZN3QF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2JVJLZN3QF');
+    </script>
+    <!-- ========================================== -->
+
+    <!-- Acelerador de letras (Pre-conexión) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -216,10 +229,10 @@
             padding-bottom: 8px; margin-bottom: 15px; text-align: center;
         }
         
-        /* 2. Limpieza de moldes repetidos (Clases Utilitarias) */
+        /* Limpieza de moldes repetidos (Clases Utilitarias) */
         .info-block {
             background: #f8fafc; border-radius: 12px; padding: 12px 15px;
-            margin-bottom: 12px; border-left: 4px solid #10B981; /* Verde por defecto */
+            margin-bottom: 12px; border-left: 4px solid #10B981;
         }
         .border-darkgreen { border-left-color: #047857 !important; }
         .border-gold { border-left-color: #d4af37 !important; }
@@ -255,7 +268,6 @@
         }
         .upsell-link { display: inline-block; margin-top: 6px; color: #d4af37; font-weight: bold; font-size: 12.5px; text-decoration: underline; cursor: pointer; }
         
-        /* Botón WhatsApp unificado */
         .wa-btn-full {
             display: block; background: #25D366; color: white; padding: 12px;
             border-radius: 12px; text-decoration: none; font-weight: bold;
@@ -347,7 +359,6 @@
             </div>
             <button class="qr-toggle" onclick="toggleMainQR()">📶 Ver código QR de WiFi</button>
             <div class="qr-box" id="main-qr-box">
-                <!-- 1. Carga perezosa (Lazy loading) activada en imágenes internas -->
                 <img src="https://i.postimg.cc/66DsZS8W/Wi-Fi-Cima-Blanca.jpg" alt="WiFi Cima Blanca QR" style="width: 100%; border-radius: 8px;" loading="lazy">
             </div>
             <div class="kf-note">🔑 Tu PIN de ingreso a la cerradura inteligente llegará por este mismo medio 24 horas antes.</div>
@@ -922,9 +933,16 @@
     <div class="toast" id="toast">Copiado ✓</div>
 
     <script>
-        /* 3. Simplificación del "Cerebro" Javascript */
+        /* ========================================== */
+        /* CEREBRO JAVASCRIPT CON SENSORES GA4        */
+        /* ========================================== */
         
         function abrirModal(id) { 
+            // SENSOR: Avisa a Google qué tarjeta se abrió
+            if(typeof gtag === 'function') {
+                gtag('event', 'open_modal', { 'modal_name': id });
+            }
+
             const modal = document.getElementById(id);
             modal.style.display = 'flex'; 
             document.body.classList.add('modal-open');
@@ -935,7 +953,6 @@
         function cerrarModal(id) { 
             document.getElementById(id).style.display = 'none'; 
             document.body.classList.remove('modal-open');
-            /* Cierra cualquier pestaña interna que haya quedado abierta */
             document.querySelectorAll('.rule-content, .zona-content, #main-qr-box').forEach(el => el.style.display = 'none');
         }
 
@@ -949,14 +966,18 @@
             box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
 
-        /* Esta única función ahora controla Reglas y Zonas sin código repetido */
         function toggleContent(id, contentClass) {
+            // SENSOR: Avisa a Google qué sub-sección se desplegó
+            if(typeof gtag === 'function') {
+                gtag('event', 'toggle_content', { 'content_id': id });
+            }
+
             document.querySelectorAll('.' + contentClass).forEach(box => {
                 box.style.display = (box.id === id && box.style.display !== 'block') ? 'block' : 'none';
             });
         }
 
-        /* Función de Copiar */
+        /* Función de Copiar con SENSOR y manejo de errores */
         const toast = document.getElementById('toast');
         function showToast(msg){
             toast.textContent = msg; toast.classList.add('show');
@@ -966,6 +987,12 @@
         document.querySelectorAll('.copy-btn').forEach(btn=>{
             btn.addEventListener('click', async ()=>{
                 const text = btn.dataset.copy;
+                
+                // SENSOR: Avisa a Google que copiaron el WiFi
+                if(typeof gtag === 'function') {
+                    gtag('event', 'copy_wifi', { 'copied_text': text });
+                }
+
                 try{ await navigator.clipboard.writeText(text); }
                 catch(e){
                     const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
