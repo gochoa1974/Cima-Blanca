@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Guía Digital de Bienvenida - Cima Blanca</title>
+    
+    <!-- 4. Acelerador de letras (Pre-conexión) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
     <style>
         body { 
             font-family: 'Helvetica Neue', Arial, sans-serif; 
@@ -69,28 +74,8 @@
             text-align: center;
         }
 
-        .card-logo {
-            width: 117px;
-            height: auto;
-            margin: 0 auto 0 auto; 
-            display: block;
-        }
-
-        .welcome-img {
-            max-width: 320px;
-            height: auto;
-            margin: 0 auto 15px auto;
-            display: block;
-        }
-
-        .guest-name-dynamic {
-            font-family: 'Georgia', serif;
-            font-style: italic;
-            color: #b45309; 
-            margin: 0 0 15px 0; 
-            font-size: 24px; 
-            font-weight: bold;
-        }
+        .card-logo { width: 117px; height: auto; margin: 0 auto; display: block; }
+        .welcome-img { max-width: 320px; height: auto; margin: 0 auto 15px auto; display: block; }
 
         .about-text { 
             font-family: 'Montserrat', sans-serif;
@@ -102,50 +87,26 @@
         }
 
         .badge-container {
-            background: #fdfdfd;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 10px;
-            margin-bottom: 20px;
+            background: #fdfdfd; border: 1px solid #e2e8f0;
+            border-radius: 14px; padding: 10px; margin-bottom: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
-        .badge-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-        }
+        .badge-img { width: 100%; height: auto; display: block; border-radius: 8px; }
 
         .footer-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 20px; border-top: 1px solid #f1f5f9; padding-top: 15px;
         }
-        .superhost-gif {
-            width: 65px;
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
-        }
-        .signature-img {
-            max-width: 130px;
-            height: auto;
-            display: block;
-        }
+        .superhost-gif { width: 65px; height: auto; display: block; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)); }
+        .signature-img { max-width: 130px; height: auto; display: block; }
 
-        /* --- KEYCARD WIFI AL FRENTE CON NOMBRE DEL EDIFICIO --- */
+        /* KEYCARD WIFI */
         .keycard {
             position: relative;
             background: linear-gradient(150deg, #1e293b 0%, #0f172a 78%);
-            border-radius: 20px;
-            color: #fff;
-            padding: 20px;
+            border-radius: 20px; color: #fff; padding: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
-            border-left: 6px solid #0284c7;
+            margin-bottom: 20px; border-left: 6px solid #0284c7;
         }
         .keycard-top { display: flex; justify-content: space-between; align-items: flex-start; }
         .keycard-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
@@ -163,351 +124,164 @@
         .kf-note { font-size: 11px; opacity: 0.7; margin-top: 10px; line-height: 1.3; }
 
         .section-header {
-            font-size: 11.5px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #b45309;
-            margin: 20px 5px 10px 5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 11.5px; font-weight: bold; text-transform: uppercase;
+            letter-spacing: 1px; color: #b45309; margin: 20px 5px 10px 5px;
+            display: flex; align-items: center; gap: 6px;
         }
         
         .banner-btn { 
-            display: flex; 
-            align-items: center; 
-            background: #FFFFFF; 
-            padding: 16px 18px; 
-            border-radius: 16px; 
-            margin-bottom: 12px; 
-            text-decoration: none; 
-            color: #2c3e50; 
-            font-weight: bold; 
-            font-size: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.05); 
-            border-left: 8px solid #10B981; 
-            transition: transform 0.2s, box-shadow 0.2s; 
-            cursor: pointer;
-            position: relative;
+            display: flex; align-items: center; background: #FFFFFF; 
+            padding: 16px 18px; border-radius: 16px; margin-bottom: 12px; 
+            text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05); border-left: 8px solid #10B981; 
+            transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; position: relative;
         }
-        .banner-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .banner-btn.premium-btn {
-            border-left: 8px solid #d4af37;
-            background: linear-gradient(135deg, #ffffff 0%, #fffdfa 100%);
-        }
+        .banner-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .banner-btn.premium-btn { border-left: 8px solid #d4af37; background: linear-gradient(135deg, #ffffff 0%, #fffdfa 100%); }
+        .banner-btn.urgent-btn { border-left: 8px solid #ef4444; background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); }
 
-        .banner-btn.urgent-btn {
-            border-left: 8px solid #ef4444;
-            background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
-        }
-
-        /* CUADRÍCULA (GRID) 3 COLUMNAS */
-        .guide-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
+        /* GRID */
+        .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .grid-card {
-            background: #FFFFFF;
-            border-radius: 16px;
-            padding: 12px 6px;
-            text-align: center;
-            text-decoration: none;
-            color: #1e293b;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            border-bottom: 4px solid #0284c7;
-            min-height: 95px;
+            background: #FFFFFF; border-radius: 16px; padding: 12px 6px; text-align: center;
+            text-decoration: none; color: #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; display: flex;
+            flex-direction: column; align-items: center; justify-content: flex-start;
+            border-bottom: 4px solid #0284c7; min-height: 95px;
         }
-        .grid-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
+        .grid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
         .grid-card.amenities-grid-card { border-bottom-color: #047857; }
         .grid-card.rules-grid-card { border-bottom-color: #f59e0b; }
         .grid-card.emergency-grid-card { border-bottom-color: #ef4444; }
         .grid-card.tutorials-grid-card { border-bottom-color: #8b5cf6; }
 
         .grid-icon-box {
-            width: 36px;
-            height: 36px;
-            background: #f1f5f9;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            margin-bottom: 6px;
-            flex-shrink: 0;
+            width: 36px; height: 36px; background: #f1f5f9; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
+            margin-bottom: 6px; flex-shrink: 0;
         }
-
-        .grid-title {
-            font-size: 10px;
-            font-weight: bold;
-            line-height: 1.25;
-            color: #334155;
-            text-align: center;
-        }
+        .grid-title { font-size: 10px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
 
         .card-badge {
-            position: absolute;
-            top: -10px;
-            right: 15px;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-weight: bold;
+            position: absolute; top: -10px; right: 15px; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; font-weight: bold;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .card-badge.gold-badge { background: #d4af37; color: white; }
         .card-badge.red-badge { background: #ef4444; color: white; }
         
         .icon { 
-            font-size: 22px; 
-            margin-right: 12px; 
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: #f1f5f9;
+            font-size: 22px; margin-right: 12px; width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #f1f5f9;
         }
         
         /* TARJETA SOCIAL UNIFICADA */
         .social-banner {
             background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            border-radius: 16px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(220, 39, 67, 0.25);
-            color: white;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
+            border-radius: 16px; padding: 16px 18px; text-align: center;
+            box-shadow: 0 6px 20px rgba(220, 39, 67, 0.25); color: white; text-decoration: none;
+            display: block; margin-bottom: 10px;
         }
-        .social-title {
-            font-size: 15px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+        .social-title { font-size: 15px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
         
         .action-btn {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
-            color: #10B981;
-            justify-content: center;
-            margin-top: 20px;
-            border-left: none; 
-            text-align: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #10B981;
+            justify-content: center; margin-top: 20px; border-left: none; text-align: center;
             box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
         }
 
+        /* MODALES */
         .modal-overlay {
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.5); 
-            z-index: 100; 
-            justify-content: center; 
-            align-items: flex-end; 
-            backdrop-filter: blur(3px);
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; 
+            align-items: flex-end; backdrop-filter: blur(3px);
         }
         .modal-content {
-            background: #ffffff; 
-            width: 100%; 
-            max-width: 480px; 
-            border-radius: 30px 30px 0 0; 
-            padding: 30px 20px; 
-            box-sizing: border-box; 
-            animation: slideUp 0.3s ease-out; 
-            position: relative; 
-            max-height: 85vh; 
-            overflow-y: auto;
+            background: #ffffff; width: 100%; max-width: 480px; border-radius: 30px 30px 0 0; 
+            padding: 30px 20px; box-sizing: border-box; animation: slideUp 0.3s ease-out; 
+            position: relative; max-height: 85vh; overflow-y: auto;
         }
-        @keyframes slideUp { 
-            from { transform: translateY(100%); } 
-            to { transform: translateY(0); } 
-        }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-        .close-container {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            height: 0;
-            text-align: right;
-        }
-        /* Botón de cierre táctil de 44px */
+        .close-container { position: sticky; top: 0; z-index: 20; height: 0; text-align: right; }
         .close-btn {
-            position: absolute;
-            top: -12px;
-            right: 0px;
-            font-size: 24px;
-            text-decoration: none;
-            color: #475569;
-            background: #f1f5f9;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            position: absolute; top: -12px; right: 0px; font-size: 24px; text-decoration: none;
+            color: #475569; background: #f1f5f9; width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: bold;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .modal-title {
-            color: #047857;
-            margin-top: 5px;
-            font-size: 20px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            text-align: center;
+            color: #047857; margin-top: 5px; font-size: 20px; border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px; margin-bottom: 15px; text-align: center;
         }
         
+        /* 2. Limpieza de moldes repetidos (Clases Utilitarias) */
         .info-block {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 12px 15px;
-            margin-bottom: 12px;
-            border-left: 4px solid #10B981;
+            background: #f8fafc; border-radius: 12px; padding: 12px 15px;
+            margin-bottom: 12px; border-left: 4px solid #10B981; /* Verde por defecto */
         }
+        .border-darkgreen { border-left-color: #047857 !important; }
+        .border-gold { border-left-color: #d4af37 !important; }
+        .border-amber { border-left-color: #f59e0b !important; }
+        .border-blue { border-left-color: #0284c7 !important; }
+        .border-green { border-left-color: #10B981 !important; }
+        .border-purple { border-left-color: #8b5cf6 !important; }
+        .border-red { border-left-color: #ef4444 !important; }
+        .border-cyan { border-left-color: #38bdf8 !important; }
+        .border-pink { border-left-color: #ec4899 !important; }
+
         .info-block h4 { margin: 0 0 6px 0; color: #1e293b; font-size: 14.5px; }
         .info-block p { margin: 0 0 8px 0; font-size: 13px; color: #475569; line-height: 1.4; }
         .info-block ul { margin: 0; padding-left: 18px; font-size: 13px; color: #334155; list-style-type: none; }
         .info-block li { margin-bottom: 8px; line-height: 1.4; }
         
         .modal-link-btn {
-            display: inline-block;
-            margin-top: 8px;
-            margin-right: 4px;
-            padding: 6px 12px;
-            background: #10B981;
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
+            display: inline-block; margin-top: 8px; margin-right: 4px; padding: 6px 12px;
+            background: #10B981; color: white; border-radius: 8px; text-decoration: none;
+            font-size: 12px; font-weight: bold;
         }
-        .modal-link-btn.ig-btn {
-            background: #E1306C;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .modal-link-btn.ig-btn { background: #E1306C; display: inline-flex; align-items: center; gap: 5px; }
         .youtube-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
-            padding: 8px 14px;
-            background: #FF0000;
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            width: 100%;
-            justify-content: center;
-            box-sizing: border-box;
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 8px 14px;
+            background: #FF0000; color: white; border-radius: 8px; text-decoration: none;
+            font-size: 12px; font-weight: bold; width: 100%; justify-content: center; box-sizing: border-box;
         }
         .ig-highlight-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
-            padding: 8px 14px;
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 8px 14px;
             background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            width: 100%;
-            justify-content: center;
-            box-sizing: border-box;
+            color: white; border-radius: 8px; text-decoration: none; font-size: 12px;
+            font-weight: bold; width: 100%; justify-content: center; box-sizing: border-box;
         }
-        .upsell-link {
-            display: inline-block;
-            margin-top: 6px;
-            color: #d4af37;
-            font-weight: bold;
-            font-size: 12.5px;
-            text-decoration: underline;
-            cursor: pointer;
+        .upsell-link { display: inline-block; margin-top: 6px; color: #d4af37; font-weight: bold; font-size: 12.5px; text-decoration: underline; cursor: pointer; }
+        
+        /* Botón WhatsApp unificado */
+        .wa-btn-full {
+            display: block; background: #25D366; color: white; padding: 12px;
+            border-radius: 12px; text-decoration: none; font-weight: bold;
+            font-size: 14px; text-align: center; margin-top: 15px;
         }
 
         .wifi-toggle-btn, .rule-toggle-btn, .zona-toggle-btn {
-            display: block;
-            width: 100%;
-            background: #0284c7;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            text-align: center;
-            margin-top: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: block; width: 100%; background: #0284c7; color: white; border: none;
+            padding: 10px; border-radius: 8px; font-weight: bold; font-size: 13px;
+            cursor: pointer; text-align: center; margin-top: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .rule-toggle-btn { background: #f59e0b; }
         .rule-toggle-btn:hover { background: #d97706; }
-        
-        /* Botones específicos para cada tipo de regla */
         .rule-btn-dept { background: #f59e0b; }
         .rule-btn-dept:hover { background: #d97706; }
-        
         .rule-btn-building { background: #0284c7; }
         .rule-btn-building:hover { background: #0369a1; }
-        
         .rule-btn-pool { background: #10B981; }
         .rule-btn-pool:hover { background: #059669; }
 
-        .rule-content, .zona-content, .wifi-content {
-            display: none;
-            margin-top: 10px;
-        }
-        .wifi-img { width: 100%; height: auto; display: block; border-radius: 8px; }
+        .rule-content, .zona-content, .wifi-content { display: none; margin-top: 10px; }
 
-        .zsection-title {
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #0284c7;
-            font-weight: bold;
-            margin: 12px 4px 6px;
-        }
+        .zsection-title { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #0284c7; font-weight: bold; margin: 12px 4px 6px; }
         .zrow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 10px 4px;
-            border-bottom: 1px solid #f1f5f9;
-            text-decoration: none;
-            color: #333;
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            padding: 10px 4px; border-bottom: 1px solid #f1f5f9; text-decoration: none; color: #333;
         }
         .zrow:last-child { border-bottom: none; }
         .zrow .zname { font-size: 13.5px; font-weight: 600; color: #1e293b; }
@@ -535,11 +309,10 @@
         <div class="trust-card">
             <img src="https://i.postimg.cc/ZqkssVsP/Cima-Blanca-logo.png" alt="Cima Blanca Logo" class="card-logo">
             <img src="https://i.postimg.cc/QxX1JPgK/Bienvenido.png" alt="¡Bienvenido!" class="welcome-img">
-            <div id="guest-name" style="display:none;"></div>
             <div class="badge-container">
                 <img src="https://i.postimg.cc/g2TVJjbQ/Favorito-entre-Huespedes-ABNB.png" alt="Favorito entre huéspedes" class="badge-img">
             </div>
-            <p class="about-text" style="margin-bottom: 10px;">
+            <p class="about-text">
                 Nuestro objetivo es brindarte un hogar temporal impecable. Si necesitas recomendaciones o asistencia, estamos a una llamada de distancia. ¡Disfruta tu estadía al máximo!
             </p>
             <div class="footer-section">
@@ -574,7 +347,8 @@
             </div>
             <button class="qr-toggle" onclick="toggleMainQR()">📶 Ver código QR de WiFi</button>
             <div class="qr-box" id="main-qr-box">
-                <img src="https://i.postimg.cc/66DsZS8W/Wi-Fi-Cima-Blanca.jpg" alt="WiFi Cima Blanca QR" class="wifi-img">
+                <!-- 1. Carga perezosa (Lazy loading) activada en imágenes internas -->
+                <img src="https://i.postimg.cc/66DsZS8W/Wi-Fi-Cima-Blanca.jpg" alt="WiFi Cima Blanca QR" style="width: 100%; border-radius: 8px;" loading="lazy">
             </div>
             <div class="kf-note">🔑 Tu PIN de ingreso a la cerradura inteligente llegará por este mismo medio 24 horas antes.</div>
         </div>
@@ -594,43 +368,28 @@
         <div class="section-header">📖 Guía de la Estadía</div>
         <div class="guide-grid">
             <a onclick="abrirModal('modal-amenities')" class="grid-card amenities-grid-card">
-                <div class="grid-icon-box">🌊</div>
-                <div class="grid-title">Sobre el Departamento & Amenities</div>
+                <div class="grid-icon-box">🌊</div><div class="grid-title">Sobre el Departamento & Amenities</div>
             </a>
-
             <a onclick="abrirModal('modal-estadia')" class="grid-card">
-                <div class="grid-icon-box">🔑</div>
-                <div class="grid-title">Tu Estadía (Check-in / WiFi)</div>
+                <div class="grid-icon-box">🔑</div><div class="grid-title">Tu Estadía (Check-in / WiFi)</div>
             </a>
-
             <a onclick="abrirModal('modal-reglas')" class="grid-card rules-grid-card">
-                <div class="grid-icon-box">📜</div>
-                <div class="grid-title">Normas y Reglas del Depto. & Edificio</div>
+                <div class="grid-icon-box">📜</div><div class="grid-title">Normas y Reglas del Depto. & Edificio</div>
             </a>
-
-            <a onclick="abrirModal('modal-recomendaciones')" class="grid-card tips-grid-card">
-                <div class="grid-icon-box">🎒</div>
-                <div class="grid-title">Recomendaciones antes del Viaje</div>
+            <a onclick="abrirModal('modal-recomendaciones')" class="grid-card">
+                <div class="grid-icon-box">🎒</div><div class="grid-title">Recomendaciones antes del Viaje</div>
             </a>
-
             <a onclick="abrirModal('modal-tutoriales')" class="grid-card tutorials-grid-card">
-                <div class="grid-icon-box">⚙️</div>
-                <div class="grid-title">¿Cómo funciona? (Tutoriales)</div>
+                <div class="grid-icon-box">⚙️</div><div class="grid-title">¿Cómo funciona? (Tutoriales)</div>
             </a>
-            
             <a onclick="abrirModal('modal-edificio-areas')" class="grid-card">
-                <div class="grid-icon-box">🏊‍♂️</div>
-                <div class="grid-title">Áreas del Edificio</div>
+                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Áreas del Edificio</div>
             </a>
-            
             <a onclick="abrirModal('modal-zona')" class="grid-card">
-                <div class="grid-icon-box">📍</div>
-                <div class="grid-title">Explora Punta Blanca</div>
+                <div class="grid-icon-box">📍</div><div class="grid-title">Explora Punta Blanca</div>
             </a>
-
             <a onclick="abrirModal('modal-ayuda')" class="grid-card emergency-grid-card">
-                <div class="grid-icon-box">🆘</div>
-                <div class="grid-title">Contacto & Emergencias (Hospitales)</div>
+                <div class="grid-icon-box">🆘</div><div class="grid-title">Contacto & Emergencias (Hospitales)</div>
             </a>
         </div>
         
@@ -662,24 +421,24 @@
     <div id="modal-amenities" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-amenities')">×</a></div>
-            <h2 class="modal-title" style="color: #047857;">🌊 Sobre Cima Blanca & Amenities</h2>
+            <h2 class="modal-title">🌊 Sobre Cima Blanca & Amenities</h2>
             
             <div style="background: #fdfdfd; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 15px;">
-                <img src="https://i.postimg.cc/6QB7LGx4/PORTADA-MEL04927-(1).jpg" alt="Cima Blanca Vista" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+                <img src="https://i.postimg.cc/6QB7LGx4/PORTADA-MEL04927-(1).jpg" alt="Cima Blanca Vista" style="width: 100%; border-radius: 8px; display: block;" loading="lazy">
             </div>
 
-            <div class="info-block" style="border-left-color: #047857;">
+            <div class="info-block border-darkgreen">
                 <h4>Cima Blanca by Cumbre Blanca Luxury Beach Apartment</h4>
                 <p>Ubicado en el <strong>sexto piso</strong> del complejo Cumbre Blanca, Cima Blanca (<strong>#607</strong>) es un apartamento moderno y sofisticado, diseñado para ofrecer confort, estilo y funcionalidad. Ideal para familias, grupos de amigos o parejas que buscan una experiencia de alojamiento superior.</p>
                 <p>Con una hermosa vista, luz natural y un diseño elegante realizado por iluminación LED decorativa, cada rincón de CIMA BLANCA es perfecto para fotos instagrameables y momentos inolvidables. Tenemos una localización estratégica que te permite estar a minutos de las mejores playas, gastronomía y puntos de interés de la zona, con la libertad de explorarlos durante el día y volver fácilmente para relajarte al atardecer.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #d4af37;">
+            <div class="info-block border-gold">
                 <h4>📊 Ficha Técnica del Espacio</h4>
                 <ul>
                     <li>📍 <strong>Location:</strong> Punta Blanca frente a la entrada 7</li>
                     <li>👥 <strong>Capacity:</strong> Hasta 8 pers. máx. (Ideal: 6 pax) <br>
-                        <span style="font-size: 11.5px; color: #b45309; font-style: italic;">⚠️ La tarifa base aplica según el número de huéspedes registrados. Exceder el número pagado genera cargos adicionales. <a onclick="cambiarModal('modal-amenities', 'modal-reglas'); toggleRule('dept-rules');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver política de ocupación →</a></span>
+                        <span style="font-size: 11.5px; color: #b45309; font-style: italic;">⚠️ La tarifa base aplica según el número de huéspedes registrados. Exceder el número pagado genera cargos adicionales. <a onclick="cambiarModal('modal-amenities', 'modal-reglas'); toggleContent('dept-rules', 'rule-content');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver política de ocupación →</a></span>
                     </li>
                     <li>🛏️ <strong>Bedrooms:</strong> Dos</li>
                     <li>🚿 <strong>Bathrooms:</strong> Dos</li>
@@ -687,7 +446,7 @@
                 </ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #f59e0b;">
+            <div class="info-block border-amber">
                 <h4>🛏️ Distribución de Camas (Total: 5 camas)</h4>
                 <p>El departamento cuenta con una infraestructura total de <strong>5 camas</strong> distribuidas estratégicamente para alojar cómodamente hasta 8 personas:</p>
                 <ul>
@@ -703,7 +462,7 @@
                 </ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #0284c7;">
+            <div class="info-block border-blue">
                 <h4>🏢 Amenities del Edificio</h4>
                 <ul>
                     <li>🏊‍♂️ Piscina infinita</li>
@@ -715,7 +474,7 @@
                 </ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #10B981;">
+            <div class="info-block border-green">
                 <h4>✨ Comodidades del Departamento</h4>
                 <ul>
                     <li>🍳 Cocina súper completa con utensilios BBQ.</li>
@@ -740,7 +499,7 @@
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-estadia')">×</a></div>
             <h2 class="modal-title">🔑 Tu Estadía</h2>
             
-            <div class="info-block" style="border-left-color: #d4af37; background: linear-gradient(135deg, #f8fafc 0%, #fffef9 100%);">
+            <div class="info-block border-gold" style="background: linear-gradient(135deg, #f8fafc 0%, #fffef9 100%);">
                 <h4 style="color: #b45309;">📍 Ubicación Exacta del Departamento</h4>
                 <p><strong>Edificio:</strong> Cumbre Blanca Beach Towers<br><strong>Ubicación:</strong> 6to piso, Departamento #607</p>
             </div>
@@ -755,13 +514,13 @@
                 <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏰ ¿Llegas antes? Consulta nuestro servicio de Early Check-in →</span>
             </div>
 
-            <div class="info-block" style="border-left-color: #ef4444;">
+            <div class="info-block border-red">
                 <h4>2. Salida (Check-out)</h4>
                 <p>Hora límite: <strong>12:00 p.m.</strong><br>Apaga luces, aire y electrodomésticos, junta las toallas y saca la basura a los contenedores de Planta Baja.</p>
                 <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏳ ¿Quieres quedarte más tiempo? Mira nuestro Late Check-out →</span>
             </div>
 
-            <div class="info-block" style="border-left-color: #d4af37;">
+            <div class="info-block border-gold">
                 <h4>3. PIN de Ingreso Cerradura Smart</h4>
                 <p>Recibirás tu PIN de ingreso <strong>24 horas antes</strong> del check-in.</p>
             </div>
@@ -780,7 +539,7 @@
             <h2 class="modal-title" style="color: #d4af37;">✨ Servicios Extras (Add-ons)</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Eleva tu experiencia. Escríbenos para solicitar cualquiera de las siguientes opciones:</p>
             
-            <div class="info-block" style="border-left-color: #38bdf8;">
+            <div class="info-block border-cyan">
                 <h4>⏰ Entrada Temprana (Early Check-in)</h4>
                 <p>Si llegas antes del horario regular, te ofrecemos la opción de Early check-in para que comiences tu estancia sin estrés, te relajes, dejes tu equipaje y aproveches mejor el día.</p>
                 <ul>
@@ -790,7 +549,7 @@
                 </ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #38bdf8;">
+            <div class="info-block border-cyan">
                 <h4>⏳ Salida Tardía (Late Check-out)</h4>
                 <p>Si deseas quedarte después del horario de salida ya sea en el depa o disfrutando de las áreas comunes como la piscina o zona BBQ, te invitamos a contratar el servicio Late Check-out.</p>
                 <ul>
@@ -800,7 +559,7 @@
                 </ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #38bdf8;">
+            <div class="info-block border-cyan">
                 <h4>🧺 Servicio de Lavandería</h4>
                 <p>Ponemos a tu disposición lavadora y secadora con las siguientes tarifas:</p>
                 <ul>
@@ -812,7 +571,7 @@
                 <p style="margin-top: 4px; font-size: 12px; color: #ef4444;">⚠️ Por favor, no lavar ni secar prendas con arena, ya que pueden dañar los equipos.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #38bdf8;">
+            <div class="info-block border-cyan">
                 <h4>🚗 Parqueo Adicional</h4>
                 <p>Tu reserva incluye 1 puesto gratis.</p>
                 <ul>
@@ -821,7 +580,7 @@
                 </ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #d4af37;">
+            <div class="info-block border-gold">
                 <h4>🍹 Bebidas y Kit de Playa</h4>
                 <ul>
                     <li>Agua → <strong>$1.00</strong> | Gaseosas → <strong>$1.50</strong></li>
@@ -831,9 +590,7 @@
                 </ul>
             </div>
 
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="https://wa.me/593994000500?text=Hola,%20deseo%20solicitar%20un%20servicio%20adicional%20para%20mi%20estancia." target="_blank" style="display: block; background: #25D366; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px;">💬 Solicitar por WhatsApp</a>
-            </div>
+            <a href="https://wa.me/593994000500?text=Hola,%20deseo%20solicitar%20un%20servicio%20adicional%20para%20mi%20estancia." target="_blank" class="wa-btn-full">💬 Solicitar por WhatsApp</a>
         </div>
     </div>
 
@@ -844,21 +601,19 @@
             <h2 class="modal-title" style="color: #ef4444;">🚨 Registro de Último Minuto</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">¿Quieres invitar a un amigo, un familiar o sumar a tu mascota a última hora? ¡Hazlo aquí fácilmente!</p>
             
-            <div class="info-block" style="border-left-color: #ef4444;">
+            <div class="info-block border-red">
                 <h4>🐾 Ingreso de Mascota (Pet Friendly)</h4>
                 <p>Exclusivo para un (1) <strong>perro de raza pequeña de hasta 10 kg</strong>.</p>
                 <ul><li><strong>Cálculo:</strong> Tarifa diaria × número de noches de tu estancia.</li></ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #ef4444;">
+            <div class="info-block border-red">
                 <h4>👤 Acompañante Adicional de Último Momento</h4>
                 <p>Si sumas a un invitado adicional que no estaba en la reserva original, debe ser registrado obligatoriamente para autorizar su ingreso en la garita de control.</p>
                 <ul><li><strong>Cálculo:</strong> Tarifa por noche / persona × número de noches de tu estancia.</li></ul>
             </div>
 
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="https://wa.me/593994000500?text=Hola,%20necesito%20realizar%20un%20registro%20de%20último%20minuto%20(mascota/acompañante%20adicional)%20para%20mi%20estancia." target="_blank" style="display: block; background: #25D366; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px;">💬 Regularizar por WhatsApp</a>
-            </div>
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20realizar%20un%20registro%20de%20último%20minuto%20(mascota/acompañante%20adicional)%20para%20mi%20estancia." target="_blank" class="wa-btn-full">💬 Regularizar por WhatsApp</a>
         </div>
     </div>
 
@@ -869,10 +624,9 @@
             <h2 class="modal-title" style="color: #d97706;">📜 Apartment & Building Rules</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Selecciona una sección para ver las normativas vigentes:</p>
             
-            <!-- Reglas del Departamento (Ámbar / Naranja) -->
-            <div class="info-block" style="border-left-color: #f59e0b;">
+            <div class="info-block border-amber">
                 <h4>Reglas del Departamento</h4>
-                <button class="rule-toggle-btn rule-btn-dept" onclick="toggleRule('dept-rules')">📂 Ver / Ocultar Reglas del Depa</button>
+                <button class="rule-toggle-btn rule-btn-dept" onclick="toggleContent('dept-rules', 'rule-content')">📂 Ver / Ocultar Reglas del Depa</button>
                 <div id="dept-rules" class="rule-content">
                     <ul style="margin-top: 10px;">
                         <li>👥 <strong>Capacidad y Ocupación:</strong> Estrictamente la cantidad de personas registrada en la reserva original. El ingreso de personas no declaradas será detectado por nuestra cámara de seguridad exterior y generará cargos adicionales o cancelación.</li>
@@ -894,10 +648,9 @@
                 </div>
             </div>
 
-            <!-- Normas del Edificio (Azul) -->
-            <div class="info-block" style="border-left-color: #0284c7; margin-top: 15px;">
+            <div class="info-block border-blue">
                 <h4>Normas del Edificio</h4>
-                <button class="rule-toggle-btn rule-btn-building" onclick="toggleRule('building-rules')">📂 Ver / Ocultar Normas del Edificio</button>
+                <button class="rule-toggle-btn rule-btn-building" onclick="toggleContent('building-rules', 'rule-content')">📂 Ver / Ocultar Normas del Edificio</button>
                 <div id="building-rules" class="rule-content">
                     <ul style="margin-top: 10px;">
                         <li>🪪 Todos los huéspedes deben identificarse con cédula o pasaporte.</li>
@@ -915,10 +668,9 @@
                 </div>
             </div>
 
-            <!-- Normas de Piscina (Verde - Con Mantenimiento Lunes/Martes 6pm a 10am del día siguiente) -->
-            <div class="info-block" style="border-left-color: #10B981; margin-top: 15px;">
+            <div class="info-block border-green">
                 <h4>🌴 Recordatorio para Disfrutar la Piscina 💦</h4>
-                <button class="rule-toggle-btn rule-btn-pool" onclick="toggleRule('pool-rules')">📂 Ver / Ocultar Normas de Piscina</button>
+                <button class="rule-toggle-btn rule-btn-pool" onclick="toggleContent('pool-rules', 'rule-content')">📂 Ver / Ocultar Normas de Piscina</button>
                 <div id="pool-rules" class="rule-content">
                     <p style="margin-top: 10px;">Para que todos podamos disfrutarla al máximo y mantenerla limpia y agradable, les pedimos tener en cuenta:</p>
                     <ul>
@@ -936,138 +688,129 @@
         </div>
     </div>
 
-    <!-- MODAL: RECOMENDACIONES ANTES DEL VIAJE -->
+    <!-- MODAL: RECOMENDACIONES -->
     <div id="modal-recomendaciones" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-recomendaciones')">×</a></div>
             <h2 class="modal-title" style="color: #0284c7;">🎒 Recomendaciones antes del Viaje</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Antes de tu viaje a CIMA BLANCA, te recomendamos llevar:</p>
             
-            <div class="info-block" style="border-left-color: #0284c7;">
+            <div class="info-block border-blue">
                 <h4>🧴 Aseo personal y protección</h4>
-                <ul>
-                    <li>🌸 <strong>Aseo personal:</strong> cepillo y pasta dental.</li>
-                    <li>🧴 <strong>Protección solar:</strong> bloqueador, repelente.</li>
-                </ul>
+                <ul><li>🌸 <strong>Aseo personal:</strong> cepillo y pasta dental.</li><li>🧴 <strong>Protección solar:</strong> bloqueador, repelente.</li></ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #0284c7;">
+            <div class="info-block border-blue">
                 <h4>🏖️ Playa & Piscina</h4>
-                <ul>
-                    <li>🩴 Traje de baño, sandalias, gorra/sombrero.</li>
-                    <li>🕶️ <strong>Extras útiles:</strong> lentes de sol, aloe vera, hidratación.</li>
-                </ul>
+                <ul><li>🩴 Traje de baño, sandalias, gorra/sombrero.</li><li>🕶️ <strong>Extras útiles:</strong> lentes de sol, aloe vera, hidratación.</li></ul>
             </div>
 
-            <div class="info-block" style="border-left-color: #ec4899;">
+            <div class="info-block border-pink">
                 <h4>🐾 Si viajas con tu peludo 🐶</h4>
                 <p>No te olvides de llevarle su <strong>cama, bebedero y comida</strong>. Aunque las torres son <em>pet friendly</em>, recuerda que por normas de convivencia no puede andar sin su collar y debes llevarlo exclusivamente a las zonas determinadas para sus necesidades.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #f59e0b;">
+            <div class="info-block border-amber">
                 <h4>⚠️ Muy importante: Toallas de playa/piscina 🧺</h4>
                 <p>Las toallas del departamento son <strong>solo de uso interno</strong> del depa. En el caso de extravío o daño pueden haber cargos adicionales de <strong>$20 dólares por artículo</strong>.</p>
                 <span class="upsell-link" onclick="cambiarModal('modal-recomendaciones', 'modal-extras')">✨ ¿Necesitas facilidades de playa? Mira nuestro Rental Kit de Playa →</span>
             </div>
 
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="https://wa.me/593994000500?text=Hola,%20tengo%20una%20duda%20sobre%20mi%20viaje%20a%20Cima%20Blanca." target="_blank" style="display: block; background: #25D366; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px;">📱 Escríbenos por WhatsApp si tienes dudas</a>
-            </div>
+            <a href="https://wa.me/593994000500?text=Hola,%20tengo%20una%20duda%20sobre%20mi%20viaje%20a%20Cima%20Blanca." target="_blank" class="wa-btn-full">📱 Escríbenos por WhatsApp si tienes dudas</a>
         </div>
     </div>
 
-    <!-- MODAL: MI DEPA & TUTORIALES -->
+    <!-- MODAL: TUTORIALES -->
     <div id="modal-tutoriales" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-tutoriales')">×</a></div>
             <h2 class="modal-title" style="color: #8b5cf6;">⚙️ ¿Cómo funciona? (Tutoriales)</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Guía rápida para el uso de los equipos y dispositivos del departamento:</p>
             
-            <div class="info-block" style="border-left-color: #8b5cf6;">
+            <div class="info-block border-purple">
                 <h4>🔒 Cerradura Inteligente</h4>
                 <p>Gira las dos manijas al mismo tiempo para abrir. Después de ingresar tu PIN numérico, presiona la tecla <strong>“#”</strong>.</p>
                 <a href="https://youtube.com/shorts/9dgp5Qc9reM?si=n21AJn3yGQ--SAJ7" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial</a>
             </div>
 
-            <div class="info-block" style="border-left-color: #8b5cf6;">
+            <div class="info-block border-purple">
                 <h4>🪟 Persiana Automática de la Sala</h4>
                 <p>El departamento cuenta con una persiana automatizada en la sala. Su control debe ser usado de forma adecuada y <strong>no debe ser manipulado por niños</strong> para evitar desconfiguraciones en su sistema.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #8b5cf6;">
+            <div class="info-block border-purple">
                 <h4>📺 Smart TV Samsung & Sistema de Audio</h4>
                 <p>Disfruta de entretenimiento de última generación en nuestra nueva <strong>Smart TV Samsung de alta gama</strong>, perfectamente sincronizada con la <strong>barra de sonido y subwoofer inalámbrico Samsung</strong> para brindarte una experiencia de audio y video superior.</p>
-                <p style="margin-top: 6px; font-size: 12px; color: #64748b;">📌 <em>Puedes acceder a diversas aplicaciones y servicios de streaming disponibles directamente en el menú de la televisión.</em></p>
+                <p style="margin-top: 6px; font-size: 12px; color: #64748b;">📌 <em>Puedes acceder a diversas aplicaciones y streaming directamente en el menú de la televisión.</em></p>
             </div>
 
-            <div class="info-block" style="border-left-color: #8b5cf6;">
+            <div class="info-block border-purple">
                 <h4>🛋️ Sofá Cama Versátil de 3 Posiciones</h4>
-                <p>Cuenta con 3 configuraciones: <strong>sofá tradicional</strong>, <strong>reclinable para ver películas</strong> y <strong>cama</strong> (capacidad para 2 personas adicionales). Empuja el respaldar hacia adelante hasta escuchar un clic para cambiar de posición.</p>
+                <p>Cuenta con 3 configuraciones: <strong>sofá tradicional</strong>, <strong>reclinable</strong> y <strong>cama</strong>. Empuja el respaldar hacia adelante hasta escuchar un clic para cambiar de posición.</p>
                 <a href="https://youtu.be/1Ix3srVr_ys?si=e4JtfnvfgEbMns6W" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial</a>
             </div>
 
-            <div class="info-block" style="border-left-color: #8b5cf6;">
+            <div class="info-block border-purple">
                 <h4>🔐 Caja de Seguridad</h4>
                 <p>Con la puerta abierta: presiona el botón de reseteo posterior, ingresa tu código de 3 a 8 dígitos mientras parpadea la luz amarilla y presiona <strong>“#”</strong> para confirmar.</p>
                 <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODYzMzY5NTQ4NTAyMjU4?story_media_id=3850854764112527194&igsh=MW15aWc0cGoxYTlwaQ==&igsi=MW15aWc0cGoxYTlwaQ==" target="_blank" rel="noopener" class="ig-highlight-btn">📸 Ver Tutorial</a>
             </div>
 
-            <div class="info-block" style="border-left-color: #8b5cf6;">
+            <div class="info-block border-purple">
                 <h4>🍳 Cocina de Inducción Teka</h4>
                 <p>Panel táctil moderno. Recuerda utilizar únicamente ollas y sartenes aptos para inducción (con base ferromagnética).</p>
                 <a href="https://youtube.com/shorts/iARYtfK4rcY?si=rq3dCj3e6k323OzD" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial</a>
             </div>
 
-            <div class="info-block" style="border-left-color: #ef4444;">
+            <div class="info-block border-red">
                 <h4>🧺 Lavadora & Secadora Inteligente</h4>
-                <p>El panel principal de la lavadora controla ambas funciones. Temperaturas sugeridas: niveles 1–2 (fría), nivel 3 (tibia), nivel 4 (caliente).</p>
+                <p>El panel principal controla ambas funciones. Temperaturas sugeridas: niveles 1–2 (fría), nivel 3 (tibia), nivel 4 (caliente).</p>
                 <p style="margin-top: 6px; color: #ef4444;">⚠️ <strong>Importante:</strong> No laves ni seques prendas con arena, ya que pueden obstruir y dañar los equipos.</p>
-                
                 <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
-                    <a href="https://youtube.com/shorts/KcHCLfP-4nM?si=JEnaT1y24MwIYslk" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial (Detergente y suavizante)</a>
+                    <a href="https://youtube.com/shorts/KcHCLfP-4nM?si=JEnaT1y24MwIYslk" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial (Detergente)</a>
                     <a href="https://youtube.com/shorts/SjPJSXA6nzo?si=CyxJlP0aaG5DkV5y" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial (Funcionamiento)</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: ÁREAS DEL EDIFICIO (CON VÍNCULO A REGLAS DE PISCINA) -->
+    <!-- MODAL: ÁREAS DEL EDIFICIO -->
     <div id="modal-edificio-areas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-edificio-areas')">×</a></div>
             <h2 class="modal-title" style="color: #0284c7;">🏊‍♂️ Áreas del Edificio</h2>
-            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Conoce y disfruta de las instalaciones de Cumbre Blanca Beach Towers:</p>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Conoce y disfruta de las instalaciones del complejo:</p>
             
-            <div class="info-block" style="border-left-color: #0284c7;">
+            <div class="info-block border-blue">
                 <h4>🌊 Piscina Infinita & Piscina Infantil</h4>
                 <p>Disfruta de una hermosa vista al mar. Horario general: todos los días de <strong>8:00 a.m. a 11:00 p.m.</strong></p>
                 <p style="margin-top: 6px; font-size: 12px; color: #b45309; font-style: italic;">
                     ⚠️ Mantenimiento entre lun/mar (6:00 p.m. a 10:00 a.m. del día siguiente). No aplica en feriados. 
-                    <a onclick="cambiarModal('modal-edificio-areas', 'modal-reglas'); toggleRule('pool-rules');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver normas completas de la piscina →</a>
+                    <a onclick="cambiarModal('modal-edificio-areas', 'modal-reglas'); toggleContent('pool-rules', 'rule-content');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver normas de la piscina →</a>
                 </p>
             </div>
 
-            <div class="info-block" style="border-left-color: #f59e0b;">
+            <div class="info-block border-amber">
                 <h4>🔥 Área de BBQ y Fogatas</h4>
                 <p>Compuesta por 4 estaciones. 📌 <em>Debe reservarse con al menos 48 horas de anticipación. Para días festivos y feriados, se debe realizar con la mayor anticipación posible</em>.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #10B981;">
+            <div class="info-block border-green">
                 <h4>💪 Gimnasio</h4>
                 <p>Equipado con máquinas cardiovasculares y de fuerza. 📌 <em>El huésped primero debe acercarse a garita y registrarse para el uso de las máquinas</em>.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #d4af37;">
+            <div class="info-block border-gold">
                 <h4>🛝 Parque Infantil</h4>
                 <p>Espacio seguro y divertido al aire libre pensado para los más pequeños del hogar.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #0284c7;">
+            <div class="info-block border-blue">
                 <h4>💻 Espacio de Coworking</h4>
                 <p>Área cómoda y conectada, ideal si necesitas trabajar o realizar videollamadas con tranquilidad.</p>
             </div>
 
-            <div class="info-block" style="border-left-color: #ef4444;">
+            <div class="info-block border-red">
                 <h4>🛡️ Seguridad 24/7</h4>
                 <p>Control de accesos y monitoreo permanente en garita y áreas comunes para tu total tranquilidad.</p>
             </div>
@@ -1082,10 +825,9 @@
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 5px;">Selecciona una categoría para ver las ubicaciones en Google Maps:</p>
             <p style="text-align: center; font-size: 11px; color: #94a3b8; font-style: italic; margin-bottom: 15px;">* Tiempos estimados en auto saliendo desde Cumbre Blanca Beach Towers.</p>
             
-            <!-- 1. Playas Destacadas -->
-            <div class="info-block" style="border-left-color: #0284c7; margin-bottom: 10px;">
+            <div class="info-block border-blue" style="margin-bottom: 10px;">
                 <h4>🏖️ Ruta de Playas</h4>
-                <button class="zona-toggle-btn" onclick="toggleZona('zona-playas')">📂 Ver / Ocultar Playas</button>
+                <button class="zona-toggle-btn" onclick="toggleContent('zona-playas', 'zona-content')">📂 Ver / Ocultar Playas</button>
                 <div id="zona-playas" class="zona-content">
                     <div class="zsection-title">Nuestras Recomendadas</div>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Punta+Blanca+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Playa Punta Blanca <small style="display:block; font-weight:normal; color:#64748b;">Nuestra playa (entradas 5 y 7)</small></span><span class="ztime">5 min</span></a>
@@ -1101,10 +843,9 @@
                 </div>
             </div>
 
-            <!-- 2. Aventura y Puntos de Interés -->
-            <div class="info-block" style="border-left-color: #8b5cf6; margin-bottom: 10px;">
+            <div class="info-block border-purple" style="margin-bottom: 10px;">
                 <h4>🪂 Aventura y Turismo</h4>
-                <button class="zona-toggle-btn" style="background: #8b5cf6;" onclick="toggleZona('zona-aventura')">📂 Ver / Ocultar Puntos Turísticos</button>
+                <button class="zona-toggle-btn" style="background: #8b5cf6;" onclick="toggleContent('zona-aventura', 'zona-content')">📂 Ver / Ocultar Puntos Turísticos</button>
                 <div id="zona-aventura" class="zona-content">
                     <div class="zsection-title">Para Conocer y Explorar</div>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Museo+Amantes+de+Sumpa,+Santa+Elena" target="_blank" rel="noopener"><span class="zname">🏺 Museo Amantes de Sumpa <small style="display:block; font-weight:normal; color:#64748b;">Cultura e historia milenaria</small></span><span class="ztime">20 min</span></a>
@@ -1115,10 +856,9 @@
                 </div>
             </div>
 
-            <!-- 3. Gastronomía & Restaurantes -->
-            <div class="info-block" style="border-left-color: #f59e0b; margin-bottom: 10px;">
+            <div class="info-block border-amber" style="margin-bottom: 10px;">
                 <h4>🍽️ Gastronomía & Restaurantes</h4>
-                <button class="zona-toggle-btn" style="background: #f59e0b;" onclick="toggleZona('zona-restaurantes')">📂 Ver / Ocultar Restaurantes</button>
+                <button class="zona-toggle-btn" style="background: #f59e0b;" onclick="toggleContent('zona-restaurantes', 'zona-content')">📂 Ver / Ocultar Restaurantes</button>
                 <div id="zona-restaurantes" class="zona-content">
                     <div class="zsection-title">Opciones Cercanas</div>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Pollo+a+la+brasa+Don+Pepe,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Pollo a la brasa Don Pepe</span><span class="ztime">4 min · $</span></a>
@@ -1131,10 +871,9 @@
                 </div>
             </div>
 
-            <!-- 4. Servicios y Supermercados -->
-            <div class="info-block" style="border-left-color: #10B981; margin-bottom: 10px;">
+            <div class="info-block border-green" style="margin-bottom: 10px;">
                 <h4>🛒 Servicios y Supermercados</h4>
-                <button class="zona-toggle-btn" style="background: #10B981;" onclick="toggleZona('zona-servicios')">📂 Ver / Ocultar Servicios</button>
+                <button class="zona-toggle-btn" style="background: #10B981;" onclick="toggleContent('zona-servicios', 'zona-content')">📂 Ver / Ocultar Servicios</button>
                 <div id="zona-servicios" class="zona-content">
                     <div class="zsection-title">Para Abastecerse</div>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Gasolinera+PYS+farmacia+cajeros,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Gasolinera PYS, farmacia, cajeros</span><span class="ztime">3 min</span></a>
@@ -1157,14 +896,14 @@
             <h2 class="modal-title" style="color: #ef4444;">🆘 Contacto & Emergencias</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Estamos para ayudarte en cualquier momento:</p>
 
-            <div class="info-block" style="border-left-color: #10B981;">
+            <div class="info-block border-green">
                 <h4>💬 Habla con tus Anfitriones</h4>
                 <p>Gustavo & Alba · Español e Inglés · Tiempo de respuesta rápido.</p>
                 <a class="modal-link-btn" href="https://wa.me/593994000500?text=Hola%20Gustavo,%20necesito%20asistencia%20durante%20mi%20estancia." target="_blank">📞 Gustavo (WhatsApp)</a>
                 <a class="modal-link-btn" href="https://wa.me/593994000900?text=Hola%20Alba,%20necesito%20asistencia%20durante%20mi%20estancia." target="_blank">📞 Alba (WhatsApp)</a>
             </div>
 
-            <div class="info-block" style="border-left-color: #ef4444;">
+            <div class="info-block border-red">
                 <h4>🏥 Hospitales y Centros Médicos Cercanos</h4>
                 <p style="font-size: 12px; color: #64748b; margin-bottom: 8px;">Toca para abrir la ubicación en Google Maps:</p>
                 <div class="zsection-title" style="color: #ef4444;">Asistencia Médica</div>
@@ -1175,7 +914,7 @@
                 <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Clínica+Granados,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Clínica Granados <small style="display:block; font-weight:normal; color:#64748b;">Privado - 24 horas</small></span><span class="ztime">35 min</span></a>
             </div>
 
-            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20asistencia%20urgente%20durante%20mi%20estancia%20en%20Cima%20Blanca." target="_blank" style="display: block; background: #25D366; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; text-align: center; margin-top: 15px;">💬 Escribir por WhatsApp</a>
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20asistencia%20urgente%20durante%20mi%20estancia%20en%20Cima%20Blanca." target="_blank" class="wa-btn-full">💬 Escribir por WhatsApp</a>
         </div>
     </div>
 
@@ -1183,6 +922,8 @@
     <div class="toast" id="toast">Copiado ✓</div>
 
     <script>
+        /* 3. Simplificación del "Cerebro" Javascript */
+        
         function abrirModal(id) { 
             const modal = document.getElementById(id);
             modal.style.display = 'flex'; 
@@ -1192,17 +933,10 @@
         }
         
         function cerrarModal(id) { 
-            const modal = document.getElementById(id);
-            modal.style.display = 'none'; 
+            document.getElementById(id).style.display = 'none'; 
             document.body.classList.remove('modal-open');
-            const modalContent = modal.querySelector('.modal-content');
-            if (modalContent) modalContent.scrollTop = 0;
-
-            const sections = ['dept-rules', 'building-rules', 'pool-rules', 'main-qr-box', 'zona-playas', 'zona-aventura', 'zona-restaurantes', 'zona-servicios'];
-            sections.forEach(secId => {
-                const el = document.getElementById(secId);
-                if (el) el.style.display = 'none';
-            });
+            /* Cierra cualquier pestaña interna que haya quedado abierta */
+            document.querySelectorAll('.rule-content, .zona-content, #main-qr-box').forEach(el => el.style.display = 'none');
         }
 
         function cambiarModal(modalActual, modalNuevo) { 
@@ -1215,31 +949,14 @@
             box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
 
-        function toggleRule(id) {
-            const sections = ['dept-rules', 'building-rules', 'pool-rules'];
-            sections.forEach(secId => {
-                const box = document.getElementById(secId);
-                if (secId === id) {
-                    box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-                } else {
-                    box.style.display = 'none';
-                }
+        /* Esta única función ahora controla Reglas y Zonas sin código repetido */
+        function toggleContent(id, contentClass) {
+            document.querySelectorAll('.' + contentClass).forEach(box => {
+                box.style.display = (box.id === id && box.style.display !== 'block') ? 'block' : 'none';
             });
         }
 
-        function toggleZona(id) {
-            const sections = ['zona-playas', 'zona-aventura', 'zona-restaurantes', 'zona-servicios'];
-            sections.forEach(secId => {
-                const box = document.getElementById(secId);
-                if (secId === id) {
-                    box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-                } else {
-                    box.style.display = 'none';
-                }
-            });
-        }
-
-        /* ---- Copiar al portapapeles con Toast ---- */
+        /* Función de Copiar */
         const toast = document.getElementById('toast');
         function showToast(msg){
             toast.textContent = msg; toast.classList.add('show');
