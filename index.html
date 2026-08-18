@@ -678,7 +678,9 @@
                 <h4>📊 Ficha Técnica del Espacio</h4>
                 <ul>
                     <li>📍 <strong>Location:</strong> Punta Blanca frente a la entrada 7</li>
-                    <li>👥 <strong>Capacity:</strong> Hasta 8 pers. máx. (Ideal: 6 pax)</li>
+                    <li>👥 <strong>Capacity:</strong> Hasta 8 pers. máx. (Ideal: 6 pax) <br>
+                        <span style="font-size: 11.5px; color: #b45309; font-style: italic;">⚠️ La tarifa base aplica según el número de huéspedes registrados. Exceder el número pagado genera cargos adicionales. <a onclick="cambiarModal('modal-amenities', 'modal-reglas'); toggleRule('dept-rules');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver política de ocupación →</a></span>
+                    </li>
                     <li>🛏️ <strong>Bedrooms:</strong> Dos</li>
                     <li>🚿 <strong>Bathrooms:</strong> Dos</li>
                     <li>🚗 <strong>Parking:</strong> Free Zona Visitantes</li>
@@ -905,7 +907,6 @@
                         <li>👕 No colgar ropa o toallas en balcones o fachadas.</li>
                         <li>🥂 No consumir alcohol en áreas comunes no autorizadas.</li>
                         <li>🚫 Prohibido portar armas o sustancias psicoactivas.</li>
-                        <li>🏊‍♂️ Piscina: De mar-dom/feriados, 7:00 a.m. - 11:00 p.m. 🚧 Lun y mar hasta 12:00 p. m. en mant.</li>
                         <li>🔥 BBQ: Disponible los 7 días de la semana, 9:00 a.m. - 11:59 p.m. los mantenimientos informará previamente la administración.</li>
                         <li>📹 Seguridad 24/7 con cámaras de monitoreo.</li>
                         <li>⚠️ El incumplimiento de estas reglas puede generar cargos adicionales o la cancelación inmediata de la estadía.</li>
@@ -914,19 +915,20 @@
                 </div>
             </div>
 
-            <!-- Normas de Piscina (Verde) -->
+            <!-- Normas de Piscina (Verde - Con Mantenimiento Lunes/Martes 6pm a 10am) -->
             <div class="info-block" style="border-left-color: #10B981; margin-top: 15px;">
                 <h4>🌴 Recordatorio para Disfrutar la Piscina 💦</h4>
                 <button class="rule-toggle-btn rule-btn-pool" onclick="toggleRule('pool-rules')">📂 Ver / Ocultar Normas de Piscina</button>
                 <div id="pool-rules" class="rule-content">
                     <p style="margin-top: 10px;">Para que todos podamos disfrutarla al máximo y mantenerla limpia y agradable, les pedimos tener en cuenta:</p>
                     <ul>
+                        <li>🏊‍♂️ <strong>Horario general:</strong> Abierta todos los días de 8:00 a.m. a 11:00 p.m.</li>
+                        <li>🚧 <strong>Mantenimiento:</strong> Se realiza entre los días lunes o martes (desde las 6:00 p.m. hasta las 10:00 a.m. del día siguiente). <em>Nota: Si el lunes o martes cae feriado, no aplica mantenimiento.</em></li>
                         <li>🚿 Darse una ducha antes de ingresar.</li>
                         <li>🩱 Usar traje de baño adecuado.</li>
                         <li>🚫 Evitar ingresar con arena, alimentos o envases de vidrio.</li>
                         <li>👧🏻 Los niños deben estar siempre bajo supervisión de un adulto.</li>
                         <li>🗑️ Mantener limpias las áreas comunes y utilizar los tachos disponibles.</li>
-                        <li>🕐 Respetar los horarios y normas de uso de la piscina.</li>
                     </ul>
                     <p style="margin-top: 8px; font-style: italic; color: #047857;">¡Muchas gracias por ayudarnos a cuidar este espacio! 💙 La idea es que todos puedan disfrutarlo y pasar una excelente estadía en Cima Blanca. 🏖️✨</p>
                 </div>
@@ -1029,7 +1031,7 @@
         </div>
     </div>
 
-    <!-- MODAL: ÁREAS DEL EDIFICIO -->
+    <!-- MODAL: ÁREAS DEL EDIFICIO (CON VÍNCULO A REGLAS DE PISCINA) -->
     <div id="modal-edificio-areas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-edificio-areas')">×</a></div>
@@ -1038,7 +1040,11 @@
             
             <div class="info-block" style="border-left-color: #0284c7;">
                 <h4>🌊 Piscina Infinita & Piscina Infantil</h4>
-                <p>Disfruta de una hermosa vista al mar. Horario de atención: de <strong>8:00 a.m. a 11:00 p.m.</strong></p>
+                <p>Disfruta de una hermosa vista al mar. Horario general: todos los días de <strong>8:00 a.m. a 11:00 p.m.</strong></p>
+                <p style="margin-top: 6px; font-size: 12px; color: #b45309; font-style: italic;">
+                    ⚠️ El mantenimiento se realiza entre lunes o martes (6:00 p.m. a 10:00 a.m. del día siguiente). No aplica en feriados. 
+                    <a onclick="cambiarModal('modal-edificio-areas', 'modal-reglas'); toggleRule('pool-rules');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver normas completas de la piscina →</a>
+                </p>
             </div>
 
             <div class="info-block" style="border-left-color: #f59e0b;">
@@ -1068,7 +1074,7 @@
         </div>
     </div>
 
-    <!-- MODAL: EXPLORA PUNTA BLANCA (LIMPIO Y UNIFORME - OPCIÓN B) -->
+    <!-- MODAL: EXPLORA PUNTA BLANCA -->
     <div id="modal-zona" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-zona')">×</a></div>
@@ -1125,7 +1131,7 @@
                 </div>
             </div>
 
-            <!-- 4. Servicios y Supermercados (Limpio - Opción B) -->
+            <!-- 4. Servicios y Supermercados -->
             <div class="info-block" style="border-left-color: #10B981; margin-bottom: 10px;">
                 <h4>🛒 Servicios y Supermercados</h4>
                 <button class="zona-toggle-btn" style="background: #10B981;" onclick="toggleZona('zona-servicios')">📂 Ver / Ocultar Servicios</button>
