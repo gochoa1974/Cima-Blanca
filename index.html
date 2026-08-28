@@ -396,7 +396,7 @@
                 <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Amenidades</div>
             </a>
             <a onclick="abrirModal('modal-zona')" class="grid-card">
-                <div class="grid-icon-box">🗺️</div><div class="grid-title">Zona & Mapas</div>
+                <div class="grid-icon-box">🗺️</div><div class="grid-title">Explora</div>
             </a>
             <a onclick="abrirModal('modal-ayuda')" class="grid-card emergency-grid-card">
                 <div class="grid-icon-box">🆘</div><div class="grid-title">Ayuda & SOS</div>
@@ -871,7 +871,7 @@
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+Ballenita,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket Ballenita</span><span class="ztime">12 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Terminal+Terrestre+SUMPA,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Terminal Terrestre SUMPA</span><span class="ztime">14 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=El+Paseo+Shopping+La+Península,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 El Paseo Shopping La Península</span><span class="ztime">26 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+La+Libertad,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket La Libertad</span><span class="ztime">27 min</span></a>
+                    <a class="zrow" href="https://www.xml.github.io/..." target="_blank" rel="noopener"><span class="zname">📍 Hipermarket La Libertad</span><span class="ztime">27 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Aeropuerto+Regional+Ulpiano,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Aeropuerto Regional Ulpiano</span><span class="ztime">36 min</span></a>
                 </div>
             </div>
@@ -926,6 +926,7 @@
         }
         
         function cerrarModal(id) {  
+            document.getElementById(id); // no-op fix or standard logic
             document.getElementById(id).style.display = 'none';  
             document.body.classList.remove('modal-open');
         }
