@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Guía Digital de Bienvenida - Cima Blanca</title>
     
+    <!-- ========================================== -->
+    <!-- ETIQUETAS OPEN GRAPH PARA WHATSAPP         -->
+    <!-- ========================================== -->
     <meta property="og:title" content="Guía Digital de Bienvenida - CIMA BLANCA Beach Apartment">
     <meta property="og:description" content="Ubicación exacta, clave de WiFi, parqueo y tutoriales para tu estancia.">
     <meta property="og:image" content="https://gochoa1974.github.io/Cima-Blanca/portada-guia.jpg">
     <meta property="og:url" content="https://gochoa1974.github.io/Cima-Blanca/">
     <meta property="og:type" content="website">
     
+    <!-- ========================================== -->
+    <!-- CHIP DE GOOGLE ANALYTICS 4                 -->
+    <!-- ========================================== -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2JVJLZN3QF"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,6 +25,9 @@
 
       gtag('config', 'G-2JVJLZN3QF');
     </script>
+    <!-- ========================================== -->
+
+    <!-- Acelerador de letras (Pre-conexión) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -36,11 +45,11 @@
         body.modal-open { overflow: hidden; }
 
         .hero-banner {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('MEL04927.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.25)), url('https://i.postimg.cc/6QB7LGx4/PORTADA-MEL04927-(1).jpg');
             background-size: cover;
-            background-position: center center; 
+            background-position: 70% 67%; 
             color: white;
-            padding: 60px 20px 100px 20px; 
+            padding: 35px 20px 185px 20px; 
             text-align: left; 
             border-bottom-left-radius: 35px;
             border-bottom-right-radius: 35px;
@@ -72,7 +81,7 @@
         .container { 
             padding: 20px 15px; 
             max-width: 480px; 
-            margin: -60px auto 0 auto; 
+            margin: -45px auto 0 auto; 
         }
         
         .trust-card { 
@@ -136,6 +145,146 @@
         .qr-box img { width: 100%; border-radius: 8px; display: block; }
         .kf-note { font-size: 11px; opacity: 0.7; margin-top: 10px; line-height: 1.3; }
 
+        /* TARJETA WOW: EXTENSIÓN DE ESTADÍA MARKETING PERSUASIVO */
+        .wow-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 22px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+            text-align: center;
+            position: relative;
+            border: 2px solid #d4af37;
+            overflow: hidden;
+        }
+        .wow-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 60%);
+            animation: rotate-glow 15s linear infinite;
+            z-index: 0;
+        }
+        /* Barrido de brillo tipo tarjeta metálica premium */
+        .wow-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -60%;
+            width: 40%; height: 100%;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.14) 45%, rgba(255,255,255,0.28) 50%, rgba(255,255,255,0.14) 55%, transparent 100%);
+            transform: skewX(-20deg);
+            animation: shimmer-sweep 4.5s ease-in-out infinite;
+            z-index: 0;
+        }
+        @keyframes shimmer-sweep {
+            0% { left: -60%; }
+            35% { left: 130%; }
+            100% { left: 130%; }
+        }
+        @keyframes rotate-glow {
+            100% { transform: rotate(360deg); }
+        }
+        .wow-sparkle {
+            position: absolute; z-index: 0; opacity: 0.55; pointer-events: none;
+            animation: sparkle-float 3.6s ease-in-out infinite;
+            font-size: 15px; filter: drop-shadow(0 0 4px rgba(252,211,77,0.6));
+        }
+        .wow-sparkle.s1 { top: 14px; left: 18px; animation-delay: 0s; }
+        .wow-sparkle.s2 { top: 46px; right: 22px; animation-delay: 1.1s; font-size: 12px; }
+        .wow-sparkle.s3 { bottom: 60px; left: 26px; animation-delay: 2.1s; font-size: 11px; }
+        @keyframes sparkle-float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
+            50% { transform: translateY(-8px) scale(1.15); opacity: 0.85; }
+        }
+        .wow-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #d4af37;
+            color: #000;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 7px 18px;
+            border-bottom-left-radius: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: -2px 2px 12px rgba(0,0,0,0.4);
+            z-index: 1;
+            animation: badge-pulse 2.4s ease-in-out infinite;
+        }
+        @keyframes badge-pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.18); }
+        }
+        .wow-title {
+            color: #fcd34d;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .wow-subtitle {
+            color: #94a3b8;
+            font-size: 12.5px;
+            font-style: italic;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .wow-text {
+            color: #e2e8f0;
+            font-size: 13.5px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .wow-text strong {
+            color: #ffffff;
+        }
+        .wow-trust-row {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 12px;
+            margin-bottom: 12px; position: relative; z-index: 1;
+        }
+        .wow-trust-row span {
+            font-size: 10.5px; color: #cbd5e1; white-space: nowrap;
+        }
+        .wow-trust-row span b { color: #fcd34d; }
+        .wow-btn {
+            display: block;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            padding: 13px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
+            animation: pulse-gold 2s infinite;
+            position: relative;
+            z-index: 1;
+            border: 1px solid #fbbf24;
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { box-shadow: 0 0 0 14px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+        .wow-fineprint {
+            font-size: 9.5px; color: #64748b; margin-top: 8px; position: relative; z-index: 1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .wow-card::before, .wow-card::after, .wow-sparkle, .wow-badge, .wow-btn { animation: none; }
+        }
+
         .section-header {
             font-size: 11.5px; font-weight: bold; text-transform: uppercase;
             letter-spacing: 1px; color: #b45309; margin: 20px 5px 10px 5px;
@@ -156,11 +305,11 @@
         /* GRID */
         .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .grid-card {
-            background: #FFFFFF; border-radius: 16px; padding: 14px 6px; text-align: center;
+            background: #FFFFFF; border-radius: 16px; padding: 12px 6px; text-align: center;
             text-decoration: none; color: #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; display: flex;
-            flex-direction: column; align-items: center; justify-content: center;
-            border-bottom: 4px solid #0284c7; min-height: 88px;
+            flex-direction: column; align-items: center; justify-content: flex-start;
+            border-bottom: 4px solid #0284c7; min-height: 95px;
         }
         .grid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
         .grid-card.amenities-grid-card { border-bottom-color: #047857; }
@@ -173,17 +322,15 @@
             display: flex; align-items: center; justify-content: center; font-size: 18px;
             margin-bottom: 6px; flex-shrink: 0;
         }
-        .grid-title { font-size: 11.5px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
+        .grid-title { font-size: 10px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
 
         .card-badge {
-            display: inline-flex; align-items: center; flex-shrink: 0; margin-left: 8px;
-            font-size: 10px; text-transform: uppercase; white-space: nowrap;
+            position: absolute; top: -10px; right: 15px; font-size: 10px; text-transform: uppercase;
             letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; font-weight: bold;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .card-badge.gold-badge { background: #d4af37; color: white; }
         .card-badge.red-badge { background: #ef4444; color: white; }
-        .banner-btn .btn-text { flex: 1; }
         
         .icon { 
             font-size: 22px; margin-right: 12px; width: 36px; height: 36px;
@@ -231,6 +378,7 @@
             padding-bottom: 8px; margin-bottom: 15px; text-align: center;
         }
         
+        /* Limpieza de moldes repetidos (Clases Utilitarias) */
         .info-block {
             background: #f8fafc; border-radius: 12px; padding: 12px 15px;
             margin-bottom: 12px; border-left: 4px solid #10B981;
@@ -318,6 +466,7 @@
 
     <div class="container">
         
+        <!-- PRESENTACIÓN -->
         <div class="trust-card">
             <img src="https://i.postimg.cc/ZqkssVsP/Cima-Blanca-logo.png" alt="Cima Blanca Logo" class="card-logo">
             <img src="https://i.postimg.cc/QxX1JPgK/Bienvenido.png" alt="¡Bienvenido!" class="welcome-img">
@@ -333,6 +482,7 @@
             </div>
         </div>
 
+        <!-- KEYCARD WIFI AL FRENTE -->
         <div class="keycard">
             <div class="keycard-top">
                 <div>
@@ -363,48 +513,70 @@
             <div class="kf-note">🔑 Tu PIN de ingreso a la cerradura inteligente llegará por este mismo medio 24 horas antes.</div>
         </div>
 
+        <!-- TARJETA WOW: EXTENSIÓN DE ESTADÍA MARKETING PERSUASIVO -->
+        <div class="wow-card">
+            <span class="wow-sparkle s1">✨</span>
+            <span class="wow-sparkle s2">🌴</span>
+            <span class="wow-sparkle s3">☀️</span>
+            <div class="wow-badge">🔥 Solo para huéspedes actuales</div>
+            <div class="wow-title">¿El mar ya te atrapó? 🌊</div>
+            <p class="wow-text">
+                Si hay disponibilidad, te damos una <strong>Tarifa Directa de Anfitrión</strong> (sin comisiones) para quedarte 1 o 2 noches más.
+            </p>
+            <div class="wow-trust-row">
+                <span>✓ <b>Respuesta</b> en minutos</span>
+                <span>✓ <b>Sin</b> re-reservar en la app</span>
+                <span>✓ <b>Tarifa</b> preferencial</span>
+            </div>
+            <a href="https://wa.me/593994000500?text=Hola%20Gustavo,%20me%20encant%C3%B3%20mi%20estad%C3%ADa%20en%20Cima%20Blanca%20y%20no%20me%20quiero%20ir%20todav%C3%ADa.%20%C2%BFTienes%20disponibilidad%20para%20extenderla%201%20o%202%20noches%20y%20cu%C3%A1l%20ser%C3%ADa%20mi%20tarifa%20especial%3F" target="_blank" rel="noopener" class="wow-btn" id="wow-extend-btn">
+                💬 Preguntar disponibilidad y tarifa VIP
+            </a>
+            <div class="wow-fineprint">Sujeto a disponibilidad. Tu anfitrión confirma por WhatsApp al instante.</div>
+        </div>
+
+        <!-- SERVICIOS ESPECIALES -->
         <div class="section-header">✨ Servicios y Solicitudes Especiales</div>
         <a onclick="abrirModal('modal-extras')" class="banner-btn premium-btn">
-            <span class="icon">✨</span>
-            <span class="btn-text">Eleva tu Experiencia (Servicios Adicionales)</span>
             <span class="card-badge gold-badge">⭐ Exclusivo</span>
+            <span class="icon">✨</span> Eleva tu Experiencia (Servicios Adicionales)
         </a>
         <a onclick="abrirModal('modal-registro-urgente')" class="banner-btn urgent-btn">
-            <span class="icon">📝</span>
-            <span class="btn-text">Registro de Último Minuto (Mascota / Huésped)</span>
             <span class="card-badge red-badge">⚡ Ajustes</span>
+            <span class="icon">🚨</span> Registro de Último Minuto (Mascota / Huésped)
         </a>
 
+        <!-- GUÍA DE LA ESTADÍA -->
         <div class="section-header">📖 Guía de la Estadía</div>
         <div class="guide-grid">
             <a onclick="abrirModal('modal-amenities')" class="grid-card amenities-grid-card">
-                <div class="grid-icon-box">🏠</div><div class="grid-title">El Depa</div>
+                <div class="grid-icon-box">🌊</div><div class="grid-title">Sobre el Departamento & Amenities</div>
             </a>
             <a onclick="abrirModal('modal-estadia')" class="grid-card">
-                <div class="grid-icon-box">📍</div><div class="grid-title">Ubicación & Horarios</div>
+                <div class="grid-icon-box">🔑</div><div class="grid-title">Tu Estadía (Check-in / WiFi)</div>
             </a>
             <a onclick="abrirModal('modal-reglas')" class="grid-card rules-grid-card">
-                <div class="grid-icon-box">📜</div><div class="grid-title">Normas & Reglas</div>
+                <div class="grid-icon-box">📜</div><div class="grid-title">Normas y Reglas del Depto. & Edificio</div>
             </a>
             <a onclick="abrirModal('modal-recomendaciones')" class="grid-card">
-                <div class="grid-icon-box">🎒</div><div class="grid-title">Antes de Viajar</div>
+                <div class="grid-icon-box">🎒</div><div class="grid-title">Recomendaciones antes del Viaje</div>
             </a>
             <a onclick="abrirModal('modal-tutoriales')" class="grid-card tutorials-grid-card">
-                <div class="grid-icon-box">🎬</div><div class="grid-title">Tutoriales</div>
+                <div class="grid-icon-box">⚙️</div><div class="grid-title">¿Cómo funciona? (Tutoriales)</div>
             </a>
             <a onclick="abrirModal('modal-edificio-areas')" class="grid-card">
-                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Amenidades</div>
+                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Áreas del Edificio</div>
             </a>
             <a onclick="abrirModal('modal-zona')" class="grid-card">
-                <div class="grid-icon-box">🗺️</div><div class="grid-title">Explora</div>
+                <div class="grid-icon-box">📍</div><div class="grid-title">Explora Punta Blanca</div>
             </a>
             <a onclick="abrirModal('modal-ayuda')" class="grid-card emergency-grid-card">
-                <div class="grid-icon-box">🆘</div><div class="grid-title">Ayuda & SOS</div>
+                <div class="grid-icon-box">🆘</div><div class="grid-title">Contacto & Emergencias (Hospitales)</div>
             </a>
         </div>
         
+        <!-- TARJETA SOCIAL UNIFICADA -->
         <div style="margin-bottom: 15px; margin-top: 15px;">
-            <a href="https://www.instagram.com/cimablanca.beach/" target="_blank" rel="noopener" class="social-banner">
+            <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" rel="noopener" class="social-banner">
                 <div class="social-title">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     ¡Síguenos en @cimablanca.beach!
@@ -422,14 +594,15 @@
             </div>
         </div>
 
-        <a href="https://wa.me/593994000500?text=Hola%20Gustavo,%20estoy%20interesado/a%20en%20realizar%20una%20reserva%20directa%20para%20Cima%20Blanca." target="_blank" rel="noopener" class="banner-btn action-btn" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'reserva_directa' }); }">✨ Reserva Directa (Huésped Frecuente)</a>
+        <a href="https://wa.me/593994000500?text=Hola%20Gustavo,%20estoy%20interesado/a%20en%20realizar%20una%20reserva%20directa%20para%20Cima%20Blanca." target="_blank" rel="noopener" class="banner-btn action-btn">✨ Reserva Directa (Huésped Frecuente)</a>
         
     </div>
 
+    <!-- MODAL: SOBRE EL DEPARTAMENTO & AMENITIES -->
     <div id="modal-amenities" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-amenities')">×</a></div>
-            <h2 class="modal-title">🏠 El Depa</h2>
+            <h2 class="modal-title">🌊 Sobre Cima Blanca & Amenities</h2>
             
             <div style="background: #fdfdfd; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 15px;">
                 <img src="https://i.postimg.cc/6QB7LGx4/PORTADA-MEL04927-(1).jpg" alt="Cima Blanca Vista" style="width: 100%; border-radius: 8px; display: block;" loading="lazy">
@@ -470,9 +643,20 @@
                 </ul>
             </div>
 
+            <div class="info-block border-blue">
+                <h4>🏢 Amenities del Edificio</h4>
+                <ul>
+                    <li>🏊‍♂️ Piscina infinita</li>
+                    <li>👶 Piscina infantil</li>
+                    <li>🔥 Área de BBQ y Fogatas (compuesta por 4 estaciones; requiere reserva con anticipación)</li>
+                    <li>💪 Área de Gym</li>
+                    <li>🛝 Parque Infantil</li>
+                    <li>💻 Espacio de Coworking</li>
+                </ul>
+            </div>
+
             <div class="info-block border-green">
                 <h4>✨ Comodidades del Departamento</h4>
-                <p style="font-size:11.5px; color:#94a3b8; font-style:italic; margin-bottom:10px;">📌 ¿Buscas la piscina, el gym o el BBQ? Eso está en <a onclick="cambiarModal('modal-amenities','modal-edificio-areas')" style="color:#0284c7; text-decoration:underline; cursor:pointer; font-weight:bold;">Amenidades →</a></p>
                 <ul>
                     <li>🍳 Cocina súper completa con utensilios BBQ.</li>
                     <li>❄️ Climatizado con aire acondicionado en todos los ambientes.</li>
@@ -490,23 +674,24 @@
         </div>
     </div>
 
+    <!-- MODAL: TU ESTADÍA -->
     <div id="modal-estadia" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-estadia')">×</a></div>
-            <h2 class="modal-title">📍 Ubicación & Horarios</h2>
+            <h2 class="modal-title">🔑 Tu Estadía</h2>
             
             <div class="info-block border-gold" style="background: linear-gradient(135deg, #f8fafc 0%, #fffef9 100%);">
                 <h4 style="color: #b45309;">📍 Ubicación Exacta del Departamento</h4>
                 <p><strong>Edificio:</strong> Cumbre Blanca Beach Towers<br><strong>Ubicación:</strong> 6to piso, Departamento #607</p>
-                <div>
-                    <a href="https://maps.app.goo.gl/RNqeNFtPwZDRp6KU6" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
-                    <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDg5MTg4ODUwMTE5NjA4?story_media_id=3826784477812746004" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
-                </div>
             </div>
 
             <div class="info-block">
                 <h4>1. Llegada (Check-in)</h4>
                 <p>A partir de las <strong>3:00 p.m.</strong><br>Es obligatorio identificarse en la garita con documento de identidad de todos los adultos previo al ingreso.</p>
+                <div>
+                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
+                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
+                </div>
                 <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏰ ¿Llegas antes? Consulta nuestro servicio de Early Check-in →</span>
             </div>
 
@@ -528,6 +713,7 @@
         </div>
     </div>
 
+    <!-- MODAL: SERVICIOS EXTRAS -->
     <div id="modal-extras" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-extras')">×</a></div>
@@ -585,14 +771,15 @@
                 </ul>
             </div>
 
-            <a href="https://wa.me/593994000500?text=Hola,%20deseo%20solicitar%20un%20servicio%20adicional%20para%20mi%20estancia." target="_blank" class="wa-btn-full" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'servicios_extras' }); }">💬 Solicitar por WhatsApp</a>
+            <a href="https://wa.me/593994000500?text=Hola,%20deseo%20solicitar%20un%20servicio%20adicional%20para%20mi%20estancia." target="_blank" class="wa-btn-full">💬 Solicitar por WhatsApp</a>
         </div>
     </div>
 
+    <!-- MODAL: REGISTRO DE ÚLTIMO MINUTO -->
     <div id="modal-registro-urgente" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-registro-urgente')">×</a></div>
-            <h2 class="modal-title" style="color: #ef4444;">📝 Registro de Último Minuto</h2>
+            <h2 class="modal-title" style="color: #ef4444;">🚨 Registro de Último Minuto</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">¿Quieres invitar a un amigo, un familiar o sumar a tu mascota a última hora? ¡Hazlo aquí fácilmente!</p>
             
             <div class="info-block border-red">
@@ -607,10 +794,11 @@
                 <ul><li><strong>Cálculo:</strong> Tarifa por noche / persona × número de noches de tu estancia.</li></ul>
             </div>
 
-            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20realizar%20un%20registro%20de%20último%20minuto%20(mascota/acompañante%20adicional)%20para%20mi%20estancia." target="_blank" class="wa-btn-full" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'registro_urgente' }); }">💬 Regularizar por WhatsApp</a>
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20realizar%20un%20registro%20de%20último%20minuto%20(mascota/acompañante%20adicional)%20para%20mi%20estancia." target="_blank" class="wa-btn-full">💬 Regularizar por WhatsApp</a>
         </div>
     </div>
 
+    <!-- MODAL: NORMAS Y REGLAS -->
     <div id="modal-reglas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-reglas')">×</a></div>
@@ -681,6 +869,7 @@
         </div>
     </div>
 
+    <!-- MODAL: RECOMENDACIONES -->
     <div id="modal-recomendaciones" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-recomendaciones')">×</a></div>
@@ -708,14 +897,15 @@
                 <span class="upsell-link" onclick="cambiarModal('modal-recomendaciones', 'modal-extras')">✨ ¿Necesitas facilidades de playa? Mira nuestro Rental Kit de Playa →</span>
             </div>
 
-            <a href="https://wa.me/593994000500?text=Hola,%20tengo%20una%20duda%20sobre%20mi%20viaje%20a%20Cima%20Blanca." target="_blank" class="wa-btn-full" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'recomendaciones' }); }">📱 Escríbenos por WhatsApp si tienes dudas</a>
+            <a href="https://wa.me/593994000500?text=Hola,%20tengo%20una%20duda%20sobre%20mi%20viaje%20a%20Cima%20Blanca." target="_blank" class="wa-btn-full">📱 Escríbenos por WhatsApp si tienes dudas</a>
         </div>
     </div>
 
+    <!-- MODAL: TUTORIALES -->
     <div id="modal-tutoriales" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-tutoriales')">×</a></div>
-            <h2 class="modal-title" style="color: #8b5cf6;">🎬 ¿Cómo funciona? (Tutoriales)</h2>
+            <h2 class="modal-title" style="color: #8b5cf6;">⚙️ ¿Cómo funciona? (Tutoriales)</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Guía rápida para el uso de los equipos y dispositivos del departamento:</p>
             
             <div class="info-block border-purple">
@@ -731,7 +921,7 @@
 
             <div class="info-block border-purple">
                 <h4>📺 Smart TV Samsung & Sistema de Audio</h4>
-                <p>Disfruta de entretenimiento de última generación en nuestra nueva <strong>Smart TV Samsung de alta gama</strong>, perfectamente sincronizada con la <strong>barra de sonido y subwoofer inalámbrico Samsung</strong> para brindarte una experiencia de audio y video superior.</p>
+                <p>Disfruta de entretenimiento de última generación en nuestra nueva <strong>Smart TV Samsung de alta gama</strong>, perfectly sincronizada con la <strong>barra de sonido y subwoofer inalámbrico Samsung</strong> para brindarte una experiencia de audio y video superior.</p>
                 <p style="margin-top: 6px; font-size: 12px; color: #64748b;">📌 <em>Puedes acceder a diversas aplicaciones y streaming directamente en el menú de la televisión.</em></p>
             </div>
 
@@ -765,6 +955,7 @@
         </div>
     </div>
 
+    <!-- MODAL: ÁREAS DEL EDIFICIO -->
     <div id="modal-edificio-areas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-edificio-areas')">×</a></div>
@@ -797,7 +988,7 @@
 
             <div class="info-block border-blue">
                 <h4>💻 Espacio de Coworking</h4>
-                <p>Área cómoda y conectada, ideal si necesitas trabalhar o realizar videollamadas con tranquilidad.</p>
+                <p>Área cómoda y conectada, ideal si necesitas trabajar o realizar videollamadas con tranquilidad.</p>
             </div>
 
             <div class="info-block border-red">
@@ -807,6 +998,7 @@
         </div>
     </div>
 
+    <!-- MODAL: EXPLORA PUNTA BLANCA -->
     <div id="modal-zona" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-zona')">×</a></div>
@@ -871,13 +1063,14 @@
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+Ballenita,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket Ballenita</span><span class="ztime">12 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Terminal+Terrestre+SUMPA,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Terminal Terrestre SUMPA</span><span class="ztime">14 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=El+Paseo+Shopping+La+Península,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 El Paseo Shopping La Península</span><span class="ztime">26 min</span></a>
-                    <a class="zrow" href="https://www.xml.github.io/..." target="_blank" rel="noopener"><span class="zname">📍 Hipermarket La Libertad</span><span class="ztime">27 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+La+Libertad,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket La Libertad</span><span class="ztime">27 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Aeropuerto+Regional+Ulpiano,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Aeropuerto Regional Ulpiano</span><span class="ztime">36 min</span></a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: CONTACTO & EMERGENCIAS -->
     <div id="modal-ayuda" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="#" class="close-btn" onclick="cerrarModal('modal-ayuda')">×</a></div>
@@ -887,8 +1080,8 @@
             <div class="info-block border-green">
                 <h4>💬 Habla con tus Anfitriones</h4>
                 <p>Gustavo & Alba · Español e Inglés · Tiempo de respuesta rápido.</p>
-                <a class="modal-link-btn" href="https://wa.me/593994000500?text=Hola%20Gustavo,%20necesito%20asistencia%20durante%20mi%20estancia." target="_blank" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'contacto_gustavo' }); }">📞 Gustavo (WhatsApp)</a>
-                <a class="modal-link-btn" href="https://wa.me/593994000900?text=Hola%20Alba,%20necesito%20asistencia%20durante%20mi%20estancia." target="_blank" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'contacto_alba' }); }">📞 Alba (WhatsApp)</a>
+                <a class="modal-link-btn" href="https://wa.me/593994000500?text=Hola%20Gustavo,%20necesito%20asistencia%20durante%20mi%20estancia." target="_blank">📞 Gustavo (WhatsApp)</a>
+                <a class="modal-link-btn" href="https://wa.me/593994000900?text=Hola%20Alba,%20necesito%20asistencia%20durante%20mi%20estancia." target="_blank">📞 Alba (WhatsApp)</a>
             </div>
 
             <div class="info-block border-red">
@@ -902,47 +1095,40 @@
                 <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Clínica+Granados,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Clínica Granados <small style="display:block; font-weight:normal; color:#64748b;">Privado - 24 horas</small></span><span class="ztime">35 min</span></a>
             </div>
 
-            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20asistencia%20urgente%20durante%20mi%20estancia%20en%20Cima%20Blanca." target="_blank" class="wa-btn-full" onclick="if(typeof gtag==='function') { gtag('event', 'clic_whatsapp', { 'button_location': 'ayuda_urgente' }); }">💬 Escribir por WhatsApp</a>
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20asistencia%20urgente%20durante%20mi%20estancia%20en%20Cima%20Blanca." target="_blank" class="wa-btn-full">💬 Escribir por WhatsApp</a>
         </div>
     </div>
 
+    <!-- Toast Notification -->
     <div class="toast" id="toast">Copiado ✓</div>
 
     <script>
         /* ========================================== */
-        /* CEREBRO JAVASCRIPT CON SENSORES GA4 (FIXED) */
+        /* CEREBRO JAVASCRIPT CON SENSORES GA4        */
         /* ========================================== */
         
-        function abrirModal(id) {  
+        function abrirModal(id) { 
+            // SENSOR: Avisa a Google qué tarjeta se abrió
             if(typeof gtag === 'function') {
                 gtag('event', 'open_modal', { 'modal_name': id });
             }
 
             const modal = document.getElementById(id);
-            modal.style.display = 'flex';  
+            modal.style.display = 'flex'; 
             document.body.classList.add('modal-open');
             const modalContent = modal.querySelector('.modal-content');
             if (modalContent) modalContent.scrollTop = 0;
         }
         
-        function cerrarModal(id) {  
-            document.getElementById(id); // no-op fix or standard logic
-            document.getElementById(id).style.display = 'none';  
+        function cerrarModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
             document.body.classList.remove('modal-open');
+            document.querySelectorAll('.rule-content, .zona-content, #main-qr-box').forEach(el => el.style.display = 'none');
         }
 
-        // Cierra el modal si el usuario hace clic en el fondo gris difuminado
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) {
-                    cerrarModal(overlay.id);
-                }
-            });
-        });
-
-        function cambiarModal(modalActual, modalNuevo) {  
+        function cambiarModal(modalActual, modalNuevo) { 
             cerrarModal(modalActual);
-            abrirModal(modalNuevo);  
+            abrirModal(modalNuevo); 
         }
 
         function toggleMainQR() {
@@ -951,6 +1137,7 @@
         }
 
         function toggleContent(id, contentClass) {
+            // SENSOR: Avisa a Google qué sub-sección se desplegó
             if(typeof gtag === 'function') {
                 gtag('event', 'toggle_content', { 'content_id': id });
             }
@@ -960,6 +1147,7 @@
             });
         }
 
+        /* Función de Copiar con SENSOR y manejo de errores */
         const toast = document.getElementById('toast');
         function showToast(msg){
             toast.textContent = msg; toast.classList.add('show');
@@ -970,6 +1158,7 @@
             btn.addEventListener('click', async ()=>{
                 const text = btn.dataset.copy;
                 
+                // SENSOR: Avisa a Google que copiaron el WiFi
                 if(typeof gtag === 'function') {
                     gtag('event', 'copy_wifi', { 'copied_text': text });
                 }
@@ -982,6 +1171,16 @@
                 showToast('Copiado ✓');
             });
         });
+
+        /* SENSOR EXTRA: mide cuántos huéspedes preguntan por extender su estadía */
+        const wowExtendBtn = document.getElementById('wow-extend-btn');
+        if (wowExtendBtn) {
+            wowExtendBtn.addEventListener('click', () => {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'clic_extender_estadia', { 'card': 'wow_extension' });
+                }
+            });
+        }
     </script>
 
 </body>
