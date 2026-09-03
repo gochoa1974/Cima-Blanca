@@ -16,21 +16,45 @@
     <meta property="og:type" content="website">
     
     <!-- ========================================== -->
-    <!-- CHIP DE GOOGLE ANALYTICS 4                 -->
+    <!-- GOOGLE ANALYTICS 4 — carga diferida (no bloquea el render) -->
+    <!-- Se dispara con la primera interacción del huésped, o a los 2.5s como respaldo, -->
+    <!-- para no perder NINGÚN evento de analítica ni siquiera en visitas rápidas. -->
     <!-- ========================================== -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2JVJLZN3QF"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-2JVJLZN3QF');
+
+      let gtmLoaded = false;
+      function cargarGTM(){
+        if (gtmLoaded) return;
+        gtmLoaded = true;
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-2JVJLZN3QF';
+        document.head.appendChild(s);
+        ['scroll','touchstart','mousemove','keydown'].forEach(evt =>
+          window.removeEventListener(evt, cargarGTM)
+        );
+      }
+      ['scroll','touchstart','mousemove','keydown'].forEach(evt =>
+        window.addEventListener(evt, cargarGTM, { passive: true, once: true })
+      );
+      setTimeout(cargarGTM, 2500); // respaldo: garantiza el disparo aunque nadie interactúe
     </script>
     <!-- ========================================== -->
 
     <!-- Acelerador de letras (Pre-conexión) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- FIX LCP: precarga la imagen del hero para que sea el primer recurso descubierto -->
+    <link rel="preload" as="image" href="MEL04927.jpg" fetchpriority="high">
+
+    <!-- FIX render-blocking: la fuente ya no bloquea el primer pintado -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"></noscript>
     
     <style>
         body { 
@@ -243,11 +267,11 @@
         /* GRID */
         .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .grid-card {
-            background: #FFFFFF; border-radius: 16px; padding: 12px 6px; text-align: center;
+            background: #FFFFFF; border-radius: 16px; padding: 14px 6px; text-align: center;
             text-decoration: none; color: #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; display: flex;
-            flex-direction: column; align-items: center; justify-content: flex-start;
-            border-bottom: 4px solid #0284c7; min-height: 95px;
+            flex-direction: column; align-items: center; justify-content: center;
+            border-bottom: 4px solid #0284c7; min-height: 88px;
         }
         .grid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
         .grid-card.amenities-grid-card { border-bottom-color: #047857; }
@@ -260,15 +284,17 @@
             display: flex; align-items: center; justify-content: center; font-size: 18px;
             margin-bottom: 6px; flex-shrink: 0;
         }
-        .grid-title { font-size: 10px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
+        .grid-title { font-size: 11.5px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
 
         .card-badge {
-            position: absolute; top: -10px; right: 15px; font-size: 10px; text-transform: uppercase;
+            display: inline-flex; align-items: center; flex-shrink: 0; margin-left: 8px;
+            font-size: 10px; text-transform: uppercase; white-space: nowrap;
             letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; font-weight: bold;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .card-badge.gold-badge { background: #d4af37; color: #1e293b; }
         .card-badge.red-badge { background: #b91c1c; color: white; }
+        .banner-btn .btn-text { flex: 1; }
         
         .icon { 
             font-size: 22px; margin-right: 12px; width: 36px; height: 36px;
@@ -396,6 +422,7 @@
 </head>
 <body>
 
+    <main id="contenido-principal">
     <div class="hero-banner">
         <h1>Cima Blanca</h1>
         <p>CUMBRE BLANCA BEACH TOWERS</p>
@@ -413,7 +440,7 @@
                 Nuestro objetivo es brindarte un hogar temporal impecable. Si necesitas recomendaciones o asistencia, estamos a una llamada de distancia. ¡Disfruta tu estadía al máximo!
             </p>
             <div class="footer-section">
-                <video src="Airbnb-Superhost-medal.mp4" autoplay loop muted playsinline class="superhost-video" width="65" height="92"></video>
+                <video src="Airbnb-Superhost-medal.mp4" autoplay loop muted playsinline aria-hidden="true" class="superhost-video" width="65" height="92"></video>
                 <img src="Alba-y-Gus.png" alt="Alba y Gus" class="signature-img" width="130" height="45">
             </div>
         </div>
@@ -466,39 +493,41 @@
 
         <div class="section-header">✨ Servicios y Solicitudes Especiales</div>
         <a href="javascript:void(0)" onclick="abrirModal('modal-extras')" class="banner-btn premium-btn">
+            <span class="icon">✨</span>
+            <span class="btn-text">Eleva tu Experiencia (Servicios Adicionales)</span>
             <span class="card-badge gold-badge">⭐ Exclusivo</span>
-            <span class="icon">✨</span> Eleva tu Experiencia (Servicios Adicionales)
         </a>
         <a href="javascript:void(0)" onclick="abrirModal('modal-registro-urgente')" class="banner-btn urgent-btn">
+            <span class="icon">📝</span>
+            <span class="btn-text">Registro de Último Minuto (Mascota / Huésped)</span>
             <span class="card-badge red-badge">⚡ Ajustes</span>
-            <span class="icon">🚨</span> Registro de Último Minuto (Mascota / Huésped)
         </a>
 
         <div class="section-header">📖 Guía de la Estadía</div>
         <div class="guide-grid">
             <a href="javascript:void(0)" onclick="abrirModal('modal-amenities')" class="grid-card amenities-grid-card">
-                <div class="grid-icon-box">🌊</div><div class="grid-title">Sobre el Departamento & Amenities</div>
+                <div class="grid-icon-box">🏠</div><div class="grid-title">El Depa</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-estadia')" class="grid-card">
-                <div class="grid-icon-box">🔑</div><div class="grid-title">Tu Estadía (Check-in / WiFi)</div>
+                <div class="grid-icon-box">🧭</div><div class="grid-title">Ubicación & Horarios</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-reglas')" class="grid-card rules-grid-card">
-                <div class="grid-icon-box">📜</div><div class="grid-title">Normas y Reglas del Depto. & Edificio</div>
+                <div class="grid-icon-box">📜</div><div class="grid-title">Normas & Reglas</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-recomendaciones')" class="grid-card">
-                <div class="grid-icon-box">🎒</div><div class="grid-title">Recomendaciones antes del Viaje</div>
+                <div class="grid-icon-box">🎒</div><div class="grid-title">Antes de Viajar</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-tutoriales')" class="grid-card tutorials-grid-card">
-                <div class="grid-icon-box">⚙️</div><div class="grid-title">¿Cómo funciona? (Tutoriales)</div>
+                <div class="grid-icon-box">🎬</div><div class="grid-title">Tutoriales</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-edificio-areas')" class="grid-card">
-                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Áreas del Edificio</div>
+                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Amenidades</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-zona')" class="grid-card">
-                <div class="grid-icon-box">📍</div><div class="grid-title">Explora Punta Blanca</div>
+                <div class="grid-icon-box">📍</div><div class="grid-title">Zona & Mapas</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-ayuda')" class="grid-card emergency-grid-card">
-                <div class="grid-icon-box">🆘</div><div class="grid-title">Contacto & Emergencias (Hospitales)</div>
+                <div class="grid-icon-box">🆘</div><div class="grid-title">Ayuda & SOS</div>
             </a>
         </div>
         
@@ -529,7 +558,7 @@
     <div id="modal-amenities" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-amenities')">×</a></div>
-            <h2 class="modal-title">🌊 Sobre Cima Blanca & Amenities</h2>
+            <h2 class="modal-title">🏠 El Depa</h2>
             
             <div style="background: #fdfdfd; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 15px;">
                 <img src="MEL04927.jpg" alt="Cima Blanca Vista" style="width: 100%; border-radius: 8px; display: block;" loading="lazy" width="400" height="266">
@@ -570,20 +599,9 @@
                 </ul>
             </div>
 
-            <div class="info-block border-blue">
-                <h4>🏢 Amenities del Edificio</h4>
-                <ul>
-                    <li>🏊‍♂️ Piscina infinita</li>
-                    <li>👶 Piscina infantil</li>
-                    <li>🔥 Área de BBQ y Fogatas (compuesta por 4 estaciones; requiere reserva con anticipación)</li>
-                    <li>💪 Área de Gym</li>
-                    <li>🛝 Parque Infantil</li>
-                    <li>💻 Espacio de Coworking</li>
-                </ul>
-            </div>
-
             <div class="info-block border-green">
                 <h4>✨ Comodidades del Departamento</h4>
+                <p style="font-size:11.5px; color:#94a3b8; font-style:italic; margin-bottom:10px;">📌 ¿Buscas la piscina, el gym o el BBQ? Eso está en <a href="javascript:void(0)" onclick="cambiarModal('modal-amenities','modal-edificio-areas')" style="color:#0284c7; text-decoration:underline; cursor:pointer; font-weight:bold;">Amenidades →</a></p>
                 <ul>
                     <li>🍳 Cocina súper completa con utensilios BBQ.</li>
                     <li>❄️ Climatizado con aire acondicionado en todos los ambientes.</li>
@@ -605,20 +623,20 @@
     <div id="modal-estadia" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-estadia')">×</a></div>
-            <h2 class="modal-title">🔑 Tu Estadía</h2>
+            <h2 class="modal-title">🧭 Ubicación & Horarios</h2>
             
             <div class="info-block border-gold" style="background: linear-gradient(135deg, #f8fafc 0%, #fffef9 100%);">
                 <h4 style="color: #92400e;">📍 Ubicación Exacta del Departamento</h4>
                 <p><strong>Edificio:</strong> Cumbre Blanca Beach Towers<br><strong>Ubicación:</strong> 6to piso, Departamento #607</p>
+                <div>
+                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
+                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
+                </div>
             </div>
 
             <div class="info-block">
                 <h4>1. Llegada (Check-in)</h4>
                 <p>A partir de las <strong>3:00 p.m.</strong><br>Es obligatorio identificarse en la garita con documento de identidad de todos los adultos previo al ingreso.</p>
-                <div>
-                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
-                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
-                </div>
                 <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏰ ¿Llegas antes? Consulta nuestro servicio de Early Check-in →</span>
             </div>
 
@@ -706,7 +724,7 @@
     <div id="modal-registro-urgente" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-registro-urgente')">×</a></div>
-            <h2 class="modal-title" style="color: #b91c1c;">🚨 Registro de Último Minuto</h2>
+            <h2 class="modal-title" style="color: #b91c1c;">📝 Registro de Último Minuto</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">¿Quieres invitar a un amigo, un familiar o sumar a tu mascota a última hora? ¡Hazlo aquí fácilmente!</p>
             
             <div class="info-block border-red">
@@ -832,7 +850,7 @@
     <div id="modal-tutoriales" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-tutoriales')">×</a></div>
-            <h2 class="modal-title" style="color: #8b5cf6;">⚙️ ¿Cómo funciona? (Tutoriales)</h2>
+            <h2 class="modal-title" style="color: #8b5cf6;">🎬 ¿Cómo funciona? (Tutoriales)</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Guía rápida para el uso de los equipos y dispositivos del departamento:</p>
             
             <div class="info-block border-purple">
@@ -1028,6 +1046,7 @@
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">Copiado ✓</div>
+    </main>
 
     <script>
         function abrirModal(id) { 
