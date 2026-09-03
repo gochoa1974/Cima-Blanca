@@ -178,7 +178,16 @@
         }
         .qr-toggle:active { filter: brightness(0.9); }
 
-        .qr-box { display: none; margin-top: 10px; text-align: center; background: #ffffff; padding: 10px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        /* CONTENEDOR DE CÓDIGO QR BLANCO Y ELEGANTE */
+        .qr-box { 
+            display: none; 
+            margin-top: 10px; 
+            text-align: center; 
+            background: #ffffff; 
+            padding: 10px; 
+            border-radius: 14px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+        }
         .qr-box img { width: 100%; border-radius: 8px; display: block; }
         .kf-note { font-size: 11px; opacity: 0.7; margin-top: 10px; line-height: 1.3; }
 
@@ -489,10 +498,12 @@
                 </div>
                 <button class="copy-btn" data-copy="Gue&st138K.#">📋 Copiar</button>
             </div>
+            
             <button class="qr-toggle" onclick="toggleMainQR()">📷 ESCANEAR QR DEL WIFI</button>
             <div class="qr-box" id="main-qr-box">
-                <img src="Wi-Fi-Cima-Blanca.jpeg" alt="WiFi Cima Blanca QR" style="width: 100%; border-radius: 8px;" loading="lazy" width="250" height="250">
+                <img src="Wi-Fi-Cima-Blanca.jpeg" alt="WiFi Cima Blanca QR" loading="lazy" width="250" height="250">
             </div>
+            
             <div class="kf-note">🔑 Tu PIN de ingreso a la cerradura inteligente llegará por este mismo medio 24 horas antes.</div>
         </div>
 
@@ -514,39 +525,41 @@
 
         <div class="section-header">✨ Servicios y Solicitudes Especiales</div>
         <a href="javascript:void(0)" onclick="abrirModal('modal-extras')" class="banner-btn premium-btn">
+            <span class="icon">✨</span>
+            <span class="btn-text">Eleva tu Experiencia (Servicios Adicionales)</span>
             <span class="card-badge gold-badge">⭐ Exclusivo</span>
-            <span class="icon">✨</span> Eleva tu Experiencia (Servicios Adicionales)
         </a>
         <a href="javascript:void(0)" onclick="abrirModal('modal-registro-urgente')" class="banner-btn urgent-btn">
+            <span class="icon">📝</span>
+            <span class="btn-text">Registro de Último Minuto (Mascota / Huésped)</span>
             <span class="card-badge red-badge">⚡ Ajustes</span>
-            <span class="icon">🚨</span> Registro de Último Minuto (Mascota / Huésped)
         </a>
 
         <div class="section-header">📖 Guía de la Estadía</div>
         <div class="guide-grid">
             <a href="javascript:void(0)" onclick="abrirModal('modal-amenities')" class="grid-card amenities-grid-card">
-                <div class="grid-icon-box">🌊</div><div class="grid-title">Sobre el Departamento & Amenities</div>
+                <div class="grid-icon-box">🏠</div><div class="grid-title">El Depa</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-estadia')" class="grid-card">
-                <div class="grid-icon-box">🔑</div><div class="grid-title">Tu Estadía (Check-in / WiFi)</div>
+                <div class="grid-icon-box">🧭</div><div class="grid-title">Ubicación & Horarios</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-reglas')" class="grid-card rules-grid-card">
-                <div class="grid-icon-box">📜</div><div class="grid-title">Normas y Reglas del Depto. & Edificio</div>
+                <div class="grid-icon-box">📜</div><div class="grid-title">Normas & Reglas</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-recomendaciones')" class="grid-card">
-                <div class="grid-icon-box">🎒</div><div class="grid-title">Recomendaciones antes del Viaje</div>
+                <div class="grid-icon-box">🎒</div><div class="grid-title">Antes de Viajar</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-tutoriales')" class="grid-card tutorials-grid-card">
-                <div class="grid-icon-box">⚙️</div><div class="grid-title">¿Cómo funciona? (Tutoriales)</div>
+                <div class="grid-icon-box">🎬</div><div class="grid-title">Tutoriales</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-edificio-areas')" class="grid-card">
-                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Áreas del Edificio</div>
+                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Amenidades</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-zona')" class="grid-card">
-                <div class="grid-icon-box">📍</div><div class="grid-title">Explora Punta Blanca</div>
+                <div class="grid-icon-box">📍</div><div class="grid-title">Zona & Mapas</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-ayuda')" class="grid-card emergency-grid-card">
-                <div class="grid-icon-box">🆘</div><div class="grid-title">Contacto & Emergencias (Hospitales)</div>
+                <div class="grid-icon-box">🆘</div><div class="grid-title">Ayuda & SOS</div>
             </a>
         </div>
         
@@ -573,11 +586,11 @@
         
     </div>
 
-    <!-- MODALES -->
+    <!-- MODAL: SOBRE EL DEPARTAMENTO & AMENITIES -->
     <div id="modal-amenities" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-amenities')">×</a></div>
-            <h2 class="modal-title">🌊 Sobre Cima Blanca & Amenities</h2>
+            <h2 class="modal-title">🏠 El Depa</h2>
             
             <div style="background: #fdfdfd; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 15px;">
                 <img src="MEL04706_HDR.jpg" alt="Cima Blanca Vista" style="width: 100%; height: auto; border-radius: 8px; display: block;" loading="lazy">
@@ -618,20 +631,9 @@
                 </ul>
             </div>
 
-            <div class="info-block border-blue">
-                <h4>🏢 Amenities del Edificio</h4>
-                <ul>
-                    <li>🏊‍♂️ Piscina infinita</li>
-                    <li>👶 Piscina infantil</li>
-                    <li>🔥 Área de BBQ y Fogatas (compuesta por 4 estaciones; requiere reserva con anticipación)</li>
-                    <li>💪 Área de Gym</li>
-                    <li>🛝 Parque Infantil</li>
-                    <li>💻 Espacio de Coworking</li>
-                </ul>
-            </div>
-
             <div class="info-block border-green">
                 <h4>✨ Comodidades del Departamento</h4>
+                <p style="font-size:11.5px; color:#94a3b8; font-style:italic; margin-bottom:10px;">📌 ¿Buscas la piscina, el gym o el BBQ? Eso está en <a href="javascript:void(0)" onclick="cambiarModal('modal-amenities','modal-edificio-areas')" style="color:#0284c7; text-decoration:underline; cursor:pointer; font-weight:bold;">Amenidades →</a></p>
                 <ul>
                     <li>🍳 Cocina súper completa con utensilios BBQ.</li>
                     <li>❄️ Climatizado con aire acondicionado en todos los ambientes.</li>
@@ -649,23 +651,24 @@
         </div>
     </div>
 
+    <!-- MODAL: TU ESTADÍA -->
     <div id="modal-estadia" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-estadia')">×</a></div>
-            <h2 class="modal-title">🔑 Tu Estadía</h2>
+            <h2 class="modal-title">🧭 Ubicación & Horarios</h2>
             
             <div class="info-block border-gold" style="background: linear-gradient(135deg, #f8fafc 0%, #fffef9 100%);">
                 <h4 style="color: #92400e;">📍 Ubicación Exacta del Departamento</h4>
                 <p><strong>Edificio:</strong> Cumbre Blanca Beach Towers<br><strong>Ubicación:</strong> 6to piso, Departamento #607</p>
+                <div>
+                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
+                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
+                </div>
             </div>
 
             <div class="info-block">
                 <h4>1. Llegada (Check-in)</h4>
                 <p>A partir de las <strong>3:00 p.m.</strong><br>Es obligatorio identificarse en la garita con documento de identidad de todos los adultos previo al ingreso.</p>
-                <div>
-                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
-                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
-                </div>
                 <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏰ ¿Llegas antes? Consulta nuestro servicio de Early Check-in →</span>
             </div>
 
@@ -687,6 +690,7 @@
         </div>
     </div>
 
+    <!-- MODAL: SERVICIOS EXTRAS -->
     <div id="modal-extras" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-extras')">×</a></div>
@@ -748,6 +752,7 @@
         </div>
     </div>
 
+    <!-- MODAL: REGISTRO DE ÚLTIMO MINUTO -->
     <div id="modal-registro-urgente" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-registro-urgente')">×</a></div>
@@ -770,6 +775,7 @@
         </div>
     </div>
 
+    <!-- MODAL: NORMAS Y REGLAS -->
     <div id="modal-reglas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-reglas')">×</a></div>
@@ -840,6 +846,7 @@
         </div>
     </div>
 
+    <!-- MODAL: RECOMENDACIONES -->
     <div id="modal-recomendaciones" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-recomendaciones')">×</a></div>
@@ -871,10 +878,11 @@
         </div>
     </div>
 
+    <!-- MODAL: TUTORIALES -->
     <div id="modal-tutoriales" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-tutoriales')">×</a></div>
-            <h2 class="modal-title" style="color: #8b5cf6;">⚙️ ¿Cómo funciona? (Tutoriales)</h2>
+            <h2 class="modal-title" style="color: #8b5cf6;">🎬 ¿Cómo funciona? (Tutoriales)</h2>
             <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Guía rápida para el uso de los equipos y dispositivos del departamento:</p>
             
             <div class="info-block border-purple">
@@ -924,6 +932,7 @@
         </div>
     </div>
 
+    <!-- MODAL: ÁREAS DEL EDIFICIO -->
     <div id="modal-edificio-areas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-edificio-areas')">×</a></div>
@@ -966,6 +975,7 @@
         </div>
     </div>
 
+    <!-- MODAL: EXPLORA PUNTA BLANCA -->
     <div id="modal-zona" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-zona')">×</a></div>
@@ -978,42 +988,72 @@
                 <button class="zona-toggle-btn" onclick="toggleContent('zona-playas', 'zona-content')">📂 Ver / Ocultar Playas</button>
                 <div id="zona-playas" class="zona-content">
                     <div class="zsection-title">Nuestras Recomendadas</div>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Punta+Blanca+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Playa Punta Blanca</span><span class="ztime">5 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=San+Pablo,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ San Pablo</span><span class="ztime">5-7 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Ayangue,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌊 Ayangue</span><span class="ztime">35-40 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Montañita,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🏄 Montañita</span><span class="ztime">50-55 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Punta+Blanca+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Playa Punta Blanca <small style="display:block; font-weight:normal; color:#64748b;">Nuestra playa (entradas 5 y 7)</small></span><span class="ztime">5 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Punta+Centinela,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Punta Centinela <small style="display:block; font-weight:normal; color:#64748b;">Playa tranquila</small></span><span class="ztime">5 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=San+Pablo,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ San Pablo <small style="display:block; font-weight:normal; color:#64748b;">Ideal para familias</small></span><span class="ztime">5-7 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Capaes,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Capaes <small style="display:block; font-weight:normal; color:#64748b;">Playa tranquila</small></span><span class="ztime">10-12 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Ballenita,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Ballenita <small style="display:block; font-weight:normal; color:#64748b;">Paseo y atardecer</small></span><span class="ztime">12-15 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Salinas,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌴 Salinas <small style="display:block; font-weight:normal; color:#64748b;">Turismo y restaurantes</small></span><span class="ztime">30-35 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Ayangue,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌊 Ayangue <small style="display:block; font-weight:normal; color:#64748b;">Snorkel y mar calmado</small></span><span class="ztime">35-40 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Rosada,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌸 Playa Rosada <small style="display:block; font-weight:normal; color:#64748b;">Paisajes instagrameables</small></span><span class="ztime">40-45 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Montañita,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🏄 Montañita <small style="display:block; font-weight:normal; color:#64748b;">Surf y ambiente vibrante</small></span><span class="ztime">50-55 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Olón,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌅 Olón <small style="display:block; font-weight:normal; color:#64748b;">Playa extensa y atardeceres</small></span><span class="ztime">~1 hora</span></a>
                 </div>
             </div>
-            
+
+            <div class="info-block border-purple" style="margin-bottom: 10px;">
+                <h4>🪂 Aventura y Turismo</h4>
+                <button class="zona-toggle-btn" style="background: #8b5cf6;" onclick="toggleContent('zona-aventura', 'zona-content')">📂 Ver / Ocultar Puntos Turísticos</button>
+                <div id="zona-aventura" class="zona-content">
+                    <div class="zsection-title">Para Conocer y Explorar</div>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Museo+Amantes+de+Sumpa,+Santa+Elena" target="_blank" rel="noopener"><span class="zname">🏺 Museo Amantes de Sumpa <small style="display:block; font-weight:normal; color:#64748b;">Cultura e historia milenaria</small></span><span class="ztime">20 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Baños+de+Lodo+San+Vicente,+Santa+Elena" target="_blank" rel="noopener"><span class="zname">💆‍♂️ Baños de Lodo de San Vicente <small style="display:block; font-weight:normal; color:#64748b;">Turismo de bienestar / arcilla</small></span><span class="ztime">25 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Bruja+Parapente,+San+Pedro,+Ecuador" target="_blank" rel="noopener"><span class="zname">🪂 Parapente en Playa Bruja <small style="display:block; font-weight:normal; color:#64748b;">Vuelos panorámicos sobre el mar</small></span><span class="ztime">40 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=La+Chocolatera+Salinas,+Ecuador" target="_blank" rel="noopener"><span class="zname">🦭 La Chocolatera y La Lobería <small style="display:block; font-weight:normal; color:#64748b;">Miradores y lobos marinos</small></span><span class="ztime">45 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Santuario+Blanca+Estrella+de+la+Mar,+Olon" target="_blank" rel="noopener"><span class="zname">⛪ Santuario Blanca Estrella <small style="display:block; font-weight:normal; color:#64748b;">Iglesia acantilado en Olón</small></span><span class="ztime">~1 hora</span></a>
+                </div>
+            </div>
+
             <div class="info-block border-amber" style="margin-bottom: 10px;">
                 <h4>🍽️ Gastronomía & Restaurantes</h4>
                 <button class="zona-toggle-btn" style="background: #f59e0b;" onclick="toggleContent('zona-restaurantes', 'zona-content')">📂 Ver / Ocultar Restaurantes</button>
                 <div id="zona-restaurantes" class="zona-content">
                     <div class="zsection-title">Opciones Cercanas</div>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Pollo+a+la+brasa+Don+Pepe,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Pollo a la brasa Don Pepe</span><span class="ztime">4 min · $</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Quiosko+de+Fast+Food,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Quiosko de Fast Food</span><span class="ztime">4 min · $</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Parrilla+Punta+Grill,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Parrilla Punta Grill</span><span class="ztime">5 min · $$</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Pizzería+Cova+Food,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Pizzería Cova Food</span><span class="ztime">5 min · $$</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hueca+de+Carnes+y+menestra,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hueca de Carnes & menestra</span><span class="ztime">6 min · $</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Galeón+San+Pablo,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Restaurante Galeón San Pablo</span><span class="ztime">6 min · $$</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Cabaña+Restaurante+Narbine,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Cabaña Restaurante Narbine</span><span class="ztime">8 min · $</span></a>
                 </div>
             </div>
-            
+
             <div class="info-block border-green" style="margin-bottom: 10px;">
                 <h4>🛒 Servicios y Supermercados</h4>
                 <button class="zona-toggle-btn" style="background: #10B981;" onclick="toggleContent('zona-servicios', 'zona-content')">📂 Ver / Ocultar Servicios</button>
                 <div id="zona-servicios" class="zona-content">
                     <div class="zsection-title">Para Abastecerse</div>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Gasolinera+PYS+farmacia+cajeros,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Gasolinera PYS, farmacia</span><span class="ztime">3 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Gasolinera+PYS+farmacia+cajeros,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Gasolinera PYS, farmacia, cajeros</span><span class="ztime">3 min</span></a>
                     <a class="zrow" href="https://maps.app.goo.gl/2AZrquzAMH17xRLP9" target="_blank" rel="noopener"><span class="zname">📍 TIA GO</span><span class="ztime">5 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=TUTI+San+Pablo,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 TUTI San Pablo</span><span class="ztime">7 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+Ballenita,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket Ballenita</span><span class="ztime">12 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Terminal+Terrestre+SUMPA,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Terminal Terrestre SUMPA</span><span class="ztime">14 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=El+Paseo+Shopping+La+Península,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 El Paseo Shopping La Península</span><span class="ztime">26 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+La+Libertad,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket La Libertad</span><span class="ztime">27 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Aeropuerto+Regional+Ulpiano,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Aeropuerto Regional Ulpiano</span><span class="ztime">36 min</span></a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: CONTACTO & EMERGENCIAS -->
     <div id="modal-ayuda" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-ayuda')">×</a></div>
-            <h2 class="modal-title" style="color: #b91c1c;">🆘 Contacto & Emergencias</h2>
-            
+            <h2 class="modal-title" style="color: #ef4444;">🆘 Contacto & Emergencias</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Estamos para ayudarte en cualquier momento:</p>
+
             <div class="info-block border-green">
                 <h4>💬 Habla con tus Anfitriones</h4>
                 <p>Gustavo & Alba · Español e Inglés · Tiempo de respuesta rápido.</p>
@@ -1023,14 +1063,20 @@
 
             <div class="info-block border-red">
                 <h4>🏥 Hospitales y Centros Médicos Cercanos</h4>
-                <div class="zsection-title" style="color: #b91c1c;">Asistencia Médica</div>
-                <a class="zrow" href="https://maps.app.goo.gl/zbhVyTxGRo5eBYUR7" target="_blank" rel="noopener"><span class="zname">📍 Centro de Salud San Pablo</span><span class="ztime">6 min</span></a>
-                <a class="zrow" href="https://maps.app.goo.gl/sDV8DpqmoHvmKkdEA" target="_blank" rel="noopener"><span class="zname">📍 Punto Médico San Pablo</span><span class="ztime">4 min</span></a>
-                <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Clínica+Granados,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Clínica Granados <small style="display:block; font-weight:normal; color:#64748b;">24 horas</small></span><span class="ztime">35 min</span></a>
+                <p style="font-size: 12px; color: #64748b; margin-bottom: 8px;">Toca para abrir la ubicación en Google Maps:</p>
+                <div class="zsection-title" style="color: #ef4444;">Asistencia Médica</div>
+                
+                <a class="zrow" href="https://maps.app.goo.gl/zbhVyTxGRo5eBYUR7" target="_blank" rel="noopener"><span class="zname">📍 Centro de Salud San Pablo <small style="display:block; font-weight:normal; color:#64748b;">Público - Atención diurna</small></span><span class="ztime">6 min</span></a>
+                <a class="zrow" href="https://maps.app.goo.gl/sDV8DpqmoHvmKkdEA" target="_blank" rel="noopener"><span class="zname">📍 Punto Médico San Pablo <small style="display:block; font-weight:normal; color:#64748b;">Privado - Atención diurna</small></span><span class="ztime">4 min</span></a>
+                <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hospital+Gral.+Dr.+Liborio+Panchana+Sotomayor,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hospital Gral. Dr. Liborio Panchana <small style="display:block; font-weight:normal; color:#64748b;">Público - 24 horas</small></span><span class="ztime">20 min</span></a>
+                <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Clínica+Granados,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Clínica Granados <small style="display:block; font-weight:normal; color:#64748b;">Privado - 24 horas</small></span><span class="ztime">35 min</span></a>
             </div>
+
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20asistencia%20urgente%20durante%20mi%20estancia%20en%20Cima%20Blanca." target="_blank" class="wa-btn-full">💬 Escribir por WhatsApp</a>
         </div>
     </div>
 
+    <!-- Toast Notification -->
     <div class="toast" id="toast">Copiado ✓</div>
     </main>
 
