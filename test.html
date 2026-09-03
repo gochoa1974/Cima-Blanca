@@ -16,20 +16,40 @@
     <meta property="og:type" content="website">
     
     <!-- ========================================== -->
-    <!-- CHIP DE GOOGLE ANALYTICS 4                 -->
+    <!-- GOOGLE ANALYTICS 4 — carga diferida        -->
     <!-- ========================================== -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2JVJLZN3QF"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-2JVJLZN3QF');
+
+      let gtmLoaded = false;
+      function cargarGTM(){
+        if (gtmLoaded) return;
+        gtmLoaded = true;
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-2JVJLZN3QF';
+        document.head.appendChild(s);
+        ['scroll','touchstart','mousemove','keydown'].forEach(evt =>
+          window.removeEventListener(evt, cargarGTM)
+        );
+      }
+      ['scroll','touchstart','mousemove','keydown'].forEach(evt =>
+        window.addEventListener(evt, cargarGTM, { passive: true, once: true })
+      );
+      setTimeout(cargarGTM, 2500); 
     </script>
     <!-- ========================================== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <link rel="preload" as="image" href="MEL04927.jpg" fetchpriority="high">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"></noscript>
     
     <style>
         body { 
@@ -120,6 +140,7 @@
         .superhost-video { width: 65px; height: auto; display: block; border-radius: 6px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)); }
         .signature-img { max-width: 130px; height: auto; display: block; }
 
+        /* KEYCARD WIFI */
         .keycard {
             position: relative;
             background: linear-gradient(150deg, #1e293b 0%, #0f172a 78%);
@@ -142,15 +163,16 @@
         .qr-box img { width: 100%; border-radius: 8px; display: block; }
         .kf-note { font-size: 11px; opacity: 0.7; margin-top: 10px; line-height: 1.3; }
 
+        /* TARJETA WOW OPTIMIZADA CON TITULAR DESTACADO UNIFORME */
         .wow-card {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            border-radius: 22px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
             text-align: center;
             position: relative;
-            border: 2px solid #d4af37;
+            border: 1px solid #d4af37;
             overflow: hidden;
         }
         .wow-card::before {
@@ -177,52 +199,54 @@
         .wow-sparkle {
             position: absolute; z-index: 0; opacity: 0.55; pointer-events: none;
             animation: sparkle-float 3.6s ease-in-out infinite;
-            font-size: 15px; filter: drop-shadow(0 0 4px rgba(252,211,77,0.6));
+            filter: drop-shadow(0 0 4px rgba(252,211,77,0.6));
         }
-        .wow-sparkle.s1 { top: 14px; left: 18px; animation-delay: 0s; }
-        .wow-sparkle.s2 { top: 46px; right: 22px; animation-delay: 1.1s; font-size: 12px; }
-        .wow-sparkle.s3 { bottom: 60px; left: 26px; animation-delay: 2.1s; font-size: 11px; }
+        .wow-sparkle.s1 { top: 8px; left: 10px; animation-delay: 0s; font-size: 11px; }
+        .wow-sparkle.s2 { top: 22px; right: 12px; animation-delay: 1.1s; font-size: 9px; }
+        .wow-sparkle.s3 { bottom: 20px; left: 15px; animation-delay: 2.1s; font-size: 8px; }
         
         @keyframes sparkle-float {
             0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
-            50% { transform: translateY(-8px) scale(1.15); opacity: 0.85; }
+            50% { transform: translateY(-4px) scale(1.15); opacity: 0.85; }
         }
         
         .wow-badge {
             position: absolute; top: 0; right: 0;
             background: #d4af37; color: #000;
-            font-size: 11px; font-weight: 900; padding: 7px 18px;
-            border-bottom-left-radius: 18px; text-transform: uppercase;
-            letter-spacing: 1px; box-shadow: -2px 2px 12px rgba(0,0,0,0.4);
+            font-size: 8.5px; font-weight: 900; padding: 4px 10px;
+            border-bottom-left-radius: 12px; text-transform: uppercase;
+            letter-spacing: 0.5px; box-shadow: -2px 2px 8px rgba(0,0,0,0.3);
             z-index: 1; animation: badge-pulse 2.4s ease-in-out infinite;
         }
         @keyframes badge-pulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.18); } }
         
         .wow-title {
-            color: #fcd34d; font-size: 19px; font-weight: bold; margin-top: 10px;
-            margin-bottom: 8px; font-family: 'Georgia', serif; font-style: italic;
-            position: relative; z-index: 1; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: #fcd34d; 
+            font-size: 18px; 
+            font-weight: 900; 
+            margin-top: 10px;
+            margin-bottom: 8px; 
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative; 
+            z-index: 1; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
-        .wow-text { color: #e2e8f0; font-size: 13.5px; line-height: 1.5; margin-bottom: 12px; position: relative; z-index: 1; }
-        .wow-text strong { color: #ffffff; }
         
-        .wow-trust-row {
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 12px;
-            margin-bottom: 12px; position: relative; z-index: 1;
-        }
-        .wow-trust-row span { font-size: 10.5px; color: #cbd5e1; white-space: nowrap; }
-        .wow-trust-row span b { color: #fcd34d; }
+        .wow-text { color: #e2e8f0; font-size: 11.5px; line-height: 1.4; margin-bottom: 12px; position: relative; z-index: 1; margin-top: 0; }
+        .wow-text strong { color: #ffffff; }
         
         .wow-btn {
             display: block; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: #fff; padding: 13px; border-radius: 14px; text-decoration: none;
-            font-weight: 800; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.5px;
+            color: #fff; padding: 9px 12px; border-radius: 10px; text-decoration: none;
+            font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px;
             position: relative; z-index: 1; border: 1px solid #fbbf24;
             animation: pulse-gold 2s infinite;
         }
         @keyframes pulse-gold { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
         
-        .wow-fineprint { font-size: 9.5px; color: #64748b; margin-top: 8px; position: relative; z-index: 1; }
+        .wow-fineprint { font-size: 8px; color: #94a3b8; margin-top: 6px; position: relative; z-index: 1; line-height: 1.2; }
         @media (prefers-reduced-motion: reduce) { .wow-card::before, .wow-card::after, .wow-sparkle, .wow-badge, .wow-btn { animation: none; } }
 
         .section-header {
@@ -242,13 +266,14 @@
         .banner-btn.premium-btn { border-left: 8px solid #d4af37; background: linear-gradient(135deg, #ffffff 0%, #fffdfa 100%); }
         .banner-btn.urgent-btn { border-left: 8px solid #b91c1c; background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); }
 
+        /* GRID */
         .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .grid-card {
-            background: #FFFFFF; border-radius: 16px; padding: 12px 6px; text-align: center;
+            background: #FFFFFF; border-radius: 16px; padding: 14px 6px; text-align: center;
             text-decoration: none; color: #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; display: flex;
-            flex-direction: column; align-items: center; justify-content: flex-start;
-            border-bottom: 4px solid #0284c7; min-height: 95px;
+            flex-direction: column; align-items: center; justify-content: center;
+            border-bottom: 4px solid #0284c7; min-height: 88px;
         }
         .grid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
         .grid-card.amenities-grid-card { border-bottom-color: #047857; }
@@ -261,21 +286,24 @@
             display: flex; align-items: center; justify-content: center; font-size: 18px;
             margin-bottom: 6px; flex-shrink: 0;
         }
-        .grid-title { font-size: 10px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
+        .grid-title { font-size: 11.5px; font-weight: bold; line-height: 1.25; color: #334155; text-align: center; }
 
         .card-badge {
-            position: absolute; top: -10px; right: 15px; font-size: 10px; text-transform: uppercase;
+            display: inline-flex; align-items: center; flex-shrink: 0; margin-left: 8px;
+            font-size: 10px; text-transform: uppercase; white-space: nowrap;
             letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; font-weight: bold;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .card-badge.gold-badge { background: #d4af37; color: #1e293b; }
         .card-badge.red-badge { background: #b91c1c; color: white; }
+        .banner-btn .btn-text { flex: 1; }
         
         .icon { 
             font-size: 22px; margin-right: 12px; width: 36px; height: 36px;
             display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #f1f5f9;
         }
         
+        /* TARJETA SOCIAL UNIFICADA */
         .social-banner {
             background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             border-radius: 16px; padding: 16px 18px; text-align: center;
@@ -290,6 +318,7 @@
             box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
         }
 
+        /* MODALES */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; 
@@ -395,6 +424,7 @@
 </head>
 <body>
 
+    <main id="contenido-principal">
     <div class="hero-banner">
         <h1>Cima Blanca</h1>
         <p>CUMBRE BLANCA BEACH TOWERS</p>
@@ -412,7 +442,7 @@
                 Nuestro objetivo es brindarte un hogar temporal impecable. Si necesitas recomendaciones o asistencia, estamos a una llamada de distancia. ¡Disfruta tu estadía al máximo!
             </p>
             <div class="footer-section">
-                <video src="Airbnb-Superhost-medal.mp4" autoplay loop muted playsinline class="superhost-video" width="65" height="92"></video>
+                <video src="Airbnb-Superhost-medal.mp4" autoplay loop muted playsinline aria-hidden="true" class="superhost-video" width="65" height="92"></video>
                 <img src="Alba-y-Gus.png" alt="Alba y Gus" class="signature-img" width="130" height="45">
             </div>
         </div>
@@ -447,61 +477,59 @@
             <div class="kf-note">🔑 Tu PIN de ingreso a la cerradura inteligente llegará por este mismo medio 24 horas antes.</div>
         </div>
 
+        <!-- TARJETA WOW OPTIMIZADA CON TITULAR DESTACADO UNIFORME -->
         <div class="wow-card">
             <span class="wow-sparkle s1">✨</span>
             <span class="wow-sparkle s2">🌴</span>
             <span class="wow-sparkle s3">☀️</span>
             <div class="wow-badge">🔥 Solo para huéspedes actuales</div>
-            <div class="wow-title">¿El mar ya te atrapó? 🌊</div>
+            <div class="wow-title">¡1 DÍA MÁS NO VIENE MAL !!</div>
             <p class="wow-text">
-                Si hay disponibilidad, te damos una <strong>Tarifa Directa de Anfitrión</strong> (sin comisiones) para quedarte 1 o 2 noches más.
+                Para seguir disfrutando en familia, en pareja o con amigos, puedes extender tu estadía accediendo a una tarifa especial de anfitrión.
             </p>
-            <div class="wow-trust-row">
-                <span>✓ <b>Respuesta</b> en minutos</span>
-                <span>✓ <b>Sin</b> re-reservar en la app</span>
-                <span>✓ <b>Tarifa</b> preferencial</span>
-            </div>
-            <a href="https://wa.me/593994000500?text=Hola%20Gustavo,%20me%20encant%C3%B3%20mi%20estad%C3%ADa%20en%20Cima%20Blanca%20y%20no%20me%20quiero%20ir%20todav%C3%ADa.%20%C2%BFTienes%20disponibilidad%20para%20extenderla%201%20o%202%20noches%20y%20cu%C3%A1l%20ser%C3%ADa%20mi%20tarifa%20especial%3F" target="_blank" rel="noopener" class="wow-btn" id="wow-extend-btn">
-                💬 Preguntar disponibilidad y tarifa VIP
+            <a href="https://wa.me/593994000500?text=Hola%20Gustavo,%20me%20encant%C3%B3%20mi%20estad%C3%ADa%20en%20Cima%20Blanca%20y%20me%20gustar%C3%ADa%20saber%20si%20hay%20disponibilidad%20y%20cu%C3%A1l%20ser%C3%ADa%20la%20tarifa%20especial%20para%20extenderla." target="_blank" rel="noopener" class="wow-btn" id="wow-extend-btn">
+                💬 Preguntar por disponibilidad y tarifa especial
             </a>
-            <div class="wow-fineprint">Sujeto a disponibilidad. Tu anfitrión confirma por WhatsApp al instante.</div>
+            <div class="wow-fineprint">*Sujeto a disponibilidad. No aplica para días de alta demanda como feriados.</div>
         </div>
 
         <div class="section-header">✨ Servicios y Solicitudes Especiales</div>
         <a href="javascript:void(0)" onclick="abrirModal('modal-extras')" class="banner-btn premium-btn">
+            <span class="icon">✨</span>
+            <span class="btn-text">Eleva tu Experiencia (Servicios Adicionales)</span>
             <span class="card-badge gold-badge">⭐ Exclusivo</span>
-            <span class="icon">✨</span> Eleva tu Experiencia (Servicios Adicionales)
         </a>
         <a href="javascript:void(0)" onclick="abrirModal('modal-registro-urgente')" class="banner-btn urgent-btn">
+            <span class="icon">📝</span>
+            <span class="btn-text">Registro de Último Minuto (Mascota / Huésped)</span>
             <span class="card-badge red-badge">⚡ Ajustes</span>
-            <span class="icon">🚨</span> Registro de Último Minuto (Mascota / Huésped)
         </a>
 
         <div class="section-header">📖 Guía de la Estadía</div>
         <div class="guide-grid">
             <a href="javascript:void(0)" onclick="abrirModal('modal-amenities')" class="grid-card amenities-grid-card">
-                <div class="grid-icon-box">🌊</div><div class="grid-title">Sobre el Departamento & Amenities</div>
+                <div class="grid-icon-box">🏠</div><div class="grid-title">El Depa</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-estadia')" class="grid-card">
-                <div class="grid-icon-box">🔑</div><div class="grid-title">Tu Estadía (Check-in / WiFi)</div>
+                <div class="grid-icon-box">🧭</div><div class="grid-title">Ubicación & Horarios</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-reglas')" class="grid-card rules-grid-card">
-                <div class="grid-icon-box">📜</div><div class="grid-title">Normas y Reglas del Depto. & Edificio</div>
+                <div class="grid-icon-box">📜</div><div class="grid-title">Normas & Reglas</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-recomendaciones')" class="grid-card">
-                <div class="grid-icon-box">🎒</div><div class="grid-title">Recomendaciones antes del Viaje</div>
+                <div class="grid-icon-box">🎒</div><div class="grid-title">Antes de Viajar</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-tutoriales')" class="grid-card tutorials-grid-card">
-                <div class="grid-icon-box">⚙️</div><div class="grid-title">¿Cómo funciona? (Tutoriales)</div>
+                <div class="grid-icon-box">🎬</div><div class="grid-title">Tutoriales</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-edificio-areas')" class="grid-card">
-                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Áreas del Edificio</div>
+                <div class="grid-icon-box">🏊‍♂️</div><div class="grid-title">Amenidades</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-zona')" class="grid-card">
-                <div class="grid-icon-box">📍</div><div class="grid-title">Explora Punta Blanca</div>
+                <div class="grid-icon-box">📍</div><div class="grid-title">Zona & Mapas</div>
             </a>
             <a href="javascript:void(0)" onclick="abrirModal('modal-ayuda')" class="grid-card emergency-grid-card">
-                <div class="grid-icon-box">🆘</div><div class="grid-title">Contacto & Emergencias (Hospitales)</div>
+                <div class="grid-icon-box">🆘</div><div class="grid-title">Ayuda & SOS</div>
             </a>
         </div>
         
@@ -528,20 +556,20 @@
         
     </div>
 
-    <!-- MODALES -->
+    <!-- MODAL: SOBRE EL DEPARTAMENTO & AMENITIES -->
     <div id="modal-amenities" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-amenities')">×</a></div>
-            <h2 class="modal-title">🌊 Sobre Cima Blanca & Amenities</h2>
+            <h2 class="modal-title">🏠 El Depa</h2>
             
             <div style="background: #fdfdfd; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px; margin-bottom: 15px;">
-                <img src="MEL04927.jpg" alt="Cima Blanca Vista" style="width: 100%; border-radius: 8px; display: block;" loading="lazy" width="400" height="266">
+                <img src="MEL04706_HDR.jpg" alt="Cima Blanca Vista" style="width: 100%; border-radius: 8px; display: block;" loading="lazy" width="1024" height="683">
             </div>
 
             <div class="info-block border-darkgreen">
                 <h4>Cima Blanca by Cumbre Blanca Luxury Beach Apartment</h4>
                 <p>Ubicado en el <strong>sexto piso</strong> del complejo Cumbre Blanca, Cima Blanca (<strong>#607</strong>) es un apartamento moderno y sofisticado, diseñado para ofrecer confort, estilo y funcionalidad. Ideal para familias, grupos de amigos o parejas que buscan una experiencia de alojamiento superior.</p>
-                <p>Con una hermosa vista, luz natural y un diseño elegante resaltado por iluminación LED decorativa, cada rincón de CIMA BLANCA es perfecto para fotos instagrameables y momentos inolvidables. Tenemos una localización estratégica que te permite estar a minutos de las mejores playas, gastronomía y puntos de interés de la zona.</p>
+                <p>Con una hermosa vista, luz natural y un diseño elegante realizado por iluminación LED decorativa, cada rincón de CIMA BLANCA es perfecto para fotos instagrameables y momentos inolvidables. Tenemos una localización estratégica que te permite estar a minutos de las mejores playas, gastronomía y puntos de interés de la zona, con la libertad de explorarlos durante el día y volver fácilmente para relajarte al atardecer.</p>
             </div>
 
             <div class="info-block border-gold">
@@ -562,53 +590,56 @@
                 <p>El departamento cuenta con una infraestructura total de <strong>5 camas</strong> distribuidas estratégicamente para alojar cómodamente hasta 8 personas:</p>
                 <ul>
                     <li>🛏️ <strong>Dormitorio Principal:</strong> 1 Cama queen (matrimonial tamaño 2 plazas y media).</li>
-                    <li>🛏️ <strong>Dormitorio 2:</strong> Litera triple que integra 3 camas en total.</li>
-                    <li>🛋️ <strong>Sala:</strong> 1 Sofá cama versátil de 3 posiciones.</li>
-                </ul>
-            </div>
-
-            <div class="info-block border-blue">
-                <h4>🏢 Amenities del Edificio</h4>
-                <ul>
-                    <li>🏊‍♂️ Piscina infinita y piscina infantil</li>
-                    <li>🔥 Área de BBQ y Fogatas</li>
-                    <li>💪 Área de Gym y Espacio Coworking</li>
-                    <li>🛝 Parque Infantil</li>
+                    <li>🛏️ <strong>Dormitorio 2:</strong> Litera triple que integra 3 camas en total:
+                        <ul>
+                            <li>Planta baja: Cama tamaño *full* (para 2 adultos).</li>
+                            <li>Parte superior: Cama twin (1 plaza).</li>
+                            <li>Parte inferior: Cama auxiliar twin (1 plaza).</li>
+                        </ul>
+                    </li>
+                    <li>🛋️ <strong>Sala:</strong> 1 Sofá cama versátil de 3 posiciones (configurable como sofá, reclinable para ver películas y cama adicional).</li>
                 </ul>
             </div>
 
             <div class="info-block border-green">
                 <h4>✨ Comodidades del Departamento</h4>
+                <p style="font-size:11.5px; color:#94a3b8; font-style:italic; margin-bottom:10px;">📌 ¿Buscas la piscina, el gym o el BBQ? Eso está en <a href="javascript:void(0)" onclick="cambiarModal('modal-amenities','modal-edificio-areas')" style="color:#0284c7; text-decoration:underline; cursor:pointer; font-weight:bold;">Amenidades →</a></p>
                 <ul>
                     <li>🍳 Cocina súper completa con utensilios BBQ.</li>
                     <li>❄️ Climatizado con aire acondicionado en todos los ambientes.</li>
-                    <li>📺 2 TV's 4K 55" high-definition y Soundbar.</li>
+                    <li>🚿 Agua caliente en todos los baños.</li>
+                    <li>📺 2 TV's 4K 55" high-definition.</li>
+                    <li>💡 Iluminación LED en todos los espacios.</li>
+                    <li>🪟 Persiana automatizada en la sala.</li>
+                    <li>🎵 Centro de entretenimiento con Soundbar.</li>
                     <li>📶 165 Mbps WiFi de alta velocidad y acceso a streaming.</li>
-                    <li>🔒 Caja de seguridad y persiana automatizada.</li>
-                    <li>🧺 <em>(Add-ons opcionales: Parasol, sillas de playa, hielera, lavandería).</em></li>
+                    <li>🎲 Juegos de mesa y karaoke.</li>
+                    <li>🔒 Caja de seguridad.</li>
+                    <li>🧺 <em>(Add-ons opcionales: Parasol, sillas de playa, hielera, lavadora y secadora inteligente).</em></li>
                 </ul>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: TU ESTADÍA -->
     <div id="modal-estadia" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-estadia')">×</a></div>
-            <h2 class="modal-title">🔑 Tu Estadía</h2>
+            <h2 class="modal-title">🧭 Ubicación & Horarios</h2>
             
             <div class="info-block border-gold" style="background: linear-gradient(135deg, #f8fafc 0%, #fffef9 100%);">
                 <h4 style="color: #92400e;">📍 Ubicación Exacta del Departamento</h4>
                 <p><strong>Edificio:</strong> Cumbre Blanca Beach Towers<br><strong>Ubicación:</strong> 6to piso, Departamento #607</p>
+                <div>
+                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
+                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
+                </div>
             </div>
 
             <div class="info-block">
                 <h4>1. Llegada (Check-in)</h4>
                 <p>A partir de las <strong>3:00 p.m.</strong><br>Es obligatorio identificarse en la garita con documento de identidad de todos los adultos previo al ingreso.</p>
-                <div>
-                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" class="modal-link-btn">📍 Abrir Google Maps</a>
-                    <a href="https://www.instagram.com/cimablanca.beach?igsh=cHdvam5nMnMyYms5&igsi=cHdvam5nMnMyYms5&utm_source=qr" target="_blank" class="modal-link-btn ig-btn">IG: Cómo Llegar 📸</a>
-                </div>
-                <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏰ ¿Llegas antes? Consulta nuestro Early Check-in →</span>
+                <span class="upsell-link" onclick="cambiarModal('modal-estadia', 'modal-extras')">⏰ ¿Llegas antes? Consulta nuestro servicio de Early Check-in →</span>
             </div>
 
             <div class="info-block border-red">
@@ -621,9 +652,15 @@
                 <h4>3. PIN de Ingreso Cerradura Smart</h4>
                 <p>Recibirás tu PIN de ingreso <strong>24 horas antes</strong> del check-in.</p>
             </div>
+
+            <div class="info-block">
+                <h4>4. Conexión WiFi</h4>
+                <p>La red y contraseña ya están configuradas en tu Tarjeta de Acceso Digital al inicio de la guía.</p>
+            </div>
         </div>
     </div>
 
+    <!-- MODAL: SERVICIOS EXTRAS -->
     <div id="modal-extras" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-extras')">×</a></div>
@@ -632,6 +669,7 @@
             
             <div class="info-block border-cyan">
                 <h4>⏰ Entrada Temprana (Early Check-in)</h4>
+                <p>Si llegas antes del horario regular, te ofrecemos la opción de Early check-in para que comiences tu estancia sin estrés, te relajes, dejes tu equipaje y aproveches mejor el día.</p>
                 <ul>
                     <li>Hasta 2 horas antes → <strong>$20</strong></li>
                     <li>Hasta 4 horas antes → <strong>$30</strong></li>
@@ -641,6 +679,7 @@
 
             <div class="info-block border-cyan">
                 <h4>⏳ Salida Tardía (Late Check-out)</h4>
+                <p>Si deseas quedarte después del horario de salida ya sea en el depa o disfrutando de las áreas comunes como la piscina o zona BBQ, te invitamos a contratar el servicio Late Check-out.</p>
                 <ul>
                     <li>Hasta 2 horas adicionales → <strong>$20</strong></li>
                     <li>Hasta 4 horas adicionales → <strong>$30</strong></li>
@@ -650,27 +689,32 @@
 
             <div class="info-block border-cyan">
                 <h4>🧺 Servicio de Lavandería</h4>
+                <p>Ponemos a tu disposición lavadora y secadora con las siguientes tarifas:</p>
                 <ul>
-                    <li>Solo lavado → <strong>$6</strong> | Solo secado → <strong>$6</strong></li>
+                    <li>Solo lavado → <strong>$6</strong></li>
+                    <li>Solo secado → <strong>$6</strong></li>
                     <li>Lavado + Secado (combo) → <strong>$10</strong></li>
                 </ul>
-                <p style="margin-top: 8px; font-size: 12px; color: #047857;">📌 Incluye detergente líquido.</p>
-                <p style="margin-top: 4px; font-size: 12px; color: #b91c1c;">⚠️ Por favor, no lavar ni secar prendas con arena.</p>
+                <p style="margin-top: 8px; font-size: 12px; color: #047857;">📌 Precio por carga. Incluye detergente líquido.</p>
+                <p style="margin-top: 4px; font-size: 12px; color: #b91c1c;">⚠️ Por favor, no lavar ni secar prendas con arena, ya que pueden dañar los equipos.</p>
             </div>
 
             <div class="info-block border-cyan">
                 <h4>🚗 Parqueo Adicional</h4>
+                <p>Tu reserva incluye 1 puesto gratis.</p>
                 <ul>
-                    <li>Upgrade Techado → <strong>$5/día</strong></li>
-                    <li>Vehículo Adicional → <strong>$10/día</strong></li>
+                    <li>Upgrade Techado → <strong>$5/día</strong> ($25/semana)</li>
+                    <li>Vehículo Adicional → <strong>$10/día</strong> ($35/semana)</li>
                 </ul>
             </div>
 
             <div class="info-block border-gold">
                 <h4>🍹 Bebidas y Kit de Playa</h4>
                 <ul>
-                    <li>Agua → <strong>$1.00</strong> | Cervezas → <strong>$2.00</strong></li>
-                    <li>Rental Kit de Playa (Sombrilla, 2 sillas, hielera) → <strong>$10.00/día</strong></li>
+                    <li>Agua → <strong>$1.00</strong> | Gaseosas → <strong>$1.50</strong></li>
+                    <li>Cervezas → <strong>$2.00</strong> | Botella de Vino → <strong>$15.00</strong></li>
+                    <li>Rental Kit de Playa: Sombrilla, 2 sillas y hielera → <strong>$10.00/día</strong></li>
+                    <li>Ítems sueltos: Hielera → <strong>$5.00</strong> | Parasol → <strong>$5.00</strong> | 2 Sillas → <strong>$5.00</strong> por día.</li>
                 </ul>
             </div>
 
@@ -678,196 +722,308 @@
         </div>
     </div>
 
+    <!-- MODAL: REGISTRO DE ÚLTIMO MINUTO -->
     <div id="modal-registro-urgente" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-registro-urgente')">×</a></div>
-            <h2 class="modal-title" style="color: #b91c1c;">🚨 Registro de Último Minuto</h2>
-            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">¿Quieres invitar a un amigo, un familiar o sumar a tu mascota a última hora?</p>
+            <h2 class="modal-title" style="color: #b91c1c;">📝 Registro de Último Minuto</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">¿Quieres invitar a un amigo, un familiar o sumar a tu mascota a última hora? ¡Hazlo aquí fácilmente!</p>
             
             <div class="info-block border-red">
                 <h4>🐾 Ingreso de Mascota (Pet Friendly)</h4>
                 <p>Exclusivo para un (1) <strong>perro de raza pequeña de hasta 10 kg</strong>.</p>
+                <ul><li><strong>Cálculo:</strong> Tarifa diaria × número de noches de tu estancia.</li></ul>
             </div>
 
             <div class="info-block border-red">
-                <h4>👤 Acompañante Adicional</h4>
-                <p>Si sumas a un invitado adicional que no estaba en la reserva original, debe ser registrado obligatoriamente para autorizar su ingreso en la garita.</p>
+                <h4>👤 Acompañante Adicional de Último Momento</h4>
+                <p>Si sumas a un invitado adicional que no estaba en la reserva original, debe ser registrado obligatoriamente para autorizar su ingreso en la garita de control.</p>
+                <ul><li><strong>Cálculo:</strong> Tarifa por noche / persona × número de noches de tu estancia.</li></ul>
             </div>
 
-            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20realizar%20un%20registro%20de%20último%20minuto." target="_blank" class="wa-btn-full">💬 Regularizar por WhatsApp</a>
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20realizar%20un%20registro%20de%20último%20minuto%20(mascota/acompañante%20adicional)%20para%20mi%20estancia." target="_blank" class="wa-btn-full">💬 Regularizar por WhatsApp</a>
         </div>
     </div>
 
+    <!-- MODAL: NORMAS Y REGLAS -->
     <div id="modal-reglas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-reglas')">×</a></div>
             <h2 class="modal-title" style="color: #d97706;">📜 Apartment & Building Rules</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Selecciona una sección para ver las normativas vigentes:</p>
             
             <div class="info-block border-amber">
                 <h4>Reglas del Departamento</h4>
-                <button class="rule-toggle-btn rule-btn-dept" onclick="toggleContent('dept-rules', 'rule-content')">📂 Ver / Ocultar Reglas</button>
+                <button class="rule-toggle-btn rule-btn-dept" onclick="toggleContent('dept-rules', 'rule-content')">📂 Ver / Ocultar Reglas del Depa</button>
                 <div id="dept-rules" class="rule-content">
                     <ul style="margin-top: 10px;">
-                        <li>👥 <strong>Capacidad:</strong> Estrictamente la cantidad de personas registrada. El ingreso de personas no declaradas será detectado por cámara.</li>
-                        <li>🐾 <strong>Mascotas:</strong> Solo 1 perro pequeño hasta 10 kg, formalizado previamente.</li>
+                        <li>👥 <strong>Capacidad y Ocupación:</strong> Estrictamente la cantidad de personas registrada en la reserva original. El ingreso de personas no declaradas será detectado por nuestra cámara de seguridad exterior y generará cargos adicionales o cancelación.</li>
+                        <li>🐾 <strong>Mascotas:</strong> Solo se acepta un (1) perro pequeño de raza pequeña de hasta 10 kg, formalizado previamente mediante nuestro registro.</li>
+                        <li>⏰ Early check-in y late check-in: Disponible con costo adicional y sujeto a disponibilidad.</li>
+                        <li>⚠️ <strong>Responsabilidad por daños:</strong> El huésped es responsable de cualquier daño a la propiedad o mobiliario y debe reportarlo de inmediato.</li>
+                        <li>🚫 Las toallas del alojamiento son de uso exclusivo dentro del departamento.</li>
                         <li>🚭 No fumar ni vapear dentro del apartamento.</li>
                         <li>🎉 No se permiten fiestas ni eventos.</li>
-                        <li>🚿 Retirarse la arena antes de ingresar, usando duchas exteriores.</li>
+                        <li>🔇 Evitar ruidos excesivos, especialmente entre 00:00 y 07:00.</li>
+                        <li>👕 No lavar prendas con arena, ya que puede dañar la lavadora.</li>
+                        <li>🚿 Retirarse la arena antes de ingresar, usando las duchas exteriores (planta baja).</li>
+                        <li>🛏️ Cuida el mobiliario e instalaciones del apartamento.</li>
+                        <li>⚡ Usa los equipos eléctricos de forma responsable.</li>
+                        <li>🗑️ Deposita la basura en los contenedores adecuados.</li>
+                        <li>🚪 Cierra puertas, ventanas y apaga el AC al salir del apartamento.</li>
+                        <li>📷 <strong>Cámara de vigilancia:</strong> Contamos con cámara activa en el exterior del departamento (entrada principal) para control de aforo y seguridad.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="info-block border-blue">
                 <h4>Normas del Edificio</h4>
-                <button class="rule-toggle-btn rule-btn-building" onclick="toggleContent('building-rules', 'rule-content')">📂 Ver / Ocultar Normas</button>
+                <button class="rule-toggle-btn rule-btn-building" onclick="toggleContent('building-rules', 'rule-content')">📂 Ver / Ocultar Normas del Edificio</button>
                 <div id="building-rules" class="rule-content">
                     <ul style="margin-top: 10px;">
-                        <li>🪪 Todos los huéspedes deben identificarse con cédula en garita.</li>
+                        <li>🪪 Todos los huéspedes deben identificarse con cédula o pasaporte.</li>
+                        <li>🚗 Estacionar solo en los espacios asignados.</li>
                         <li>🛗 Prohibido ingresar al ascensor mojados o con arena.</li>
+                        <li>🚫 <strong>Seguridad en pasillos y ascensores:</strong> Está prohibido andar completamente mojado subiendo en los ascensores o pasillos que dan a los departamentos, como medida preventiva para evitar caídas y lesiones graves.</li>
                         <li>👕 No colgar ropa o toallas en balcones o fachadas.</li>
-                        <li>🔥 BBQ: 9:00 a.m. - 11:59 p.m. previa reserva.</li>
+                        <li>🥂 No consumir alcohol en áreas comunes no autorizadas.</li>
+                        <li>🚫 Prohibido portar armas o sustancias psicoactivas.</li>
+                        <li>🔥 BBQ: Disponible los 7 días de la semana, 9:00 a.m. - 11:59 p.m. los mantenimientos informará previamente la administración.</li>
+                        <li>📹 Seguridad 24/7 con cámaras de monitoreo.</li>
+                        <li>⚠️ El incumplimiento de estas reglas puede generar cargos adicionales o la cancelación inmediata de la estadía.</li>
+                        <li>😊 ¡Gracias por respetar las normas y disfrutar tu estancia!</li>
                     </ul>
                 </div>
             </div>
 
             <div class="info-block border-green">
-                <h4>🌴 Recordatorio para la Piscina 💦</h4>
-                <button class="rule-toggle-btn rule-btn-pool" onclick="toggleContent('pool-rules', 'rule-content')">📂 Ver / Ocultar Normas</button>
+                <h4>🌴 Recordatorio para Disfrutar la Piscina 💦</h4>
+                <button class="rule-toggle-btn rule-btn-pool" onclick="toggleContent('pool-rules', 'rule-content')">📂 Ver / Ocultar Normas de Piscina</button>
                 <div id="pool-rules" class="rule-content">
-                    <ul style="margin-top: 10px;">
-                        <li>🏊‍♂️ <strong>Horario:</strong> Abierta todos los días de 8:00 a.m. a 11:00 p.m.</li>
-                        <li>🚧 <strong>Mantenimiento:</strong> Entre los días lunes o martes, desde las 6:00 p.m. hasta las 10:00 a.m. del día siguiente.</li>
-                        <li>🩱 Usar traje de baño adecuado y evitar ingresar con arena.</li>
+                    <p style="margin-top: 10px;">Para que todos podamos disfrutarla al máximo y mantenerla limpia y agradable, les pedimos tener en cuenta:</p>
+                    <ul>
+                        <li>🏊‍♂️ <strong>Horario general:</strong> Abierta todos los días de 8:00 a.m. a 11:00 p.m.</li>
+                        <li>🚧 <strong>Mantenimiento:</strong> Se realiza entre los días lunes o martes, desde las 6:00 p.m. hasta las 10:00 a.m. del día siguiente. <em>Nota: Si el lunes o martes cae feriado, no aplica mantenimiento.</em></li>
+                        <li>🚿 Darse una ducha antes de ingresar.</li>
+                        <li>🩱 Usar traje de baño adecuado.</li>
+                        <li>🚫 Evitar ingresar con arena, alimentos o envases de vidrio.</li>
+                        <li>👧🏻 Los niños deben estar siempre bajo supervisión de un adulto.</li>
+                        <li>🗑️ Mantener limpias las áreas comunes y utilizar los tachos disponibles.</li>
                     </ul>
+                    <p style="margin-top: 8px; font-style: italic; color: #047857;">¡Muchas gracias por ayudarnos a cuidar este espacio! 💙 La idea es que todos puedan disfrutarlo y pasar una excelente estadía en Cima Blanca. 🏖️✨</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: RECOMENDACIONES -->
     <div id="modal-recomendaciones" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-recomendaciones')">×</a></div>
             <h2 class="modal-title" style="color: #0284c7;">🎒 Recomendaciones antes del Viaje</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Antes de tu viaje a CIMA BLANCA, te recomendamos llevar:</p>
             
             <div class="info-block border-blue">
-                <h4>🧴 Aseo y Playa</h4>
-                <ul>
-                    <li>🌸 Cepillo y pasta dental. Bloqueador y repelente.</li>
-                    <li>🩴 Traje de baño, sandalias, gorra/sombrero.</li>
-                </ul>
+                <h4>🧴 Aseo personal y protección</h4>
+                <ul><li>🌸 <strong>Aseo personal:</strong> cepillo y pasta dental.</li><li>🧴 <strong>Protección solar:</strong> bloqueador, repelente.</li></ul>
+            </div>
+
+            <div class="info-block border-blue">
+                <h4>🏖️ Playa & Piscina</h4>
+                <ul><li>🩴 Traje de baño, sandalias, gorra/sombrero.</li><li>🕶️ <strong>Extras útiles:</strong> lentes de sol, aloe vera, hidratación.</li></ul>
             </div>
 
             <div class="info-block border-pink">
                 <h4>🐾 Si viajas con tu peludo 🐶</h4>
-                <p>No olvides su cama, bebedero y comida. No puede andar sin collar en las áreas comunes.</p>
+                <p>No te olvides de llevarle su <strong>cama, bebedero y comida</strong>. Aunque las torres son <em>pet friendly</em>, recuerda que por normas de convivencia no puede andar sin su collar y debes llevarlo exclusivamente a las zonas determinadas para sus necesidades.</p>
             </div>
 
             <div class="info-block border-amber">
-                <h4>⚠️ Toallas de playa/piscina 🧺</h4>
-                <p>Las toallas del departamento son <strong>solo de uso interno</strong>. Extravíos o daños generan cargos de $20.</p>
-                <span class="upsell-link" onclick="cambiarModal('modal-recomendaciones', 'modal-extras')">✨ ¿Necesitas facilidades de playa? Mira nuestro Rental Kit →</span>
+                <h4>⚠️ Muy importante: Toallas de playa/piscina 🧺</h4>
+                <p>Las toallas del departamento son <strong>solo de uso interno</strong> del depa. En el caso de extravío o daño pueden haber cargos adicionales de <strong>$20 dólares por artículo</strong>.</p>
+                <span class="upsell-link" onclick="cambiarModal('modal-recomendaciones', 'modal-extras')">✨ ¿Necesitas facilidades de playa? Mira nuestro Rental Kit de Playa →</span>
             </div>
+
+            <a href="https://wa.me/593994000500?text=Hola,%20tengo%20una%20duda%20sobre%20mi%20viaje%20a%20Cima%20Blanca." target="_blank" class="wa-btn-full">📱 Escríbenos por WhatsApp si tienes dudas</a>
         </div>
     </div>
 
+    <!-- MODAL: TUTORIALES -->
     <div id="modal-tutoriales" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-tutoriales')">×</a></div>
-            <h2 class="modal-title" style="color: #8b5cf6;">⚙️ ¿Cómo funciona? (Tutoriales)</h2>
+            <h2 class="modal-title" style="color: #8b5cf6;">🎬 ¿Cómo funciona? (Tutoriales)</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Guía rápida para el uso de los equipos y dispositivos del departamento:</p>
             
             <div class="info-block border-purple">
                 <h4>🔒 Cerradura Inteligente</h4>
-                <p>Ingresa tu PIN numérico y presiona la tecla <strong>“#”</strong>.</p>
+                <p>Gira las dos manijas al mismo tiempo para abrir. Después de ingresar tu PIN numérico, presiona la tecla <strong>“#”</strong>.</p>
                 <a href="https://youtube.com/shorts/9dgp5Qc9reM?si=n21AJn3yGQ--SAJ7" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial</a>
             </div>
 
             <div class="info-block border-purple">
-                <h4>🛋️ Sofá Cama Versátil</h4>
-                <p>Empuja el respaldar hacia adelante hasta escuchar un clic para cambiar de posición.</p>
+                <h4>🪟 Persiana Automática de la Sala</h4>
+                <p>El departamento cuenta con una persiana automatizada en la sala. Su control debe ser usado de forma adecuada y <strong>no debe ser manipulado por niños</strong> para evitar desconfiguraciones en su sistema.</p>
+            </div>
+
+            <div class="info-block border-purple">
+                <h4>📺 Smart TV Samsung & Sistema de Audio</h4>
+                <p>Disfruta de entretenimiento de última generación en nuestra nueva <strong>Smart TV Samsung de alta gama</strong>, perfectamente sincronizada con la <strong>barra de sonido y subwoofer inalámbrico Samsung</strong> para brindarte una experiencia de audio y video superior.</p>
+                <p style="margin-top: 6px; font-size: 12px; color: #64748b;">📌 <em>Puedes acceder a diversas aplicaciones y streaming directamente en el menú de la televisión.</em></p>
+            </div>
+
+            <div class="info-block border-purple">
+                <h4>🛋️ Sofá Cama Versátil de 3 Posiciones</h4>
+                <p>Cuenta con 3 configuraciones: <strong>sofá tradicional</strong>, <strong>reclinable</strong> y <strong>cama</strong>. Empuja el respaldar hacia adelante hasta escuchar un clic para cambiar de posición.</p>
                 <a href="https://youtu.be/1Ix3srVr_ys?si=e4JtfnvfgEbMns6W" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial</a>
+            </div>
+
+            <div class="info-block border-purple">
+                <h4>🔐 Caja de Seguridad</h4>
+                <p>Con la puerta abierta: presiona el botón de reseteo posterior, ingresa tu código de 3 a 8 dígitos mientras parpadea la luz amarilla y presiona <strong>“#”</strong> para confirmar.</p>
+                <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODYzMzY5NTQ4NTAyMjU4?story_media_id=3850854764112527194&igsh=MW15aWc0cGoxYTlwaQ==&igsi=MW15aWc0cGoxYTlwaQ==" target="_blank" rel="noopener" class="ig-highlight-btn">📸 Ver Tutorial</a>
+            </div>
+
+            <div class="info-block border-purple">
+                <h4>🍳 Cocina de Inducción Teka</h4>
+                <p>Panel táctil moderno. Recuerda utilizar únicamente ollas y sartenes aptos para inducción (con base ferromagnética).</p>
+                <a href="https://youtube.com/shorts/iARYtfK4rcY?si=rq3dCj3e6k323OzD" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial</a>
             </div>
 
             <div class="info-block border-red">
                 <h4>🧺 Lavadora & Secadora Inteligente</h4>
-                <p style="margin-top: 6px; color: #b91c1c;">⚠️ <strong>Importante:</strong> No laves ni seques prendas con arena, ya que pueden obstruir los equipos.</p>
+                <p>El panel principal controla ambas funciones. Temperaturas sugeridas: niveles 1–2 (fría), nivel 3 (tibia), nivel 4 (caliente).</p>
+                <p style="margin-top: 6px; color: #b91c1c;">⚠️ <strong>Importante:</strong> No laves ni seques prendas con arena, ya que pueden obstruir y dañar los equipos.</p>
                 <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+                    <a href="https://youtube.com/shorts/KcHCLfP-4nM?si=JEnaT1y24MwIYslk" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial (Detergente)</a>
                     <a href="https://youtube.com/shorts/SjPJSXA6nzo?si=CyxJlP0aaG5DkV5y" target="_blank" rel="noopener" class="youtube-btn">▶️ Ver Tutorial (Funcionamiento)</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: ÁREAS DEL EDIFICIO -->
     <div id="modal-edificio-areas" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-edificio-areas')">×</a></div>
             <h2 class="modal-title" style="color: #0284c7;">🏊‍♂️ Áreas del Edificio</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Conoce y disfruta de las instalaciones del complejo:</p>
             
             <div class="info-block border-blue">
                 <h4>🌊 Piscina Infinita & Piscina Infantil</h4>
                 <p>Disfruta de una hermosa vista al mar. Horario general: todos los días de <strong>8:00 a.m. a 11:00 p.m.</strong></p>
-                <p style="margin-top: 6px; font-size: 12px; color: #92400e; font-style: italic;">
-                    ⚠️ Mantenimiento entre lun/mar (6:00 p.m. a 10:00 a.m. del día siguiente).
+                <p style="margin-top: 6px; font-size: 12px; color: #b45309; font-style: italic;">
+                    ⚠️ Mantenimiento entre lun/mar (6:00 p.m. a 10:00 a.m. del día siguiente). No aplica en feriados. 
+                    <a href="javascript:void(0)" onclick="cambiarModal('modal-edificio-areas', 'modal-reglas'); toggleContent('pool-rules', 'rule-content');" style="color: #0284c7; text-decoration: underline; cursor: pointer; font-weight: bold;">Ver normas de la piscina →</a>
                 </p>
             </div>
 
             <div class="info-block border-amber">
                 <h4>🔥 Área de BBQ y Fogatas</h4>
-                <p>Debe reservarse con al menos 48 horas de anticipación en garita.</p>
+                <p>Compuesta por 4 estaciones. 📌 <em>Debe reservarse con al menos 48 horas de anticipación. Para días festivos y feriados, se debe realizar con la mayor anticipación posible</em>.</p>
             </div>
 
             <div class="info-block border-green">
                 <h4>💪 Gimnasio</h4>
-                <p>El huésped debe acercarse a garita y registrarse para el uso de las máquinas.</p>
+                <p>Equipado con máquinas cardiovasculares y de fuerza. 📌 <em>El huésped primero debe acercarse a garita y registrarse para el uso de las máquinas</em>.</p>
+            </div>
+
+            <div class="info-block border-gold">
+                <h4>🛝 Parque Infantil</h4>
+                <p>Espacio seguro y divertido al aire libre pensado para los más pequeños del hogar.</p>
+            </div>
+
+            <div class="info-block border-blue">
+                <h4>💻 Espacio de Coworking</h4>
+                <p>Área cómoda y conectada, ideal si necesitas trabajar o realizar videollamadas con tranquilidad.</p>
+            </div>
+
+            <div class="info-block border-red">
+                <h4>🛡️ Seguridad 24/7</h4>
+                <p>Control de accesos y monitoreo permanente en garita y áreas comunes para tu total tranquilidad.</p>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: EXPLORA PUNTA BLANCA -->
     <div id="modal-zona" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-zona')">×</a></div>
             <h2 class="modal-title" style="color: #0284c7;">📍 Explora la Península</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 5px;">Selecciona una categoría para ver las ubicaciones en Google Maps:</p>
+            <p style="text-align: center; font-size: 11px; color: #94a3b8; font-style: italic; margin-bottom: 15px;">* Tiempos estimados en auto saliendo desde Cumbre Blanca Beach Towers.</p>
             
             <div class="info-block border-blue" style="margin-bottom: 10px;">
                 <h4>🏖️ Ruta de Playas</h4>
                 <button class="zona-toggle-btn" onclick="toggleContent('zona-playas', 'zona-content')">📂 Ver / Ocultar Playas</button>
                 <div id="zona-playas" class="zona-content">
                     <div class="zsection-title">Nuestras Recomendadas</div>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Punta+Blanca+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Playa Punta Blanca</span><span class="ztime">5 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=San+Pablo,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ San Pablo</span><span class="ztime">5-7 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Ayangue,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌊 Ayangue</span><span class="ztime">35-40 min</span></a>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Montañita,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🏄 Montañita</span><span class="ztime">50-55 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Punta+Blanca+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Playa Punta Blanca <small style="display:block; font-weight:normal; color:#64748b;">Nuestra playa (entradas 5 y 7)</small></span><span class="ztime">5 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Punta+Centinela,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Punta Centinela <small style="display:block; font-weight:normal; color:#64748b;">Playa tranquila</small></span><span class="ztime">5 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=San+Pablo,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ San Pablo <small style="display:block; font-weight:normal; color:#64748b;">Ideal para familias</small></span><span class="ztime">5-7 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Capaes,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Capaes <small style="display:block; font-weight:normal; color:#64748b;">Playa tranquila</small></span><span class="ztime">10-12 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Ballenita,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">⭐ Ballenita <small style="display:block; font-weight:normal; color:#64748b;">Paseo y atardecer</small></span><span class="ztime">12-15 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Salinas,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌴 Salinas <small style="display:block; font-weight:normal; color:#64748b;">Turismo y restaurantes</small></span><span class="ztime">30-35 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Ayangue,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌊 Ayangue <small style="display:block; font-weight:normal; color:#64748b;">Snorkel y mar calmado</small></span><span class="ztime">35-40 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Rosada,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌸 Playa Rosada <small style="display:block; font-weight:normal; color:#64748b;">Paisajes instagrameables</small></span><span class="ztime">40-45 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Montañita,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🏄 Montañita <small style="display:block; font-weight:normal; color:#64748b;">Surf y ambiente vibrante</small></span><span class="ztime">50-55 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Olón,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">🌅 Olón <small style="display:block; font-weight:normal; color:#64748b;">Playa extensa y atardeceres</small></span><span class="ztime">~1 hora</span></a>
                 </div>
             </div>
-            
+
+            <div class="info-block border-purple" style="margin-bottom: 10px;">
+                <h4>🪂 Aventura y Turismo</h4>
+                <button class="zona-toggle-btn" style="background: #8b5cf6;" onclick="toggleContent('zona-aventura', 'zona-content')">📂 Ver / Ocultar Puntos Turísticos</button>
+                <div id="zona-aventura" class="zona-content">
+                    <div class="zsection-title">Para Conocer y Explorar</div>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Museo+Amantes+de+Sumpa,+Santa+Elena" target="_blank" rel="noopener"><span class="zname">🏺 Museo Amantes de Sumpa <small style="display:block; font-weight:normal; color:#64748b;">Cultura e historia milenaria</small></span><span class="ztime">20 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Baños+de+Lodo+San+Vicente,+Santa+Elena" target="_blank" rel="noopener"><span class="zname">💆‍♂️ Baños de Lodo de San Vicente <small style="display:block; font-weight:normal; color:#64748b;">Turismo de bienestar / arcilla</small></span><span class="ztime">25 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Playa+Bruja+Parapente,+San+Pedro,+Ecuador" target="_blank" rel="noopener"><span class="zname">🪂 Parapente en Playa Bruja <small style="display:block; font-weight:normal; color:#64748b;">Vuelos panorámicos sobre el mar</small></span><span class="ztime">40 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=La+Chocolatera+Salinas,+Ecuador" target="_blank" rel="noopener"><span class="zname">🦭 La Chocolatera y La Lobería <small style="display:block; font-weight:normal; color:#64748b;">Miradores y lobos marinos</small></span><span class="ztime">45 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Santuario+Blanca+Estrella+de+la+Mar,+Olon" target="_blank" rel="noopener"><span class="zname">⛪ Santuario Blanca Estrella <small style="display:block; font-weight:normal; color:#64748b;">Iglesia acantilado en Olón</small></span><span class="ztime">~1 hora</span></a>
+                </div>
+            </div>
+
             <div class="info-block border-amber" style="margin-bottom: 10px;">
                 <h4>🍽️ Gastronomía & Restaurantes</h4>
                 <button class="zona-toggle-btn" style="background: #f59e0b;" onclick="toggleContent('zona-restaurantes', 'zona-content')">📂 Ver / Ocultar Restaurantes</button>
                 <div id="zona-restaurantes" class="zona-content">
                     <div class="zsection-title">Opciones Cercanas</div>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Pollo+a+la+brasa+Don+Pepe,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Pollo a la brasa Don Pepe</span><span class="ztime">4 min · $</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Quiosko+de+Fast+Food,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Quiosko de Fast Food</span><span class="ztime">4 min · $</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Parrilla+Punta+Grill,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Parrilla Punta Grill</span><span class="ztime">5 min · $$</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Pizzería+Cova+Food,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Pizzería Cova Food</span><span class="ztime">5 min · $$</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hueca+de+Carnes+y+menestra,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hueca de Carnes & menestra</span><span class="ztime">6 min · $</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Galeón+San+Pablo,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Restaurante Galeón San Pablo</span><span class="ztime">6 min · $$</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Cabaña+Restaurante+Narbine,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Cabaña Restaurante Narbine</span><span class="ztime">8 min · $</span></a>
                 </div>
             </div>
-            
+
             <div class="info-block border-green" style="margin-bottom: 10px;">
                 <h4>🛒 Servicios y Supermercados</h4>
                 <button class="zona-toggle-btn" style="background: #10B981;" onclick="toggleContent('zona-servicios', 'zona-content')">📂 Ver / Ocultar Servicios</button>
                 <div id="zona-servicios" class="zona-content">
                     <div class="zsection-title">Para Abastecerse</div>
-                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Gasolinera+PYS+farmacia+cajeros,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Gasolinera PYS, farmacia</span><span class="ztime">3 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Gasolinera+PYS+farmacia+cajeros,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Gasolinera PYS, farmacia, cajeros</span><span class="ztime">3 min</span></a>
                     <a class="zrow" href="https://maps.app.goo.gl/2AZrquzAMH17xRLP9" target="_blank" rel="noopener"><span class="zname">📍 TIA GO</span><span class="ztime">5 min</span></a>
                     <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=TUTI+San+Pablo,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 TUTI San Pablo</span><span class="ztime">7 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+Ballenita,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket Ballenita</span><span class="ztime">12 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Terminal+Terrestre+SUMPA,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Terminal Terrestre SUMPA</span><span class="ztime">14 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=El+Paseo+Shopping+La+Península,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 El Paseo Shopping La Península</span><span class="ztime">26 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hipermarket+La+Libertad,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hipermarket La Libertad</span><span class="ztime">27 min</span></a>
+                    <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Aeropuerto+Regional+Ulpiano,+Punta+Blanca,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Aeropuerto Regional Ulpiano</span><span class="ztime">36 min</span></a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: CONTACTO & EMERGENCIAS -->
     <div id="modal-ayuda" class="modal-overlay">
         <div class="modal-content">
             <div class="close-container"><a href="javascript:void(0)" class="close-btn" onclick="cerrarModal('modal-ayuda')">×</a></div>
-            <h2 class="modal-title" style="color: #b91c1c;">🆘 Contacto & Emergencias</h2>
-            
+            <h2 class="modal-title" style="color: #ef4444;">🆘 Contacto & Emergencias</h2>
+            <p style="text-align: center; font-size: 13px; color: #64748b; margin-bottom: 15px;">Estamos para ayudarte en cualquier momento:</p>
+
             <div class="info-block border-green">
                 <h4>💬 Habla con tus Anfitriones</h4>
                 <p>Gustavo & Alba · Español e Inglés · Tiempo de respuesta rápido.</p>
@@ -877,15 +1033,22 @@
 
             <div class="info-block border-red">
                 <h4>🏥 Hospitales y Centros Médicos Cercanos</h4>
-                <div class="zsection-title" style="color: #b91c1c;">Asistencia Médica</div>
-                <a class="zrow" href="https://maps.app.goo.gl/zbhVyTxGRo5eBYUR7" target="_blank" rel="noopener"><span class="zname">📍 Centro de Salud San Pablo</span><span class="ztime">6 min</span></a>
-                <a class="zrow" href="https://maps.app.goo.gl/sDV8DpqmoHvmKkdEA" target="_blank" rel="noopener"><span class="zname">📍 Punto Médico San Pablo</span><span class="ztime">4 min</span></a>
-                <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Clínica+Granados,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Clínica Granados <small style="display:block; font-weight:normal; color:#64748b;">24 horas</small></span><span class="ztime">35 min</span></a>
+                <p style="font-size: 12px; color: #64748b; margin-bottom: 8px;">Toca para abrir la ubicación en Google Maps:</p>
+                <div class="zsection-title" style="color: #ef4444;">Asistencia Médica</div>
+                
+                <a class="zrow" href="https://maps.app.goo.gl/zbhVyTxGRo5eBYUR7" target="_blank" rel="noopener"><span class="zname">📍 Centro de Salud San Pablo <small style="display:block; font-weight:normal; color:#64748b;">Público - Atención diurna</small></span><span class="ztime">6 min</span></a>
+                <a class="zrow" href="https://maps.app.goo.gl/sDV8DpqmoHvmKkdEA" target="_blank" rel="noopener"><span class="zname">📍 Punto Médico San Pablo <small style="display:block; font-weight:normal; color:#64748b;">Privado - Atención diurna</small></span><span class="ztime">4 min</span></a>
+                <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Hospital+Gral.+Dr.+Liborio+Panchana+Sotomayor,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Hospital Gral. Dr. Liborio Panchana <small style="display:block; font-weight:normal; color:#64748b;">Público - 24 horas</small></span><span class="ztime">20 min</span></a>
+                <a class="zrow" href="https://www.google.com/maps/search/?api=1&query=Clínica+Granados,+Santa+Elena,+Ecuador" target="_blank" rel="noopener"><span class="zname">📍 Clínica Granados <small style="display:block; font-weight:normal; color:#64748b;">Privado - 24 horas</small></span><span class="ztime">35 min</span></a>
             </div>
+
+            <a href="https://wa.me/593994000500?text=Hola,%20necesito%20asistencia%20urgente%20durante%20mi%20estancia%20en%20Cima%20Blanca." target="_blank" class="wa-btn-full">💬 Escribir por WhatsApp</a>
         </div>
     </div>
 
+    <!-- Toast Notification -->
     <div class="toast" id="toast">Copiado ✓</div>
+    </main>
 
     <script>
         function abrirModal(id) { 
