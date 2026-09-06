@@ -141,7 +141,7 @@
         .superhost-video { width: 65px; height: auto; display: block; border-radius: 6px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)); }
         .signature-img { max-width: 130px; height: auto; display: block; }
 
-        /* KEYCARD WIFI */
+        /* KEYCARD WIFI & BOTONES */
         .keycard {
             position: relative;
             background: linear-gradient(150deg, #1e293b 0%, #0f172a 78%);
@@ -152,7 +152,12 @@
         .keycard-top { display: flex; justify-content: space-between; align-items: flex-start; }
         .keycard-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
         .keycard-unit { font-family: 'Georgia', serif; font-style: italic; font-size: 15px; margin-top: 2px; line-height: 1.2; }
-        .keycard-badge { font-size: 9.5px; letter-spacing: 0.5px; background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 20px; font-weight: bold; flex-shrink: 0; }
+        
+        .keycard-action-btn { display: inline-flex; align-items: center; gap: 4px; color: #fff; font-size: 9.5px; font-weight: bold; padding: 4px 10px; border-radius: 20px; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .keycard-action-btn:active { filter: brightness(0.9); }
+        .btn-gps { background: #10B981; border: 1px solid #047857; }
+        .btn-vid { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: 1px solid #dc2743; }
+
         .perforation { border-top: 1.5px dashed rgba(255,255,255,0.2); margin: 14px -20px; position: relative; }
         .kf-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
         .kf-label { font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; opacity: 0.6; }
@@ -482,7 +487,10 @@
                     <div class="keycard-label">Ubicación del Complejo</div>
                     <div class="keycard-unit">Cumbre Blanca Beach Towers<br><span style="font-size:12px; opacity:0.8; font-weight:normal;">Depto. 607 · Piso 6</span></div>
                 </div>
-                <div class="keycard-badge">CIMA BLANCA</div>
+                <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0;">
+                    <a href="https://maps.google.com/?q=Cumbre+Blanca+Beach+Towers+Punta+Blanca" target="_blank" rel="noopener" class="keycard-action-btn btn-gps">📍 GPS</a>
+                    <a href="javascript:void(0)" onclick="abrirModal('modal-video-llegar')" class="keycard-action-btn btn-vid">▶️ VIDEO</a>
+                </div>
             </div>
             <div class="perforation"></div>
             <div class="kf-row">
