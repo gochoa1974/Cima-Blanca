@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Panel de Anfitrión - Cima Blanca</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #0f172a; color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .panel-container { background: #1e293b; border: 2px solid #d4af37; border-radius: 20px; padding: 25px; width: 100%; max-width: 440px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); box-sizing: border-box; }
+        h2 { color: #fcd34d; font-size: 18px; margin-top: 0; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        p { font-size: 13px; color: #94a3b8; line-height: 1.4; text-align: center; margin-bottom: 20px; }
+        textarea { width: 100%; height: 130px; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 10px; padding: 12px; font-size: 13px; box-sizing: border-box; resize: vertical; font-family: monospace; }
+        textarea:focus { outline: none; border-color: #d4af37; }
+        .btn { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; border: none; font-weight: bold; padding: 14px; border-radius: 10px; width: 100%; cursor: pointer; margin-top: 15px; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+        .btn:active { filter: brightness(0.9); }
+        .result-box { display: none; background: #0f172a; border: 1px dashed #38bdf8; padding: 15px; border-radius: 10px; margin-top: 20px; }
+        .result-title { font-size: 11px; color: #38bdf8; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
+        .result-link { font-size: 12px; color: #f8fafc; font-family: monospace; word-break: break-all; margin-bottom: 12px; background: #1e293b; padding: 8px; border-radius: 6px; }
+        .btn-copy { background: #10B981; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="panel-container">
+    <h2>🛠️ Panel de Anfitrión</h2>
+    <p>Pega aquí el correo completo que te arroja Sifely para generar instantáneamente el enlace único de tu huésped:</p>
+    
+    <textarea id="sifely-input" placeholder="Ejemplo: 
+🔐 PIN DE INGRESO – CIMA BLANCA...
+🔑 PIN: 516231 + la tecla #..."></textarea>
+    
+    <button class="btn" onclick="generarEnlace()">Generar Enlace Único</button>
+    
+    <div id="result-box" class="result-box">
+        <div class="result-title">Enlace listo para enviar por WhatsApp:</div>
+        <div id="result-link" class="result-link"></div>
+        <button class="btn btn-copy" onclick="copiarEnlace()">📋 Copiar Enlace</button>
+    </div>
+</div>
+
+<script>
+    function generarEnlace() {
+        const texto = document.getElementById('sifely-input').value;
+        
+        // Expresión regular para extraer el PIN del texto de Sifely
+        const matchPin = texto.match(/PIN\*?[:\s]+\*?([0-9]{4,6})\*?/i);
+        
+        if (!matchPin || !matchPin[1]) {
+            alert("⚠️ No se pudo detectar el PIN automáticamente. Verifica que hayas copiado el texto completo del correo de Sifely.");
+            return;
+        }
+        
+        const pin = matchPin[1];
+        
+        // Construye la URL base apuntando a la guía principal (index.html)
+        const baseUrl = window.location.origin + window.location.pathname.replace('admin.html', '');
+        const enlaceFinal = `${baseUrl}?pin=${pin}`;
+        
+        document.getElementById('result-link').textContent = enlaceFinal;
+        document.getElementById('result-box').style.display = 'block';
+    }
+
+    function copiarEnlace() {
+        const linkText = document.getElementById('result-link').textContent;
+        navigator.clipboard.writeText(linkText).then(() => {
+            alert("¡Enlace copiado al portapapeles! Ya puedes pegarlo en WhatsApp.");
+        });
+    }
+</script>
+
+</body>
+</html>
