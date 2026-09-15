@@ -520,7 +520,6 @@
             <div class="qr-box" id="main-qr-box">
                 <img src="Wi-Fi-Cima-Blanca.jpeg" alt="WiFi Cima Blanca QR" loading="lazy" width="250" height="250">
             </div>
-            
         </div>
 
         <!-- TARJETA WOW OPTIMIZADA CON TITULAR DESTACADO UNIFORME -->
@@ -1111,7 +1110,7 @@
     </main>
 
     <script>
-        // Lector inteligente de URL para estructurar la Keycard (VERSIÓN UX ULTRA-COMPACTA)
+        // Lector inteligente de URL para estructurar la Keycard (VERSIÓN UX PREMIUM Y NATIVA)
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const pinParam = urlParams.get('pin');
@@ -1125,9 +1124,9 @@
             const welcomeMessage = document.getElementById('welcome-message');
             
             if (pinParam) {
-                // DISEÑO UX: Fechas lado a lado y PIN gigante en el centro
+                // DISEÑO UX: Fechas lado a lado, PIN continuo y Alerta de Manijas
                 let htmlContenido = `
-                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 10px; margin-bottom: 12px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 10px; margin-bottom: 15px; text-align: left;">
                         <div style="flex: 1;">
                             <div style="font-size: 9px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px;">🟢 Check-in</div>
                             <div style="font-size: 11.5px; font-weight: bold; margin-top: 2px;">${inicioParam || '3:00 PM'}</div>
@@ -1139,10 +1138,13 @@
                     </div>
                     
                     <div style="text-align: center; margin-bottom: 5px;">
-                        <div style="font-size: 28px; font-family: monospace; font-weight: bold; color: #fff; letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-                            ${pinParam} <span style="color: #38bdf8;">#</span>
+                        <div style="font-size: 32px; font-family: monospace; font-weight: bold; color: #fff; letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                            ${pinParam}#
                         </div>
-                        <div style="font-size: 11px; opacity: 0.85; margin-top: 4px;">Dpto. 607 · Gira ambas manijas</div>
+                        
+                        <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fcd34d; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; margin-top: 14px; display: inline-block; letter-spacing: 0.3px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                            ⚠️ IMPORTANTE: Gira ambas manijas a la vez
+                        </div>
                     </div>
                 `;
 
@@ -1153,14 +1155,14 @@
                 
                 pinTitleLabel.textContent = `🔑 Credenciales Activas`;
 
-                // Botón compacto del tutorial (sin textos largos que hagan crecer la tarjeta)
+                // Botón Nativo (Abre el Modal interno sin sacar al usuario de la App)
                 pinNote.innerHTML = `
-                    <a href="https://youtube.com/shorts/9dgp5Qc9reM" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; gap:6px; background:rgba(255,255,255,0.08); color:#38bdf8; padding:10px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:11px; border: 1px solid rgba(56, 189, 248, 0.3); margin-top: 15px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        🎬 Ver Tutorial de Apertura
+                    <a href="javascript:void(0)" onclick="abrirModal('modal-tutoriales')" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#8b5cf6; color:#fff; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:12px; margin-top: 18px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); text-transform: uppercase; letter-spacing: 0.5px; transition: transform 0.2s;">
+                        🎬 Abrir Tutoriales de la Casa
                     </a>
                 `;
                 
-                // Mensaje de bienvenida sin márgenes excesivos
+                // Mensaje de bienvenida
                 if (nombreParam) {
                     const nombreDecodificado = decodeURIComponent(nombreParam);
                     welcomeMessage.innerHTML = `¡Hola, <strong>${nombreDecodificado}</strong>! 😊 Ya estamos preparándonos para recibirte en Cima Blanca. Si necesitas algo durante tu estancia, estamos a una llamada. ¡Disfruta al máximo! 🌊`;
