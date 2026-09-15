@@ -7,7 +7,7 @@
     <title>Panel de Anfitrión - Cima Blanca</title>
     <style>
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #0f172a; color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .panel-container { background: #1e293b; border: 2px solid #d4af37; border-radius: 20px; padding: 25px; width: 100%; max-width: 440px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); box-sizing: border-box; }
+        .panel-container { display: none; background: #1e293b; border: 2px solid #d4af37; border-radius: 20px; padding: 25px; width: 100%; max-width: 440px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); box-sizing: border-box; }
         h2 { color: #fcd34d; font-size: 18px; margin-top: 0; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
         p { font-size: 13px; color: #94a3b8; line-height: 1.4; text-align: center; margin-bottom: 20px; }
         label { font-size: 11px; color: #38bdf8; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 6px; }
@@ -27,10 +27,13 @@
 
 <div class="panel-container">
     <h2>🛠️ Panel de Anfitrión</h2>
-    <p>Pega el correo de Sifely y pon el nombre. El sistema comprimirá los horarios para una URL limpia:</p>
+    <p>Pega el correo de Sifely y pon el nombre. El sistema arma un enlace limpio y listo para enviar:</p>
     
     <label for="nombre-input">Nombre del Huésped:</label>
-    <input type="text" id="nombre-input" placeholder="Ej. Yazmina">
+    <input type="text" id="nombre-input" placeholder="Ej. Juan Pérez">
+
+    <label for="reserva-input">Código de Reserva (opcional, solo para medición):</label>
+    <input type="text" id="reserva-input" placeholder="Ej. R-0472">
 
     <label for="sifely-input">Texto copiado de Sifely:</label>
     <textarea id="sifely-input" placeholder="Pega el mensaje completo de Sifely aquí..."></textarea>
@@ -48,6 +51,21 @@
 </div>
 
 <script>
+    // Cortina de acceso básica: NO es seguridad real (la clave queda visible en el
+    // código fuente para quien sepa inspeccionarlo). Solo evita que alguien abra este
+    // panel por accidente (ej. reabriendo el historial del navegador o un enlace
+    // reenviado sin querer). Gvelarde: reemplaza el texto de abajo por tu propia clave
+    // antes de subir este archivo, y no la compartas con nadie más que tú.
+    (function verificarAcceso() {
+        const CLAVE_PANEL = "CAMBIA-ESTA-CLAVE";
+        const intento = prompt("🔒 Clave de acceso del panel:");
+        if (intento !== CLAVE_PANEL) {
+            document.body.innerHTML = '<p style="color:#94a3b8; text-align:center; font-family:sans-serif; padding:60px 20px;">Acceso no autorizado.</p>';
+            return;
+        }
+        document.querySelector('.panel-container').style.display = 'block';
+    })();
+
     function generarEnlace() {
         const nombre = document.getElementById('nombre-input').value.trim();
         const texto = document.getElementById('sifely-input').value;
@@ -65,11 +83,11 @@
         // Si Sifely cambia el idioma o la plantilla del mensaje, actualizar este regex.
         const matchStart = texto.match(/Start time:\s*([^\n]+)/i);
         let startVal = matchStart ? matchStart[1].trim() : "";
-        startVal = startVal.replace(/\s+/g, ''); // Le quita los espacios para que no salgan %20
+        // Ya no se le quitan los espacios: encodeURIComponent los codifica correctamente
+        // y así la fecha se ve legible en la guía del huésped (ej. "Sep 14, 3:00 PM").
 
         const matchEnd = texto.match(/End time:\s*([^\n]+)/i);
         let endVal = matchEnd ? matchEnd[1].trim() : "";
-        endVal = endVal.replace(/\s+/g, ''); // Le quita los espacios
 
         // Validación de advertencia si no detecta las fechas
         const advertencias = [];
@@ -87,11 +105,15 @@
         // Asume que la guía principal se sirve como documento por defecto de esa carpeta (index.html).
         const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
         
+        const reserva = document.getElementById('reserva-input').value.trim();
+
         // Arma el enlace corto
         let enlaceFinal = `${baseUrl}?pin=${pin}`;
         if (nombre) enlaceFinal += `&nombre=${encodeURIComponent(nombre)}`;
         if (startVal) enlaceFinal += `&inicio=${encodeURIComponent(startVal)}`;
         if (endVal) enlaceFinal += `&fin=${encodeURIComponent(endVal)}`;
+        // Código neutral para medir en Analytics SIN mandar el nombre real del huésped (ver nota de PII).
+        if (reserva) enlaceFinal += `&reserva=${encodeURIComponent(reserva)}`;
         
         document.getElementById('result-link').textContent = enlaceFinal;
         document.getElementById('result-box').style.display = 'block';
