@@ -37,10 +37,13 @@
     
     <button class="btn" onclick="generarEnlace()">Generar Enlace Corto y Limpio</button>
     
+    <div id="warning-box" style="display:none; background:#78350f; border:1px solid #f59e0b; color:#fcd34d; padding:10px; border-radius:8px; font-size:12px; margin-top:10px;"></div>
+
     <div id="result-box" class="result-box">
-        <div class="result-title">Enlace listo para enviar por WhatsApp:</div>
+        <div class="result-title">Enlace listo para enviar:</div>
         <div id="result-link" class="result-link"></div>
         <button class="btn btn-copy" onclick="copiarEnlace()">📋 Copiar Enlace</button>
+        <a id="whatsapp-share-btn" href="#" target="_blank" rel="noopener" class="btn btn-copy" style="background:#25D366; margin-top:8px; text-decoration:none; display:block; text-align:center; box-sizing:border-box;">📲 Enviar por WhatsApp</a>
     </div>
 </div>
 
@@ -49,26 +52,40 @@
         const nombre = document.getElementById('nombre-input').value.trim();
         const texto = document.getElementById('sifely-input').value;
         
-        // 1. Extraer PIN
+        // Esperado: texto de Sifely en inglés que contiene "PIN: XXXXXX".
+        // Si Sifely cambia el idioma o la plantilla del mensaje, actualizar este regex.
         const matchPin = texto.match(/PIN\*?[:\s]+\*?([0-9]{4,6})\*?/i);
         if (!matchPin || !matchPin[1]) {
-            alert("⚠️ No se pudo detectar el PIN automáticamente. Verifica que hayas copiado el texto completo.");
+            alert("⚠️ No se pudo detectar el PIN automáticamente. Verifica que hayas copiado el texto completo de Sifely.");
             return;
         }
         const pin = matchPin[1];
 
-        // 2. Extraer Start Time (Ingreso) y compactarlo (ej: Sep14,3:00PM)
+        // Esperado: texto de Sifely en inglés con el formato "Start time: <fecha>" y "End time: <fecha>".
+        // Si Sifely cambia el idioma o la plantilla del mensaje, actualizar este regex.
         const matchStart = texto.match(/Start time:\s*([^\n]+)/i);
         let startVal = matchStart ? matchStart[1].trim() : "";
         startVal = startVal.replace(/\s+/g, ''); // Le quita los espacios para que no salgan %20
 
-        // 3. Extraer End Time (Salida) y compactarlo (ej: Sep17,12:00PM)
         const matchEnd = texto.match(/End time:\s*([^\n]+)/i);
         let endVal = matchEnd ? matchEnd[1].trim() : "";
         endVal = endVal.replace(/\s+/g, ''); // Le quita los espacios
+
+        // Validación de advertencia si no detecta las fechas
+        const advertencias = [];
+        if (!startVal) advertencias.push('fecha de check-in');
+        if (!endVal) advertencias.push('fecha de check-out');
+        const warningBox = document.getElementById('warning-box');
+        if (advertencias.length > 0) {
+            warningBox.textContent = '⚠️ No se detectó: ' + advertencias.join(' y ') + '. Revisa el enlace antes de enviarlo.';
+            warningBox.style.display = 'block';
+        } else {
+            warningBox.style.display = 'none';
+        }
         
-        // Construye la URL base
-        const baseUrl = window.location.origin + window.location.pathname.replace('admin.html', '');
+        // Usa la carpeta donde vive este panel, sin depender de cómo se llame su propio archivo.
+        // Asume que la guía principal se sirve como documento por defecto de esa carpeta (index.html).
+        const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
         
         // Arma el enlace corto
         let enlaceFinal = `${baseUrl}?pin=${pin}`;
@@ -78,6 +95,9 @@
         
         document.getElementById('result-link').textContent = enlaceFinal;
         document.getElementById('result-box').style.display = 'block';
+
+        // Configura el botón de envío directo a WhatsApp
+        document.getElementById('whatsapp-share-btn').href = `https://wa.me/?text=${encodeURIComponent('Hola! Aquí tienes tu guía digital de bienvenida: ' + enlaceFinal)}`;
     }
 
     function copiarEnlace() {
