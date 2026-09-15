@@ -23,7 +23,10 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-2JVJLZN3QF');
+      // send_page_view: false — el page_view se dispara a mano más abajo (ver
+      // DOMContentLoaded), después de limpiar la URL del PIN/nombre. Así, sin
+      // importar el orden de carga, ese evento nunca puede llevar datos sensibles.
+      gtag('config', 'G-2JVJLZN3QF', { send_page_view: false });
 
       let gtmLoaded = false;
       function cargarGTM(){
@@ -156,8 +159,6 @@
         .keycard-top { display: flex; justify-content: space-between; align-items: flex-start; }
         .keycard-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; font-family: 'Montserrat', sans-serif; }
         .keycard-unit { font-family: 'Georgia', serif; font-style: italic; font-size: 15px; margin-top: 2px; line-height: 1.2; }
-        .keycard-badge { font-size: 9.5px; letter-spacing: 0.5px; background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 20px; font-weight: bold; flex-shrink: 0; }
-        
         .keycard-action-btn { display: inline-flex; align-items: center; gap: 4px; color: #fff; font-size: 9.5px; font-weight: bold; padding: 4px 10px; border-radius: 20px; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
         .keycard-action-btn:active { filter: brightness(0.9); }
         .btn-gps { background: #10B981; border: 1px solid #047857; }
@@ -1142,17 +1143,28 @@
             const nombreParam = urlParams.get('nombre');
             const inicioParam = urlParams.get('inicio');
             const finParam = urlParams.get('fin');
+            let reservaParam = urlParams.get('reserva');
             
             // Validación de seguridad para el PIN
             if (pinParam && !/^[0-9]{4,6}$/.test(pinParam)) {
                 pinParam = null;
             }
+            // El código de reserva es solo para medición (nunca PII): si no tiene un
+            // formato simple y corto, se descarta en vez de mandarlo tal cual a Analytics.
+            if (reservaParam && !/^[A-Za-z0-9-]{1,30}$/.test(reservaParam)) {
+                reservaParam = null;
+            }
 
-            // Limpiar la URL visible
-            if (pinParam || nombreParam || inicioParam || finParam) {
+            // Limpiar la URL visible (PIN, nombre, fechas y código de reserva nunca
+            // deben quedar en la barra de direcciones ni viajar al Referer de enlaces externos).
+            if (pinParam || nombreParam || inicioParam || finParam || reservaParam) {
                 const urlLimpia = window.location.origin + window.location.pathname;
                 window.history.replaceState({}, document.title, urlLimpia);
             }
+
+            // page_view manual con la URL ya limpia (ver send_page_view:false en el head).
+            // Se dispara siempre, haya o no personalización, para no perder la medición normal.
+            trackEvent('page_view', { page_location: window.location.href, page_title: document.title });
 
             const pinDisplayText = document.getElementById('pin-display-text');
             const pinNote = document.getElementById('pin-note');
@@ -1160,6 +1172,12 @@
             const welcomeMessage = document.getElementById('welcome-message');
             
             if (pinParam) {
+                // Medición: solo datos no identificables. NUNCA pin ni nombre real
+                // (ver la política de PII de Google Analytics — un nombre sí cuenta como PII).
+                const datosEvento = { tiene_fechas: !!(inicioParam && finParam) };
+                if (reservaParam) datosEvento.reserva_id = reservaParam;
+                trackEvent('guia_personalizada_abierta', datosEvento);
+
                 // Sanitizamos todas las variables insertadas
                 const pinSeguro = escaparHTML(pinParam);
                 const inicioSeguro = escaparHTML(inicioParam) || '3:00 PM';
