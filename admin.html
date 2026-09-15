@@ -27,7 +27,7 @@
 
 <div class="panel-container">
     <h2>🛠️ Panel de Anfitrión</h2>
-    <p>Ingresa el nombre del huésped y pega el texto de Sifely para estructurar su acceso:</p>
+    <p>Pega el correo de Sifely y pon el nombre. El sistema comprimirá los horarios para una URL limpia:</p>
     
     <label for="nombre-input">Nombre del Huésped:</label>
     <input type="text" id="nombre-input" placeholder="Ej. Yazmina">
@@ -35,7 +35,7 @@
     <label for="sifely-input">Texto copiado de Sifely:</label>
     <textarea id="sifely-input" placeholder="Pega el mensaje completo de Sifely aquí..."></textarea>
     
-    <button class="btn" onclick="generarEnlace()">Generar Enlace Inteligente</button>
+    <button class="btn" onclick="generarEnlace()">Generar Enlace Corto y Limpio</button>
     
     <div id="result-box" class="result-box">
         <div class="result-title">Enlace listo para enviar por WhatsApp:</div>
@@ -52,23 +52,25 @@
         // 1. Extraer PIN
         const matchPin = texto.match(/PIN\*?[:\s]+\*?([0-9]{4,6})\*?/i);
         if (!matchPin || !matchPin[1]) {
-            alert("⚠️ No se pudo detectar el PIN automáticamente. Asegúrate de pegar el texto completo.");
+            alert("⚠️ No se pudo detectar el PIN automáticamente. Verifica que hayas copiado el texto completo.");
             return;
         }
         const pin = matchPin[1];
 
-        // 2. Extraer Start Time (Ingreso)
+        // 2. Extraer Start Time (Ingreso) y compactarlo (ej: Sep14,3:00PM)
         const matchStart = texto.match(/Start time:\s*([^\n]+)/i);
-        const startVal = matchStart ? matchStart[1].trim() : "";
+        let startVal = matchStart ? matchStart[1].trim() : "";
+        startVal = startVal.replace(/\s+/g, ''); // Le quita los espacios para que no salgan %20
 
-        // 3. Extraer End Time (Salida)
+        // 3. Extraer End Time (Salida) y compactarlo (ej: Sep17,12:00PM)
         const matchEnd = texto.match(/End time:\s*([^\n]+)/i);
-        const endVal = matchEnd ? matchEnd[1].trim() : "";
+        let endVal = matchEnd ? matchEnd[1].trim() : "";
+        endVal = endVal.replace(/\s+/g, ''); // Le quita los espacios
         
         // Construye la URL base
         const baseUrl = window.location.origin + window.location.pathname.replace('admin.html', '');
         
-        // Arma el enlace con todos los parámetros
+        // Arma el enlace corto
         let enlaceFinal = `${baseUrl}?pin=${pin}`;
         if (nombre) enlaceFinal += `&nombre=${encodeURIComponent(nombre)}`;
         if (startVal) enlaceFinal += `&inicio=${encodeURIComponent(startVal)}`;
