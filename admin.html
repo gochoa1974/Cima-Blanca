@@ -32,8 +32,8 @@
     <label for="nombre-input">Nombre del Huésped:</label>
     <input type="text" id="nombre-input" placeholder="Ej. Juan Pérez">
 
-    <label for="reserva-input">Código de Reserva (opcional, solo para medición):</label>
-    <input type="text" id="reserva-input" placeholder="Ej. R-0472">
+    <label for="reserva-input">Código de Reserva (déjalo vacío y se genera solo):</label>
+    <input type="text" id="reserva-input" placeholder="Se autogenera, ej. SEP14-YAZ">
 
     <label for="sifely-input">Texto copiado de Sifely:</label>
     <textarea id="sifely-input" placeholder="Pega el mensaje completo de Sifely aquí..."></textarea>
@@ -65,6 +65,16 @@
         }
         document.querySelector('.panel-container').style.display = 'block';
     })();
+
+    function generarCodigoReserva(nombre, fechaInicio) {
+        // Ej: "Sep 14, 3:00 PM" -> "SEP14"
+        const matchFecha = (fechaInicio || '').match(/^([A-Za-z]{3})[A-Za-z]*\s*(\d{1,2})/);
+        const fechaCorta = matchFecha ? (matchFecha[1] + matchFecha[2]).toUpperCase() : 'SINFECHA';
+        // 3 primeras letras del nombre (sin espacios ni tildes/ñ, para que el código quede simple)
+        const soloLetras = (nombre || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z]/g, '');
+        const inicialesNombre = soloLetras.substring(0, 3).toUpperCase() || 'INV';
+        return `${fechaCorta}-${inicialesNombre}`;
+    }
 
     function generarEnlace() {
         const nombre = document.getElementById('nombre-input').value.trim();
@@ -105,7 +115,11 @@
         // Asume que la guía principal se sirve como documento por defecto de esa carpeta (index.html).
         const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
         
-        const reserva = document.getElementById('reserva-input').value.trim();
+        let reserva = document.getElementById('reserva-input').value.trim();
+        if (!reserva) {
+            reserva = generarCodigoReserva(nombre, startVal);
+            document.getElementById('reserva-input').value = reserva; // así lo ves y puedes ajustarlo si quieres
+        }
 
         // Arma el enlace corto
         let enlaceFinal = `${baseUrl}?pin=${pin}`;
