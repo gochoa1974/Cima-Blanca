@@ -78,6 +78,29 @@
         return `${fechaCorta}-${inicialesNombre}`;
     }
 
+    // Pega aquí la URL de tu Apps Script (termina en /exec) una vez desplegada.
+    // Mientras diga esto, el registro en la bitácora simplemente no hace nada —
+    // el panel sigue funcionando normal, generando y enviando enlaces igual.
+    const URL_BITACORA = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+
+    function registrarEnBitacora(nombre, reserva, checkin, checkout) {
+        if (!URL_BITACORA || URL_BITACORA.indexOf('PEGA_AQUI') === 0) return;
+        try {
+            // "no-cors" + fuego y olvido: no bloquea ni frena la generación del
+            // enlace aunque la bitácora falle o esté lenta. A propósito NO se
+            // manda el PIN, solo lo necesario para contar enlaces generados.
+            fetch(URL_BITACORA, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ nombre, reserva, checkin, checkout })
+            });
+        } catch (err) {
+            // Silencioso a propósito: un fallo aquí nunca debe impedir que el
+            // anfitrión genere y envíe el enlace al huésped.
+        }
+    }
+
     function generarEnlace() {
         const nombre = document.getElementById('nombre-input').value.trim();
         const texto = document.getElementById('sifely-input').value;
@@ -133,6 +156,8 @@
         
         document.getElementById('result-link').textContent = enlaceFinal;
         document.getElementById('result-box').style.display = 'block';
+
+        registrarEnBitacora(nombre, reserva, startVal, endVal);
 
         // Configura el botón de envío directo a WhatsApp
         document.getElementById('whatsapp-share-btn').href = `https://wa.me/?text=${encodeURIComponent('Hola! Aquí tienes tu guía digital de bienvenida: ' + enlaceFinal)}`;
