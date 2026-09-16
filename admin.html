@@ -81,7 +81,7 @@
     // Pega aquí la URL de tu Apps Script (termina en /exec) una vez desplegada.
     // Mientras diga esto, el registro en la bitácora simplemente no hace nada —
     // el panel sigue funcionando normal, generando y enviando enlaces igual.
-    const URL_BITACORA = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+    const URL_BITACORA = "https://script.google.com/macros/s/AKfycbwRvdR20owpVxnXGKd3cSlcKkGmOxJRyL3rB75bBRWIlVlHB7G60RRNUpCzAWIxyz5D/exec";
 
     function registrarEnBitacora(nombre, reserva, checkin, checkout) {
         if (!URL_BITACORA || URL_BITACORA.indexOf('PEGA_AQUI') === 0) return;
