@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Registro Rápido de Ingresos Adicionales - Cima Blanca</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#0f172a; color:#fff; font-family:'Helvetica Neue', Arial, sans-serif; }
+  body { padding: 20px 14px 60px; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .panel { display:none; }
+  h1 { color:#fcd34d; font-size:19px; text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin:0 0 4px; }
+  .sub { font-size:12.5px; color:#94a3b8; text-align:center; margin:0 0 20px; line-height:1.5; }
+  .card { background:#1e293b; border:2px solid #d4af37; border-radius:16px; padding:18px; margin-bottom:16px; }
+  .card h2 { font-size:13px; color:#38bdf8; text-transform:uppercase; letter-spacing:0.5px; margin:0 0 14px; }
+  label { display:block; font-size:11px; color:#94a3b8; font-weight:bold; text-transform:uppercase; margin-bottom:5px; margin-top:12px; }
+  label:first-of-type { margin-top:0; }
+  select, input[type="text"], input[type="number"], input[type="date"] {
+    width:100%; background:#0f172a; border:1px solid #334155; color:#fff; border-radius:8px;
+    padding:10px; font-size:15px;
+  }
+  select:focus, input:focus { outline:none; border-color:#38bdf8; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .hint { font-size:11px; color:#64748b; margin-top:4px; }
+  .btn {
+    background:linear-gradient(135deg,#f59e0b 0%, #d97706 100%); color:#fff; border:none;
+    font-weight:bold; padding:14px; border-radius:10px; width:100%; cursor:pointer;
+    text-transform:uppercase; font-size:13px; letter-spacing:0.5px; margin-top:18px;
+  }
+  .btn:active { filter:brightness(0.9); }
+  .btn-secondary { background:#334155; }
+  .btn-copy { background:#10B981; margin-top:10px; }
+  .btn-ghost { background:transparent; border:1px solid #475569; color:#94a3b8; text-transform:none; font-weight:normal; padding:10px; margin-top:8px; }
+  .list-item {
+    background:#0f172a; border:1px solid #334155; border-radius:10px; padding:12px; margin-bottom:8px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
+  }
+  .list-item .info { font-size:13px; line-height:1.5; }
+  .list-item .info b { color:#fcd34d; }
+  .list-item .meta { font-size:11.5px; color:#94a3b8; margin-top:2px; }
+  .del-btn { background:#7f1d1d; color:#fecaca; border:none; border-radius:6px; padding:6px 10px; font-size:12px; cursor:pointer; flex-shrink:0; }
+  .empty-msg { font-size:13px; color:#64748b; text-align:center; padding:20px 0; }
+  .count-badge { background:#38bdf8; color:#0f172a; border-radius:20px; padding:2px 10px; font-size:12px; font-weight:bold; }
+  .toast {
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#10B981; color:#fff;
+    padding:12px 20px; border-radius:10px; font-size:13px; font-weight:bold; display:none; z-index:100;
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<div class="panel">
+
+  <h1>🧾 Registro de Ingresos Adicionales</h1>
+  <p class="sub">Cima Blanca — llena el formulario por cada cobro extra (lavandería, bebidas, early check-in, reservas directas, etc.) y al final copias todo pegado listo para tu Excel/Google Sheets.</p>
+
+  <div class="card">
+    <h2>1. ¿A qué reserva corresponde?</h2>
+
+    <label for="reserva-select">Reserva</label>
+    <select id="reserva-select" onchange="alSeleccionarReserva()"></select>
+    <div class="hint">Tip: con el desplegable abierto, escribe las primeras letras del nombre del huésped y salta directo a esa reserva. Si no está en la lista (reserva directa nueva o muy reciente), elige "Otra / no está en la lista" y escribe los datos a mano.</div>
+
+    <div id="manual-fields" style="display:none;">
+      <label for="m-codigo">Código de reserva</label>
+      <input type="text" id="m-codigo" placeholder="Ej. DIRECTA-0009 o el código de Airbnb">
+      <label for="m-huesped">Huésped</label>
+      <input type="text" id="m-huesped" placeholder="Nombre del huésped">
+      <div class="row2">
+        <div><label for="m-checkin">Check-in</label><input type="date" id="m-checkin"></div>
+        <div><label for="m-checkout">Check-out</label><input type="date" id="m-checkout"></div>
+      </div>
+    </div>
+
+    <label for="listing-select">Listing</label>
+    <select id="listing-select">
+      <option value="LST-01_6 pax">LST-01_6 pax</option>
+      <option value="LST-02_8 pax">LST-02_8 pax</option>
+      <option value="LST-03_4 pax">LST-03_4 pax</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <h2>2. El cobro</h2>
+
+    <label for="fecha-cobro">Fecha del cobro</label>
+    <input type="date" id="fecha-cobro">
+
+    <label for="concepto-select">Concepto</label>
+    <select id="concepto-select">
+      <option>Consumo de Bebidas / Minibar</option>
+      <option>Alquiler Kit de Playa</option>
+      <option>Lavandería</option>
+      <option>Parqueo Adicional</option>
+      <option>Early Check-in / Late Check-out</option>
+      <option>Tarifa Mascota (Pet Fee)</option>
+      <option>Huésped Adicional</option>
+      <option>Extensión de Estadía</option>
+      <option>Multas / Reposición de Daños</option>
+      <option>Reserva Externa (Directa)</option>
+      <option>Resolución Airbnb (Extra)</option>
+      <option>Otro</option>
+    </select>
+
+    <label for="item-select">Ítem / Subcategoría <span style="color:#475569;">(opcional, para el inventario)</span></label>
+    <select id="item-select">
+      <option value="">— sin detalle —</option>
+      <option>Agua</option>
+      <option>Gaseosa / Cola</option>
+      <option>Cerveza</option>
+      <option>Botella de Vino</option>
+      <option>Snack</option>
+      <option>Kit Completo</option>
+      <option>Parasol / Sombrilla</option>
+      <option>Sillas de playa (x2)</option>
+      <option>Hielera</option>
+      <option>Lavado</option>
+      <option>Secado</option>
+      <option>Combo (Lavado + Secado)</option>
+      <option>Upgrade Techado</option>
+      <option>Vehículo Adicional</option>
+      <option>Early Check-in (hasta 2h)</option>
+      <option>Early Check-in (hasta 4h)</option>
+      <option>Early Check-in (6h o más)</option>
+      <option>Late Check-out (hasta 2h)</option>
+      <option>Late Check-out (hasta 4h)</option>
+      <option>Late Check-out (hasta 6h)</option>
+      <option>Mascota (Perro raza pequeña)</option>
+      <option>Adulto Adicional</option>
+      <option>Niño Adicional</option>
+      <option>Noche Extra</option>
+      <option>Toalla extraviada / dañada</option>
+      <option>Lencería / Sábanas dañadas</option>
+      <option>Cristalería / Vajilla rota</option>
+      <option>Daño de mobiliario / equipos</option>
+      <option>Hospedaje Directo</option>
+      <option>Reclamo Centro Resoluciones</option>
+    </select>
+
+    <div class="row2">
+      <div>
+        <label for="cantidad">Cantidad <span style="color:#475569;">(opcional)</span></label>
+        <input type="number" id="cantidad" min="0" step="1" placeholder="Ej. 2">
+      </div>
+      <div>
+        <label for="monto">Monto ($)</label>
+        <input type="number" id="monto" min="0" step="0.01" placeholder="0.00">
+      </div>
+    </div>
+
+    <label for="forma-pago">Forma de pago</label>
+    <select id="forma-pago">
+      <option>Transferencia</option>
+      <option>Efectivo</option>
+      <option>Deuna</option>
+      <option>PayPhone</option>
+      <option>Yape/Plin</option>
+      <option>Otro</option>
+    </select>
+
+    <label for="notas">Notas <span style="color:#475569;">(opcional)</span></label>
+    <input type="text" id="notas" placeholder="Cualquier detalle extra">
+
+    <button class="btn" onclick="agregarFila()">➕ Agregar a la lista</button>
+  </div>
+
+  <div class="card">
+    <h2>3. Cobros agregados <span class="count-badge" id="contador">0</span></h2>
+    <div id="lista-vacia" class="empty-msg">Todavía no has agregado ningún cobro.</div>
+    <div id="lista-filas"></div>
+
+    <button class="btn btn-copy" id="btn-copiar" style="display:none;" onclick="copiarTodo()">📋 Copiar todo (para pegar en Excel/Sheets)</button>
+    <button class="btn btn-ghost" id="btn-borrar" style="display:none;" onclick="borrarTodo()">🗑️ Borrar toda la lista</button>
+  </div>
+
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Reservas de Airbnb + directas ya registradas en Ingresos_Consolidado (2026, ene-sep).
+  // Actualiza/agrega aquí cuando cargues meses nuevos en el archivo maestro.
+  const RESERVAS = [
+    {"codigo":"HMEXEYTK54","huesped":"Diana Ortega","listing":"LST-02_8 pax","checkin":"2026-01-05","checkout":"2026-01-08"},
+    {"codigo":"HMX5Q24N9Q","huesped":"Allison Burbano Quiroz","listing":"LST-03_4 pax","checkin":"2026-01-09","checkout":"2026-01-10"},
+    {"codigo":"HMQDBJ9XNW","huesped":"Karina Cepeda Arias","listing":"LST-03_4 pax","checkin":"2026-01-12","checkout":"2026-01-16"},
+    {"codigo":"DIRECTA-0007","huesped":"Diana Barragan","listing":"LST-03_4 pax","checkin":"2026-01-16","checkout":"2026-01-17"},
+    {"codigo":"HMCYNBCPME","huesped":"Ninoska Valencia Castro","listing":"LST-01_6 pax","checkin":"2026-01-19","checkout":"2026-01-20"},
+    {"codigo":"HMT9T5Y5RR","huesped":"André Vicuña Serrano","listing":"LST-03_4 pax","checkin":"2026-01-20","checkout":"2026-01-22"},
+    {"codigo":"HMQN9CPJS8","huesped":"Domenica Anchundia","listing":"LST-01_6 pax","checkin":"2026-01-22","checkout":"2026-01-24"},
+    {"codigo":"HMDYBWR2N4","huesped":"May Riv","listing":"LST-01_6 pax","checkin":"2026-01-24","checkout":"2026-01-25"},
+    {"codigo":"HMZ4NTJPD2","huesped":"Javier Cornejo","listing":"LST-01_6 pax","checkin":"2026-01-31","checkout":"2026-02-01"},
+    {"codigo":"HM8MDM4AAM","huesped":"Nicole Ronquillo","listing":"LST-03_4 pax","checkin":"2026-02-01","checkout":"2026-02-03"},
+    {"codigo":"HM4B8NWCFH","huesped":"Ingrid Gallo","listing":"LST-03_4 pax","checkin":"2026-02-06","checkout":"2026-02-09"},
+    {"codigo":"HMQ95ABSJ8","huesped":"Gino Velasquez","listing":"LST-01_6 pax","checkin":"2026-02-11","checkout":"2026-02-13"},
+    {"codigo":"HMMSPAWFCB","huesped":"Boris Juan Carlos Nájera Bohórquez","listing":"LST-01_6 pax","checkin":"2026-02-13","checkout":"2026-02-14"},
+    {"codigo":"HM25HW2E8P","huesped":"Cesar Jaramillo Leon","listing":"LST-01_6 pax","checkin":"2026-02-14","checkout":"2026-02-16"},
+    {"codigo":"HMF8WR25NN","huesped":"Dayana Denisse Carrasco Romero","listing":"LST-02_8 pax","checkin":"2026-02-16","checkout":"2026-02-17"},
+    {"codigo":"HMQHYTAKJA","huesped":"Ronald Palacios","listing":"LST-02_8 pax","checkin":"2026-02-18","checkout":"2026-02-19"},
+    {"codigo":"HM4Z3Z3J5Y","huesped":"Gabriela Chavez","listing":"LST-02_8 pax","checkin":"2026-02-19","checkout":"2026-02-20"},
+    {"codigo":"HMDH2NDEAE","huesped":"María Fernanda Paredes","listing":"LST-01_6 pax","checkin":"2026-02-20","checkout":"2026-02-22"},
+    {"codigo":"HMYPDMAY3F","huesped":"Adriana Abril Castillo","listing":"LST-03_4 pax","checkin":"2026-02-23","checkout":"2026-02-26"},
+    {"codigo":"HMZ9RXXR92","huesped":"Gabriela Gomez","listing":"LST-01_6 pax","checkin":"2026-02-27","checkout":"2026-02-28"},
+    {"codigo":"HMP8CWEZFB","huesped":"Gabriela Sotomayor Sotomayor Pico","listing":"LST-01_6 pax","checkin":"2026-02-28","checkout":"2026-03-01"},
+    {"codigo":"HMYF8BZ3PD","huesped":"Estefania Betancourt","listing":"LST-03_4 pax","checkin":"2026-03-02","checkout":"2026-03-04"},
+    {"codigo":"HMK4BYK538","huesped":"Jany Moran","listing":"LST-03_4 pax","checkin":"2026-03-06","checkout":"2026-03-07"},
+    {"codigo":"HMQC4RDMQN","huesped":"Miguel Angel Santacruz","listing":"LST-01_6 pax","checkin":"2026-03-07","checkout":"2026-03-09"},
+    {"codigo":"HM8FXNJ5Y4","huesped":"Silvia Orellana","listing":"LST-01_6 pax","checkin":"2026-03-11","checkout":"2026-03-14"},
+    {"codigo":"HMJRERQSE5","huesped":"Fercho Ayluardo","listing":"LST-01_6 pax","checkin":"2026-03-14","checkout":"2026-03-16"},
+    {"codigo":"HMM4ZFKXSJ","huesped":"Diana Abarca","listing":"LST-02_8 pax","checkin":"2026-03-16","checkout":"2026-03-19"},
+    {"codigo":"HM4ZAKBFCY","huesped":"Sara Valeria Mendoza Avendaño","listing":"LST-02_8 pax","checkin":"2026-03-20","checkout":"2026-03-22"},
+    {"codigo":"HMRCECSKZ9","huesped":"Erick Pazmiño","listing":"LST-03_4 pax","checkin":"2026-03-22","checkout":"2026-03-23"},
+    {"codigo":"HM2EPJ4NHC","huesped":"Lolita Jurado","listing":"LST-01_6 pax","checkin":"2026-03-23","checkout":"2026-03-28"},
+    {"codigo":"HMQR5YHCKH","huesped":"Alejandro Parra","listing":"LST-02_8 pax","checkin":"2026-03-28","checkout":"2026-03-29"},
+    {"codigo":"HMK983FPB5","huesped":"Samuel Uriña Coello","listing":"LST-02_8 pax","checkin":"2026-03-29","checkout":"2026-03-30"},
+    {"codigo":"HMTBJXT9NR","huesped":"Tatiana Salazar","listing":"LST-03_4 pax","checkin":"2026-03-30","checkout":"2026-03-31"},
+    {"codigo":"HMCRKHNJDX","huesped":"Heidy Isabel Carvajal Arriaga","listing":"LST-03_4 pax","checkin":"2026-03-31","checkout":"2026-04-02"},
+    {"codigo":"HMHJDTC9RZ","huesped":"Luisa Tijo","listing":"LST-01_6 pax","checkin":"2026-04-02","checkout":"2026-04-05"},
+    {"codigo":"HM2CNZWSQA","huesped":"Mariela De Los Ángeles Cevallos Viteri","listing":"LST-01_6 pax","checkin":"2026-04-05","checkout":"2026-04-06"},
+    {"codigo":"HM99N4TQSZ","huesped":"Robinson Revilla","listing":"LST-02_8 pax","checkin":"2026-04-06","checkout":"2026-04-11"},
+    {"codigo":"HMQ9WNJCN5","huesped":"Fernando Edison","listing":"LST-01_6 pax","checkin":"2026-04-11","checkout":"2026-04-12"},
+    {"codigo":"HM8DF9JPSS","huesped":"Nohelia Moyano","listing":"LST-01_6 pax","checkin":"2026-04-12","checkout":"2026-04-13"},
+    {"codigo":"HMSQR8ZK8J","huesped":"Liss Pelaez","listing":"LST-01_6 pax","checkin":"2026-04-16","checkout":"2026-04-19"},
+    {"codigo":"HM5R4EN54N","huesped":"Emely Cevallos","listing":"LST-03_4 pax","checkin":"2026-04-20","checkout":"2026-04-22"},
+    {"codigo":"HMRQRMKXAB","huesped":"Andres Carrion","listing":"LST-01_6 pax","checkin":"2026-04-22","checkout":"2026-04-23"},
+    {"codigo":"HMXSMHXTEM","huesped":"Jheimy Ramos","listing":"LST-01_6 pax","checkin":"2026-04-24","checkout":"2026-04-25"},
+    {"codigo":"HMEZNT8KM5","huesped":"Diana Paulina Giraldo Puerto","listing":"LST-01_6 pax","checkin":"2026-04-25","checkout":"2026-04-26"},
+    {"codigo":"HMQW8D2WSB","huesped":"Patricio Villalba","listing":"LST-01_6 pax","checkin":"2026-04-26","checkout":"2026-04-27"},
+    {"codigo":"HMR2N84SZR","huesped":"Mario Rizzo Vizueta","listing":"LST-02_8 pax","checkin":"2026-04-27","checkout":"2026-04-29"},
+    {"codigo":"HMJWRMSPT4","huesped":"Maria","listing":"LST-01_6 pax","checkin":"2026-04-29","checkout":"2026-05-02"},
+    {"codigo":"HMJT8SAA3D","huesped":"Josue Rea","listing":"LST-01_6 pax","checkin":"2026-04-30","checkout":"2026-05-01"},
+    {"codigo":"HMXX8ZJWWQ","huesped":"Priscila Romero","listing":"LST-01_6 pax","checkin":"2026-05-01","checkout":"2026-05-03"},
+    {"codigo":"HMBK9PYBMK","huesped":"Joselyn Navarro","listing":"LST-02_8 pax","checkin":"2026-05-03","checkout":"2026-05-06"},
+    {"codigo":"HMYHKJTZ48","huesped":"Alejandra Lara","listing":"LST-01_6 pax","checkin":"2026-05-09","checkout":"2026-05-10"},
+    {"codigo":"HMQMWAMF5A","huesped":"George Vizueta Tagle","listing":"LST-03_4 pax","checkin":"2026-05-12","checkout":"2026-05-15"},
+    {"codigo":"HM3BTH4RYJ","huesped":"Cristian Castillo","listing":"LST-03_4 pax","checkin":"2026-05-15","checkout":"2026-05-18"},
+    {"codigo":"HMZRPDM8FK","huesped":"Henry Portilla","listing":"LST-03_4 pax","checkin":"2026-05-18","checkout":"2026-05-22"},
+    {"codigo":"HMQRAQ55RZ","huesped":"David Israel Arias Avila","listing":"LST-01_6 pax","checkin":"2026-05-22","checkout":"2026-05-23"},
+    {"codigo":"HMYZSP9CEP","huesped":"Giovanna Lopez","listing":"LST-01_6 pax","checkin":"2026-05-23","checkout":"2026-05-25"},
+    {"codigo":"HMDXYKAQCH","huesped":"Miguel Cordova","listing":"LST-02_8 pax","checkin":"2026-05-25","checkout":"2026-05-26"},
+    {"codigo":"HMXDN48BQ4","huesped":"Michelle Usca","listing":"LST-02_8 pax","checkin":"2026-05-29","checkout":"2026-05-31"},
+    {"codigo":"HMDBCDYMK5","huesped":"Susu Zhang","listing":"LST-03_4 pax","checkin":"2026-05-31","checkout":"2026-06-03"},
+    {"codigo":"HMF9MPZ9FT","huesped":"Roger Rodríguez","listing":"LST-01_6 pax","checkin":"2026-06-04","checkout":"2026-06-06"},
+    {"codigo":"HMA5BNKPAB","huesped":"María Fernanda Tapia","listing":"LST-02_8 pax","checkin":"2026-06-06","checkout":"2026-06-07"},
+    {"codigo":"HMCANX5AWD","huesped":"Edgar Zambrano","listing":"LST-01_6 pax","checkin":"2026-06-12","checkout":"2026-06-13"},
+    {"codigo":"HMPPHXDJ45","huesped":"Nicolle Rodríguez Segura","listing":"LST-03_4 pax","checkin":"2026-06-13","checkout":"2026-06-15"},
+    {"codigo":"HMW4ZFDNH9","huesped":"Karin Guzman","listing":"LST-03_4 pax","checkin":"2026-06-16","checkout":"2026-06-19"},
+    {"codigo":"HMYWYFSXWS","huesped":"Alejandro Ruberto","listing":"LST-03_4 pax","checkin":"2026-06-19","checkout":"2026-06-27"},
+    {"codigo":"HM4YWEFDNB","huesped":"Holger Montesdeoca","listing":"LST-01_6 pax","checkin":"2026-06-27","checkout":"2026-06-28"},
+    {"codigo":"HMX3FK4T5B","huesped":"Daniel Garcia","listing":"LST-01_6 pax","checkin":"2026-07-03","checkout":"2026-07-05"},
+    {"codigo":"HMCHY82KDP","huesped":"Israel","listing":"LST-03_4 pax","checkin":"2026-07-05","checkout":"2026-07-07"},
+    {"codigo":"HMYWBB2FQ5","huesped":"Blanca Beatriz Guaman Guaman","listing":"LST-01_6 pax","checkin":"2026-07-07","checkout":"2026-07-10"},
+    {"codigo":"HMBFZAZ39P","huesped":"Felipe Flores","listing":"LST-01_6 pax","checkin":"2026-07-10","checkout":"2026-07-12"},
+    {"codigo":"HMK2J4KKCQ","huesped":"Karen Alarcón Arenita","listing":"LST-01_6 pax","checkin":"2026-07-14","checkout":"2026-07-16"},
+    {"codigo":"HM8CPCT2WF","huesped":"Pablo Barbecho","listing":"LST-01_6 pax","checkin":"2026-07-16","checkout":"2026-07-19"},
+    {"codigo":"HM3FAAYYDE","huesped":"Henry Ramón","listing":"LST-02_8 pax","checkin":"2026-07-19","checkout":"2026-07-22"},
+    {"codigo":"HMRBHTHJWR","huesped":"Roberto Molina","listing":"LST-01_6 pax","checkin":"2026-07-24","checkout":"2026-07-26"},
+    {"codigo":"HMQYBJAASM","huesped":"Alexander Velez","listing":"LST-01_6 pax","checkin":"2026-07-26","checkout":"2026-07-27"},
+    {"codigo":"HM5YM9EMQD","huesped":"Luis Idrovo","listing":"LST-01_6 pax","checkin":"2026-07-29","checkout":"2026-07-30"},
+    {"codigo":"HMSHEZJPM2","huesped":"Carolina Garcés Ullauri","listing":"LST-02_8 pax","checkin":"2026-07-31","checkout":"2026-08-02"},
+    {"codigo":"HMWTZSW8Z5","huesped":"PAo Gonzalez Acurio","listing":"LST-02_8 pax","checkin":"2026-08-02","checkout":"2026-08-04"},
+    {"codigo":"HMTBZD3RR2","huesped":"Byron Macas Estrada","listing":"LST-01_6 pax","checkin":"2026-08-04","checkout":"2026-08-06"},
+    {"codigo":"DIRECTA-0008","huesped":"Daniel García","listing":"LST-02_8 pax","checkin":"2026-08-06","checkout":"2026-08-08"},
+    {"codigo":"HMA825HFJK","huesped":"Diana Belén ANDRADE Choez","listing":"LST-01_6 pax","checkin":"2026-08-08","checkout":"2026-08-10"},
+    {"codigo":"HMF5PSWXJ2","huesped":"Carlos Gabriel Garcia Barahona","listing":"LST-01_6 pax","checkin":"2026-08-10","checkout":"2026-08-12"},
+    {"codigo":"HMNN4JSDYC","huesped":"Daniela Barrera","listing":"LST-01_6 pax","checkin":"2026-08-12","checkout":"2026-08-16"},
+    {"codigo":"HMEACDEA8N","huesped":"Andrea Mendez","listing":"LST-02_8 pax","checkin":"2026-08-16","checkout":"2026-08-20"},
+    {"codigo":"HMKJ42DQMA","huesped":"Víctor Manuel Caíno Caíno","listing":"LST-01_6 pax","checkin":"2026-08-20","checkout":"2026-08-24"},
+    {"codigo":"HM4SQ4YTF2","huesped":"Julio Teodoro Gonzalez Astudillo","listing":"LST-01_6 pax","checkin":"2026-08-25","checkout":"2026-08-29"},
+    {"codigo":"HMABFT5KP4","huesped":"Noemi Armijos","listing":"LST-01_6 pax","checkin":"2026-08-29","checkout":"2026-08-30"},
+    {"codigo":"HMHFYCFHBM","huesped":"Yleana Puicon","listing":"LST-01_6 pax","checkin":"2026-09-02","checkout":"2026-09-03"},
+    {"codigo":"HMCFC5HTJD","huesped":"Esteban Lucero Delgado","listing":"LST-01_6 pax","checkin":"2026-09-04","checkout":"2026-09-05"},
+    {"codigo":"HMQTKC2W84","huesped":"Dalove Mayor","listing":"LST-01_6 pax","checkin":"2026-09-05","checkout":"2026-09-07"},
+    {"codigo":"HM8QKHDERN","huesped":"Ali Aguila Vera","listing":"LST-01_6 pax","checkin":"2026-09-07","checkout":"2026-09-11"},
+    {"codigo":"HMHYBCKDKY","huesped":"Freddy Serrano","listing":"LST-01_6 pax","checkin":"2026-09-11","checkout":"2026-09-13"},
+    {"codigo":"HMTWF58KRA","huesped":"Gracielita Martinez Loor","listing":"LST-03_4 pax","checkin":"2026-09-13","checkout":"2026-09-14"}
+  ];
+
+  // Cortina de acceso básica: NO es seguridad real (la clave queda visible en el
+  // código fuente). Solo evita abrir esto por accidente. Cambia la clave antes de
+  // subir el archivo y no la compartas con nadie más que tú.
+  (function verificarAcceso() {
+    const CLAVE_PANEL = "Dosogu";
+    const intento = prompt("🔒 Clave de acceso:");
+    if (intento !== CLAVE_PANEL) {
+      document.body.innerHTML = '<p style="color:#94a3b8; text-align:center; padding:60px 20px;">Acceso no autorizado.</p>';
+      return;
+    }
+    document.querySelector('.panel').style.display = 'block';
+    document.getElementById('fecha-cobro').valueAsDate = new Date();
+    cargarReservas();
+    alSeleccionarReserva(); // sincroniza los campos manuales con la selección por defecto ("Otra")
+    cargarDeLocalStorage();
+  })();
+
+  const STORAGE_KEY = 'cimablanca_ingresos_adicionales_borrador';
+  let filas = [];
+
+  function cargarReservas() {
+    const sel = document.getElementById('reserva-select');
+    sel.innerHTML = '<option value="">— Otra / no está en la lista —</option>';
+    RESERVAS.forEach((r, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = `${r.huesped}  —  ${r.checkin} → ${r.checkout}  (${r.codigo})`;
+      sel.appendChild(opt);
+    });
+  }
+
+  function alSeleccionarReserva() {
+    const sel = document.getElementById('reserva-select');
+    const manualBox = document.getElementById('manual-fields');
+    if (sel.value === '') {
+      manualBox.style.display = 'block';
+      document.getElementById('m-codigo').value = '';
+      document.getElementById('m-huesped').value = '';
+      document.getElementById('m-checkin').value = '';
+      document.getElementById('m-checkout').value = '';
+    } else {
+      manualBox.style.display = 'none';
+      const r = RESERVAS[sel.value];
+      document.getElementById('listing-select').value = r.listing;
+    }
+  }
+
+  function nochesEntre(ini, fin) {
+    if (!ini || !fin) return '';
+    const d1 = new Date(ini), d2 = new Date(fin);
+    const diff = Math.round((d2 - d1) / 86400000);
+    return diff > 0 ? diff : '';
+  }
+
+  function agregarFila() {
+    const sel = document.getElementById('reserva-select');
+    let codigo, huesped, checkin, checkout;
+
+    if (sel.value === '') {
+      codigo = document.getElementById('m-codigo').value.trim();
+      huesped = document.getElementById('m-huesped').value.trim();
+      checkin = document.getElementById('m-checkin').value;
+      checkout = document.getElementById('m-checkout').value;
+      if (!codigo || !huesped) {
+        alert('⚠️ Falta el código de reserva o el nombre del huésped.');
+        return;
+      }
+    } else {
+      const r = RESERVAS[sel.value];
+      codigo = r.codigo; huesped = r.huesped; checkin = r.checkin; checkout = r.checkout;
+    }
+
+    const monto = document.getElementById('monto').value;
+    if (!monto || parseFloat(monto) <= 0) {
+      alert('⚠️ Escribe un monto válido.');
+      return;
+    }
+    const fechaCobro = document.getElementById('fecha-cobro').value;
+    if (!fechaCobro) {
+      alert('⚠️ Falta la fecha del cobro.');
+      return;
+    }
+
+    const fila = {
+      fechaTransaccion: fechaCobro,
+      mes: fechaCobro.substring(0,7),
+      codigo: codigo,
+      listing: document.getElementById('listing-select').value,
+      concepto: document.getElementById('concepto-select').value,
+      item: document.getElementById('item-select').value,
+      cantidad: document.getElementById('cantidad').value,
+      monto: parseFloat(monto).toFixed(2),
+      formaPago: document.getElementById('forma-pago').value,
+      fechaReserva: '',
+      checkin: checkin || '',
+      checkout: checkout || '',
+      noches: nochesEntre(checkin, checkout),
+      huesped: huesped,
+      notas: document.getElementById('notas').value.trim()
+    };
+
+    filas.push(fila);
+    guardarEnLocalStorage();
+    renderLista();
+
+    // limpiar solo lo del cobro, deja la reserva seleccionada por si agregas otro cobro a la misma
+    document.getElementById('monto').value = '';
+    document.getElementById('cantidad').value = '';
+    document.getElementById('notas').value = '';
+    mostrarToast('Cobro agregado ✓');
+  }
+
+  function eliminarFila(idx) {
+    filas.splice(idx, 1);
+    guardarEnLocalStorage();
+    renderLista();
+  }
+
+  function renderLista() {
+    const cont = document.getElementById('lista-filas');
+    const vacio = document.getElementById('lista-vacia');
+    const btnCopiar = document.getElementById('btn-copiar');
+    const btnBorrar = document.getElementById('btn-borrar');
+    document.getElementById('contador').textContent = filas.length;
+
+    if (filas.length === 0) {
+      vacio.style.display = 'block';
+      cont.innerHTML = '';
+      btnCopiar.style.display = 'none';
+      btnBorrar.style.display = 'none';
+      return;
+    }
+    vacio.style.display = 'none';
+    btnCopiar.style.display = 'block';
+    btnBorrar.style.display = 'block';
+
+    cont.innerHTML = filas.map((f, i) => `
+      <div class="list-item">
+        <div class="info">
+          <b>$${f.monto}</b> — ${f.concepto}${f.item ? ' (' + f.item + ')' : ''}
+          <div class="meta">${f.fechaTransaccion} · ${f.listing} · ${f.huesped} · ${f.codigo}</div>
+        </div>
+        <button class="del-btn" onclick="eliminarFila(${i})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function tsvEscape(v) {
+    return String(v ?? '').replace(/\t/g, ' ').replace(/\n/g, ' ');
+  }
+
+  function copiarTodo() {
+    // Mismo orden de columnas que la hoja Ingresos_Adicionales del archivo maestro
+    const encabezado = ['Fecha Transacción','Mes','Código Reserva','Listing','Concepto Estandarizado',
+      'Ítem / Subcategoría','Cant','Monto ($)','Forma de Pago','Fecha Reserva','Check-in','Check-out',
+      'Noches','Huésped','Notas'];
+    const lineas = [encabezado.join('\t')];
+    filas.forEach(f => {
+      lineas.push([f.fechaTransaccion, f.mes, f.codigo, f.listing, f.concepto, f.item, f.cantidad,
+        f.monto, f.formaPago, f.fechaReserva, f.checkin, f.checkout, f.noches, f.huesped, f.notas]
+        .map(tsvEscape).join('\t'));
+    });
+    const texto = lineas.join('\n');
+    navigator.clipboard.writeText(texto).then(() => {
+      mostrarToast(`Copiado: ${filas.length} fila(s). Pega en la primera celda vacía de Ingresos_Adicionales.`);
+    }).catch(() => {
+      alert('No se pudo copiar automáticamente. Selecciona y copia manualmente:\n\n' + texto);
+    });
+  }
+
+  function borrarTodo() {
+    if (!confirm('¿Borrar toda la lista de esta sesión? No se puede deshacer.')) return;
+    filas = [];
+    guardarEnLocalStorage();
+    renderLista();
+  }
+
+  function guardarEnLocalStorage() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(filas)); } catch(e) {}
+  }
+  function cargarDeLocalStorage() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { filas = JSON.parse(raw); renderLista(); }
+    } catch(e) {}
+  }
+
+  function mostrarToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2600);
+  }
+</script>
+
+</body>
+</html>
