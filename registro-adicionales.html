@@ -63,7 +63,7 @@
 
     <label for="reserva-select">Reserva</label>
     <select id="reserva-select" onchange="alSeleccionarReserva()"></select>
-    <div class="hint">Si no está en la lista (reserva directa nueva o muy reciente), elige "Otra / no está en la lista" y escribe los datos a mano.</div>
+    <div class="hint">Tip: con el desplegable abierto, escribe las primeras letras del nombre del huésped y salta directo a esa reserva. Si no está en la lista (reserva directa nueva o muy reciente), elige "Otra / no está en la lista" y escribe los datos a mano.</div>
 
     <div id="manual-fields" style="display:none;">
       <label for="m-codigo">Código de reserva</label>
@@ -196,6 +196,7 @@
     document.querySelector('.panel').style.display = 'block';
     document.getElementById('fecha-cobro').valueAsDate = new Date();
     cargarReservas();
+    alSeleccionarReserva(); // sincroniza los campos manuales con la selección por defecto ("Otra")
     cargarDeLocalStorage();
   })();
 
@@ -306,7 +307,7 @@
     RESERVAS.forEach((r, i) => {
       const opt = document.createElement('option');
       opt.value = i;
-      opt.textContent = `${r.checkin} → ${r.checkout}  |  ${r.huesped}  (${r.codigo})`;
+      opt.textContent = `${r.huesped}  —  ${r.checkin} → ${r.checkout}  (${r.codigo})`;
       sel.appendChild(opt);
     });
   }
