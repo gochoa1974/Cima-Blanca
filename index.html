@@ -463,6 +463,8 @@
             transition: all 0.25s ease; z-index: 200; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .cb-spinner { width: 34px; height: 34px; margin: 6px auto 10px; border: 4px solid rgba(255,255,255,0.25); border-top-color: #38bdf8; border-radius: 50%; animation: cb-giro 0.9s linear infinite; }
+        @keyframes cb-giro { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -1148,55 +1150,47 @@
             }
         });
 
-        // Lector inteligente de URL para estructurar la Keycard
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            let pinParam = urlParams.get('pin');
-            const nombreParam = urlParams.get('nombre');
-            const inicioParam = urlParams.get('inicio');
-            const finParam = urlParams.get('fin');
-            let reservaParam = urlParams.get('reserva');
-            
-            // Validación de seguridad para el PIN
-            if (pinParam && !/^[0-9]{4,6}$/.test(pinParam)) {
-                pinParam = null;
+        const URL_ENLACES = 'https://script.google.com/macros/s/AKfycbwRvdR20owpVxnXGKd3cSlcKkGmOxJRyL3rB75bBRWIlVlHB7G60RRNUpCzAWIxyz5D/exec';
+        const CLAVE_CACHE = 'cb_acceso_guardado';
+        const DIA_MS = 86400000;
+        let codigoEnCurso = null;
+
+        function codigoValido(c) {
+            return /^[A-Za-z0-9]{8}$/.test(c || '');
+        }
+
+        function decodificarNombre(n) {
+            if (!n) return '';
+            try { return decodeURIComponent(n); } catch (e) { return n; }
+        }
+
+        function guardarCache(datos) {
+            try {
+                localStorage.setItem(CLAVE_CACHE, JSON.stringify({ datos: datos, guardado: Date.now() }));
+            } catch (e) {}
+        }
+
+        function leerCache() {
+            try {
+                const crudo = localStorage.getItem(CLAVE_CACHE);
+                if (!crudo) return null;
+                const obj = JSON.parse(crudo);
+                const vence = (Number(obj.datos.expira) || (obj.guardado + 30 * DIA_MS)) + 2 * DIA_MS;
+                if (Date.now() > vence) {
+                    localStorage.removeItem(CLAVE_CACHE);
+                    return null;
+                }
+                return obj.datos;
+            } catch (e) {
+                return null;
             }
-            // El código de reserva es solo para medición (nunca PII): si no tiene un
-            // formato simple y corto, se descarta en vez de mandarlo tal cual a Analytics.
-            if (reservaParam && !/^[A-Za-z0-9-]{1,30}$/.test(reservaParam)) {
-                reservaParam = null;
-            }
+        }
 
-            // Limpiar la URL visible (PIN, nombre, fechas y código de reserva nunca
-            // deben quedar en la barra de direcciones ni viajar al Referer de enlaces externos).
-            if (pinParam || nombreParam || inicioParam || finParam || reservaParam) {
-                const urlLimpia = window.location.origin + window.location.pathname;
-                window.history.replaceState({}, document.title, urlLimpia);
-            }
-
-            // Propiedades de usuario: quedan pegadas a TODOS los eventos de esta sesión
-            // (page_view, open_modal, copy_wifi, external_link_click, etc.) sin tener que
-            // repetirlas evento por evento. Nunca llevan el nombre real ni el PIN.
-            gtag('set', 'user_properties', {
-                guia_personalizada: pinParam ? 'si' : 'no',
-                reserva_id: reservaParam || '(sin_codigo)'
-            });
-
-            // page_view manual con la URL ya limpia (ver send_page_view:false en el head).
-            // Se dispara siempre, haya o no personalización, para no perder la medición normal.
-            trackEvent('page_view', { page_location: window.location.href, page_title: document.title });
-
+        function mostrarPersonalizacion(pinParam, nombreFinal, inicioParam, finParam) {
             const pinDisplayText = document.getElementById('pin-display-text');
             const pinNote = document.getElementById('pin-note');
             const pinTitleLabel = document.getElementById('pin-title-label');
             const welcomeMessage = document.getElementById('welcome-message');
-            
-            if (pinParam) {
-                // Medición: solo datos no identificables. NUNCA pin ni nombre real
-                // (ver la política de PII de Google Analytics — un nombre sí cuenta como PII).
-                const datosEvento = { tiene_fechas: !!(inicioParam && finParam) };
-                if (reservaParam) datosEvento.reserva_id = reservaParam;
-                trackEvent('guia_personalizada_abierta', datosEvento);
 
                 // Sanitizamos todas las variables insertadas
                 const pinSeguro = escaparHTML(pinParam);
@@ -1239,11 +1233,114 @@
                         ▶️ VIDEO TUTORIAL - CERRADURA INTELIGENTE
                     </a>
                 `;
-                
-                if (nombreParam) {
-                    const nombreDecodificado = escaparHTML(decodeURIComponent(nombreParam));
+                if (nombreFinal) {
+                    const nombreDecodificado = escaparHTML(nombreFinal);
                     welcomeMessage.innerHTML = `Hola <strong>${nombreDecodificado}, gracias por tu reserva</strong>. Nuestro objetivo es brindarte un hogar temporal impecable. Si necesitas recomendaciones o asistencia, estamos a una llamada de distancia. ¡Disfruta tu estadía al máximo!`;
                 }
+        }
+
+        function abrirPersonalizada(pin, nombre, inicio, fin, reserva) {
+            const datosEvento = { tiene_fechas: !!(inicio && fin) };
+            if (reserva) datosEvento.reserva_id = reserva;
+            trackEvent('guia_personalizada_abierta', datosEvento);
+            mostrarPersonalizacion(pin, nombre, inicio, fin);
+        }
+
+        function mostrarCargando(mensaje) {
+            document.getElementById('pin-display-text').innerHTML = `<div class="cb-spinner"></div><div style="font-size: 12px; font-weight: normal; font-family: 'Helvetica Neue', Arial, sans-serif; opacity: 0.85;">${mensaje}</div>`;
+            document.getElementById('pin-note').innerHTML = '';
+        }
+
+        function mostrarFalla(definitiva) {
+            const mensaje = definitiva ? 'Este enlace ya no está disponible.' : 'No pudimos cargar tu información. Revisa tu conexión e inténtalo de nuevo.';
+            const reintento = definitiva ? '' : `<button onclick="cargarPorCodigo(codigoEnCurso)" style="width: 100%; background: var(--gradient-video); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; margin-top: 12px;">🔄 Reintentar</button>`;
+            document.getElementById('pin-display-text').innerHTML = `<div style="font-size: 13px; font-weight: normal; font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.4;">${mensaje}</div>`;
+            document.getElementById('pin-note').innerHTML = reintento + `<a href="https://wa.me/593994000500?text=Hola%20Gustavo,%20no%20me%20carga%20mi%20informaci%C3%B3n%20de%20acceso." target="_blank" rel="noopener" class="wa-btn-full" data-track="whatsapp_acceso_no_carga">💬 Escribir a Gustavo por WhatsApp</a>`;
+        }
+
+        function pedirDatos(codigo) {
+            const control = new AbortController();
+            const reloj = setTimeout(() => control.abort(), 15000);
+            return fetch(URL_ENLACES + '?g=' + encodeURIComponent(codigo), { signal: control.signal, cache: 'no-store' })
+                .then(r => {
+                    if (!r.ok) throw new Error('http');
+                    return r.json();
+                })
+                .finally(() => clearTimeout(reloj));
+        }
+
+        function cargarPorCodigo(codigo, intento) {
+            codigoEnCurso = codigo;
+            intento = intento || 1;
+            mostrarCargando(intento === 1 ? 'Cargando tu información…' : 'Conexión lenta, reintentando…');
+            pedirDatos(codigo).then(resp => {
+                if (resp && resp.ok && /^[0-9]{4,6}$/.test(String(resp.pin))) {
+                    const reserva = /^[A-Za-z0-9-]{1,30}$/.test(resp.reserva || '') ? resp.reserva : null;
+                    const datos = { pin: String(resp.pin), nombre: resp.nombre || '', inicio: resp.inicio || '', fin: resp.fin || '', reserva: reserva, expira: Number(resp.expira) || 0 };
+                    guardarCache(datos);
+                    if (reserva) gtag('set', 'user_properties', { reserva_id: reserva });
+                    abrirPersonalizada(datos.pin, datos.nombre, datos.inicio, datos.fin, datos.reserva);
+                } else if (resp && resp.ok === false && (resp.error === 'no_encontrado' || resp.error === 'expirado')) {
+                    mostrarFalla(true);
+                } else {
+                    throw new Error('respuesta');
+                }
+            }).catch(() => {
+                if (intento < 3) setTimeout(() => cargarPorCodigo(codigo, intento + 1), 1500);
+                else mostrarFalla(false);
+            });
+        }
+
+        // Lector inteligente de URL para estructurar la Keycard
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let pinParam = urlParams.get('pin');
+            const nombreParam = urlParams.get('nombre');
+            const inicioParam = urlParams.get('inicio');
+            const finParam = urlParams.get('fin');
+            let reservaParam = urlParams.get('reserva');
+            let codigoParam = urlParams.get('g');
+
+            // Validación de seguridad para el PIN
+            if (pinParam && !/^[0-9]{4,6}$/.test(pinParam)) {
+                pinParam = null;
+            }
+            // El código de reserva es solo para medición (nunca PII): si no tiene un
+            // formato simple y corto, se descarta en vez de mandarlo tal cual a Analytics.
+            if (reservaParam && !/^[A-Za-z0-9-]{1,30}$/.test(reservaParam)) {
+                reservaParam = null;
+            }
+            if (codigoParam && !codigoValido(codigoParam)) {
+                codigoParam = null;
+            }
+
+            // Limpiar la URL visible (PIN, nombre, fechas y código de reserva nunca
+            // deben quedar en la barra de direcciones ni viajar al Referer de enlaces externos).
+            if (pinParam || nombreParam || inicioParam || finParam || reservaParam || urlParams.has('g')) {
+                const urlLimpia = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, urlLimpia);
+            }
+
+            const guardado = (!pinParam && !codigoParam) ? leerCache() : null;
+
+            // Propiedades de usuario: quedan pegadas a TODOS los eventos de esta sesión
+            // (page_view, open_modal, copy_wifi, external_link_click, etc.) sin tener que
+            // repetirlas evento por evento. Nunca llevan el nombre real ni el PIN.
+            gtag('set', 'user_properties', {
+                guia_personalizada: (pinParam || codigoParam || guardado) ? 'si' : 'no',
+                reserva_id: reservaParam || (guardado && guardado.reserva) || '(sin_codigo)'
+            });
+
+            // page_view manual con la URL ya limpia (ver send_page_view:false en el head).
+            // Se dispara siempre, haya o no personalización, para no perder la medición normal.
+            trackEvent('page_view', { page_location: window.location.href, page_title: document.title });
+
+            if (pinParam) {
+                abrirPersonalizada(pinParam, decodificarNombre(nombreParam), inicioParam, finParam, reservaParam);
+            } else if (codigoParam) {
+                cargarPorCodigo(codigoParam.toUpperCase());
+            } else if (guardado) {
+                abrirPersonalizada(guardado.pin, guardado.nombre, guardado.inicio, guardado.fin, guardado.reserva);
             }
         });
 
